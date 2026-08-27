@@ -4,7 +4,9 @@ import {
   Instrument_Serif,
   DM_Mono,
 } from "next/font/google";
+
 import "./globals.css";
+import SmoothScroll from "@/components/smooth-scroll/smooth-scroll";
 
 const bricolage = Bricolage_Grotesque({
   variable: "--font-bricolage",
@@ -28,8 +30,7 @@ const dmMono = DM_Mono({
 
 export const metadata: Metadata = {
   title: "Nilima Design Associates",
-  description:
-    "Civil and structural engineering consultancy.",
+  description: "Civil and structural engineering consultancy.",
 };
 
 export default function RootLayout({
@@ -42,7 +43,7 @@ export default function RootLayout({
       <body
         className={`${bricolage.variable} ${instrument.variable} ${dmMono.variable}`}
       >
-        {children}
+        <SmoothScroll>{children}</SmoothScroll>
       </body>
     </html>
   );

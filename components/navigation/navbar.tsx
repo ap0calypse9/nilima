@@ -117,7 +117,7 @@ export default function Navbar() {
             className="relative h-12 w-16 overflow-hidden"
           >
             <Image
-              src="/images/logo.jpg"
+              src="/images/logo.jpeg"
               alt=""
               fill
               sizes="64px"
