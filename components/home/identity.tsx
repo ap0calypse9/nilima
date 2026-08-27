@@ -77,7 +77,11 @@ export default function Identity() {
   return (
     <section
       ref={container}
-      className="relative overflow-hidden bg-[var(--background)] py-32 md:py-48"
+      className="relative overflow-hidden py-32 md:py-48"
+      style={{
+        backgroundColor: "#f4efe6",
+        color: "#171717",
+      }}
     >
       <div className="page-grid">
         {/* Section label */}
@@ -87,7 +91,7 @@ export default function Identity() {
               className="text-[10px] tracking-[0.2em]"
               style={{
                 fontFamily: "var(--font-dm-mono)",
-                color: "var(--aqua)",
+                color: "#2f4a3c",
               }}
             >
               01
@@ -97,7 +101,7 @@ export default function Identity() {
               className="text-[10px] uppercase tracking-[0.2em]"
               style={{
                 fontFamily: "var(--font-dm-mono)",
-                color: "var(--muted)",
+                color: "#6f6a5f",
               }}
             >
               Who We Are
@@ -110,6 +114,7 @@ export default function Identity() {
           <h2
             ref={statement}
             className="text-[clamp(3.5rem,8vw,9rem)] leading-[0.82] tracking-[-0.05em]"
+            style={{ color: "#171717" }}
           >
             MULTIDISCIPLINARY
             <br />
@@ -124,7 +129,10 @@ export default function Identity() {
           ref={description}
           className="col-span-12 mt-20 md:col-span-5 md:col-start-7 md:mt-32"
         >
-          <p className="text-xl leading-relaxed text-[var(--foreground)] md:text-2xl">
+          <p
+            className="text-xl leading-relaxed md:text-2xl"
+            style={{ color: "#171717" }}
+          >
             Nilima Design Associates is a multidisciplinary structural
             engineering consultancy delivering precise, safe and
             cost-effective engineering solutions across West Bengal and
@@ -134,7 +142,7 @@ export default function Identity() {
           <p
             className="mt-8 text-sm leading-7"
             style={{
-              color: "var(--muted)",
+              color: "#6f6a5f",
             }}
           >
             From new construction to inspection, testing and rehabilitation,
@@ -146,7 +154,8 @@ export default function Identity() {
         {/* Capabilities */}
         <div
           ref={capabilities}
-          className="col-span-12 mt-32 border-t border-[var(--line)] pt-8 md:mt-48"
+          className="col-span-12 mt-32 border-t pt-8 md:mt-48"
+          style={{ borderColor: "rgba(23,23,23,0.12)" }}
         >
           <div className="grid grid-cols-12 gap-y-10">
             <div className="col-span-12 md:col-span-3">
@@ -154,7 +163,7 @@ export default function Identity() {
                 className="text-[10px] uppercase tracking-[0.2em]"
                 style={{
                   fontFamily: "var(--font-dm-mono)",
-                  color: "var(--aqua)",
+                  color: "#2f4a3c",
                 }}
               >
                 Core capabilities
@@ -162,7 +171,10 @@ export default function Identity() {
             </div>
 
             <div className="col-span-12 md:col-span-9">
-              <div className="grid grid-cols-1 border-t border-[var(--line)] md:grid-cols-2">
+              <div
+                className="grid grid-cols-1 border-t md:grid-cols-2"
+                style={{ borderColor: "rgba(23,23,23,0.12)" }}
+              >
                 {[
                   "Structural Design",
                   "Foundation Engineering",
@@ -175,20 +187,24 @@ export default function Identity() {
                 ].map((item, index) => (
                   <div
                     key={item}
-                    className="group flex items-center justify-between border-b border-[var(--line)] py-5"
+                    className="group flex items-center justify-between border-b py-5"
+                    style={{ borderColor: "rgba(23,23,23,0.12)" }}
                   >
                     <div className="flex items-center gap-5">
                       <span
                         className="text-[10px]"
                         style={{
                           fontFamily: "var(--font-dm-mono)",
-                          color: "var(--muted)",
+                          color: "#6f6a5f",
                         }}
                       >
                         {String(index + 1).padStart(2, "0")}
                       </span>
 
-                      <span className="text-lg tracking-[-0.02em] transition-transform duration-300 group-hover:translate-x-2 md:text-xl">
+                      <span
+                        className="text-lg tracking-[-0.02em] transition-transform duration-300 group-hover:translate-x-2 md:text-xl"
+                        style={{ color: "#171717" }}
+                      >
                         {item}
                       </span>
                     </div>
@@ -196,7 +212,7 @@ export default function Identity() {
                     <span
                       className="text-sm opacity-0 transition-opacity duration-300 group-hover:opacity-100"
                       style={{
-                        color: "var(--aqua)",
+                        color: "#2f4a3c",
                       }}
                     >
                       ↗
@@ -214,13 +230,12 @@ export default function Identity() {
             className="max-w-5xl text-[clamp(2.5rem,5vw,5.5rem)] leading-[0.95]"
             style={{
               fontFamily: "var(--font-instrument)",
+              color: "#171717",
             }}
           >
             Precision is not an outcome.
             <br />
-            <span style={{ color: "var(--aqua)" }}>
-              It is the foundation.
-            </span>
+            <span style={{ color: "#2f4a3c" }}>It is the foundation.</span>
           </p>
         </div>
       </div>
