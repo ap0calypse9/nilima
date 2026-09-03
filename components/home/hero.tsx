@@ -110,7 +110,7 @@ export default function Hero() {
   }}
 >
   <Image
-    src="/images/hero.png"
+    src="/images/project3.png"
     alt="Architectural structure"
     fill
     priority

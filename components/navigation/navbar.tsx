@@ -1,42 +1,119 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { useState } from "react";
 
 const menuItems = [
   {
     number: "01",
     title: "ABOUT",
-    children: ["Company", "Leadership", "Credentials"],
+    href: "/about",
+    children: [
+      {
+        title: "Company",
+        href: "/about/company",
+      },
+      {
+        title: "Leadership",
+        href: "/about/leadership",
+      },
+      {
+        title: "Credentials",
+        href: "/about/credentials",
+      },
+    ],
   },
   {
     number: "02",
     title: "CAPABILITIES",
-    children: [
-      "Structural Engineering",
-      "Soil & Foundation",
-      "Survey & Mapping",
-      "Testing & Investigation",
-      "Infrastructure",
-    ],
+    href: "/capabilities",
+   children: [
+  {
+    title: "Structural Engineering",
+    href: "/capabilities#structural-engineering",
+  },
+  {
+    title: "Foundation Engineering",
+    href: "/capabilities#foundation-engineering",
+  },
+  {
+    title: "Soil Investigation",
+    href: "/capabilities#soil-investigation",
+  },
+  {
+    title: "Pile Testing",
+    href: "/capabilities#pile-testing",
+  },
+  {
+    title: "Land Survey",
+    href: "/capabilities#land-survey",
+  },
+  {
+    title: "NDT",
+    href: "/capabilities#non-destructive-testing",
+  },
+  {
+    title: "Structural Audit",
+    href: "/capabilities#structural-audit",
+  },
+  {
+    title: "Rehabilitation",
+    href: "/capabilities#rehabilitation",
+  },
+],
   },
   {
     number: "03",
     title: "PROJECTS",
-    children: ["All Projects", "Buildings", "Infrastructure", "Industrial"],
+    href: "/projects",
+    children: [
+      {
+        title: "All Projects",
+        href: "/projects",
+      },
+      {
+        title: "Buildings",
+        href: "/projects?type=buildings",
+      },
+      {
+        title: "Infrastructure",
+        href: "/projects?type=infrastructure",
+      },
+      {
+        title: "Industrial",
+        href: "/projects?type=industrial",
+      },
+    ],
   },
   {
     number: "04",
     title: "EXPERTISE",
-    children: ["Engineering", "Testing", "Technology"],
+    href: "/expertise",
+    children: [
+      {
+        title: "Engineering",
+        href: "/expertise#engineering",
+      },
+      {
+        title: "Testing",
+        href: "/expertise#testing",
+      },
+      {
+        title: "Technology",
+        href: "/expertise#technology",
+      },
+    ],
   },
   {
     number: "05",
     title: "INSIGHTS",
+    href: "/insights",
   },
   {
     number: "06",
     title: "CONTACT",
+    href: "/contact",
   },
 ];
 
@@ -49,27 +126,34 @@ export default function Navbar() {
     setActiveItem(null);
   };
 
+  const toggleItem = (title: string) => {
+    setActiveItem((current) =>
+      current === title ? null : title
+    );
+  };
+
   return (
     <>
       {/* Floating Navbar */}
       <header className="fixed left-0 top-0 z-50 w-full px-[clamp(1.25rem,3vw,4rem)] py-7">
         <div className="flex items-center justify-between">
+
           {/* Logo */}
-          <button
-            type="button"
+          <Link
+            href="/"
             onClick={handleClose}
             aria-label="Nilima Design Associates home"
             className="group relative h-12 w-16 overflow-hidden"
           >
             <Image
-              src="/images/logo.jpg"
+              src="/images/logo.jpeg"
               alt="Nilima Design Associates"
               fill
               priority
               sizes="64px"
               className="scale-[2.4] object-contain transition-transform duration-500 group-hover:scale-[2.55]"
             />
-          </button>
+          </Link>
 
           {/* Menu Trigger */}
           <button
@@ -90,18 +174,19 @@ export default function Navbar() {
 
             <span className="flex flex-col gap-[5px]">
               <span className="block h-px w-8 bg-[var(--foreground)] transition-all duration-300 group-hover:w-10" />
+
               <span className="ml-auto block h-px w-5 bg-[var(--aqua)] transition-all duration-300 group-hover:w-8" />
             </span>
           </button>
         </div>
       </header>
 
-      {/* Fullscreen Navigation — single flat panel, no overlapping siblings */}
+      {/* Fullscreen Navigation */}
       <div
         className={`fixed inset-0 z-[100] flex flex-col bg-[#070707] transition-transform duration-700 ease-[cubic-bezier(0.76,0,0.24,1)] ${
           open
-            ? "translate-x-0 pointer-events-auto"
-            : "translate-x-full pointer-events-none"
+            ? "pointer-events-auto translate-x-0"
+            : "pointer-events-none translate-x-full"
         }`}
         aria-hidden={!open}
       >
@@ -110,24 +195,28 @@ export default function Navbar() {
 
         {/* Menu Header */}
         <div className="flex w-full items-center justify-between px-[clamp(1.25rem,3vw,4rem)] py-7">
-          <button
-            type="button"
+
+          {/* Logo */}
+          <Link
+            href="/"
             onClick={handleClose}
-            aria-label="Close navigation"
+            aria-label="Nilima Design Associates home"
             className="relative h-12 w-16 overflow-hidden"
           >
             <Image
               src="/images/logo.jpeg"
-              alt=""
+              alt="Nilima Design Associates"
               fill
               sizes="64px"
               className="scale-[2.4] object-contain"
             />
-          </button>
+          </Link>
 
+          {/* Close */}
           <button
             type="button"
             onClick={handleClose}
+            aria-label="Close navigation"
             className="group flex items-center gap-4"
           >
             <span
@@ -141,6 +230,7 @@ export default function Navbar() {
 
             <span className="relative h-6 w-7">
               <span className="absolute left-0 top-1/2 h-px w-7 rotate-45 bg-[var(--foreground)] transition-transform duration-300 group-hover:rotate-[35deg]" />
+
               <span className="absolute left-0 top-1/2 h-px w-7 -rotate-45 bg-[var(--aqua)] transition-transform duration-300 group-hover:-rotate-[35deg]" />
             </span>
           </button>
@@ -149,38 +239,43 @@ export default function Navbar() {
         {/* Navigation Content */}
         <div
           className={`relative flex flex-1 flex-col justify-center px-[clamp(1.5rem,6vw,6rem)] transition-opacity duration-500 ${
-            open ? "opacity-100 delay-300" : "opacity-0"
+            open ? "delay-300 opacity-100" : "opacity-0"
           }`}
         >
           <div className="grid w-full max-w-[1400px] grid-cols-12 gap-x-6">
-            {/* Main navigation */}
+
+            {/* Main Navigation */}
             <nav className="col-span-12 lg:col-span-7">
               {menuItems.map((item) => {
-                const hasChildren = Boolean(item.children?.length);
-                const isActive = activeItem === item.title;
+                const hasChildren =
+                  Boolean(item.children?.length);
+
+                const isActive =
+                  activeItem === item.title;
 
                 return (
                   <div key={item.title}>
-                    <button
-                      type="button"
-                      onMouseEnter={() =>
-                        hasChildren && setActiveItem(item.title)
-                      }
-                      onFocus={() =>
-                        hasChildren && setActiveItem(item.title)
-                      }
-                      onClick={() =>
-                        hasChildren
-                          ? setActiveItem(isActive ? null : item.title)
-                          : handleClose()
-                      }
-                      className="group flex w-full items-end justify-between border-b border-[var(--line)] py-3 text-left md:py-4"
+
+                    {/* Main row */}
+                    <div
+                      className="group flex w-full items-end justify-between border-b border-[var(--line)]"
+                      onMouseEnter={() => {
+                        if (hasChildren) {
+                          setActiveItem(item.title);
+                        }
+                      }}
                     >
-                      <div className="flex items-end gap-5 md:gap-8">
+                      {/* Actual page navigation */}
+                      <Link
+                        href={item.href}
+                        onClick={handleClose}
+                        className="flex flex-1 items-end gap-5 py-3 text-left md:gap-8 md:py-4"
+                      >
                         <span
                           className="mb-2 text-[10px] tracking-[0.2em]"
                           style={{
-                            fontFamily: "var(--font-dm-mono)",
+                            fontFamily:
+                              "var(--font-dm-mono)",
                             color: "var(--aqua)",
                           }}
                         >
@@ -190,36 +285,52 @@ export default function Navbar() {
                         <span className="text-[clamp(1.8rem,3.8vw,4.25rem)] leading-[0.9] tracking-[-0.035em] transition-transform duration-500 group-hover:translate-x-3">
                           {item.title}
                         </span>
-                      </div>
+                      </Link>
 
+                      {/* Submenu control */}
                       {hasChildren && (
-                        <span
-                          className={`mb-2 text-xl font-light transition-transform duration-300 ${
-                            isActive ? "rotate-45" : ""
-                          }`}
+                        <button
+                          type="button"
+                          onClick={() =>
+                            toggleItem(item.title)
+                          }
+                          aria-label={`Toggle ${item.title} submenu`}
+                          aria-expanded={isActive}
+                          className="flex h-full items-center px-4 py-5 md:px-6"
                         >
-                          +
-                        </span>
+                          <span
+                            className={`text-xl font-light transition-transform duration-300 ${
+                              isActive
+                                ? "rotate-45"
+                                : ""
+                            }`}
+                          >
+                            +
+                          </span>
+                        </button>
                       )}
-                    </button>
+                    </div>
 
-                    {/* Mobile / narrow-screen children */}
+                    {/* Mobile submenu */}
                     {hasChildren && isActive && (
                       <div className="border-b border-[var(--line)] py-4 lg:hidden">
                         <div className="grid grid-cols-1 gap-2 pl-9">
-                          {item.children?.map((child) => (
-                            <button
-                              type="button"
-                              key={child}
-                              onClick={handleClose}
-                              className="py-1 text-left text-sm uppercase tracking-[0.12em] text-[var(--muted)] transition-colors hover:text-[var(--aqua)]"
-                              style={{
-                                fontFamily: "var(--font-dm-mono)",
-                              }}
-                            >
-                              {child}
-                            </button>
-                          ))}
+                          {item.children?.map(
+                            (child) => (
+                              <Link
+                                href={child.href}
+                                key={child.title}
+                                onClick={handleClose}
+                                className="py-1 text-left text-sm uppercase tracking-[0.12em] text-[var(--muted)] transition-colors hover:text-[var(--aqua)]"
+                                style={{
+                                  fontFamily:
+                                    "var(--font-dm-mono)",
+                                }}
+                              >
+                                {child.title}
+                              </Link>
+                            )
+                          )}
                         </div>
                       </div>
                     )}
@@ -228,7 +339,7 @@ export default function Navbar() {
               })}
             </nav>
 
-            {/* Desktop contextual panel */}
+            {/* Desktop Contextual Panel */}
             <aside className="col-span-5 hidden lg:block lg:pl-16">
               <div className="sticky top-1/2 -translate-y-1/2">
                 {activeItem ? (
@@ -236,7 +347,8 @@ export default function Navbar() {
                     <p
                       className="mb-5 text-[10px] uppercase tracking-[0.25em]"
                       style={{
-                        fontFamily: "var(--font-dm-mono)",
+                        fontFamily:
+                          "var(--font-dm-mono)",
                         color: "var(--aqua)",
                       }}
                     >
@@ -245,30 +357,69 @@ export default function Navbar() {
 
                     <div className="space-y-3">
                       {menuItems
-                        .find((item) => item.title === activeItem)
-                        ?.children?.map((child, index) => (
-                          <button
-                            type="button"
-                            key={child}
-                            onClick={handleClose}
-                            className="group flex w-full items-center gap-4 text-left"
-                          >
-                            <span
-                              className="text-[10px]"
-                              style={{
-                                fontFamily: "var(--font-dm-mono)",
-                                color: "var(--muted)",
-                              }}
+                        .find(
+                          (item) =>
+                            item.title === activeItem
+                        )
+                        ?.children?.map(
+                          (child, index) => (
+                            <Link
+                              href={child.href}
+                              key={child.title}
+                              onClick={handleClose}
+                              className="group flex w-full items-center gap-4 text-left"
                             >
-                              0{index + 1}
-                            </span>
+                              <span
+                                className="text-[10px]"
+                                style={{
+                                  fontFamily:
+                                    "var(--font-dm-mono)",
+                                  color: "var(--muted)",
+                                }}
+                              >
+                                {String(
+                                  index + 1
+                                ).padStart(2, "0")}
+                              </span>
 
-                            <span className="text-sm uppercase tracking-[0.12em] text-[var(--muted)] transition-colors group-hover:text-[var(--foreground)]">
-                              {child}
-                            </span>
-                          </button>
-                        ))}
+                              <span className="text-sm uppercase tracking-[0.12em] text-[var(--muted)] transition-colors group-hover:text-[var(--foreground)]">
+                                {child.title}
+                              </span>
+
+                              <span className="ml-auto translate-x-[-8px] text-[var(--aqua)] opacity-0 transition-all duration-300 group-hover:translate-x-0 group-hover:opacity-100">
+                                →
+                              </span>
+                            </Link>
+                          )
+                        )}
                     </div>
+
+                    {/* Parent page */}
+                    {menuItems
+                      .find(
+                        (item) =>
+                          item.title === activeItem
+                      )
+                      ?.href && (
+                      <Link
+                        href={
+                          menuItems.find(
+                            (item) =>
+                              item.title ===
+                              activeItem
+                          )!.href
+                        }
+                        onClick={handleClose}
+                        className="mt-10 inline-flex items-center gap-3 border-b border-[var(--line)] pb-2 text-[10px] uppercase tracking-[0.18em] transition-colors hover:border-[var(--aqua)] hover:text-[var(--aqua)]"
+                        style={{
+                          fontFamily:
+                            "var(--font-dm-mono)",
+                        }}
+                      >
+                        Explore {activeItem}
+                        <span>↗</span>
+                      </Link>
+                    )}
                   </div>
                 ) : (
                   <div>
@@ -277,7 +428,8 @@ export default function Navbar() {
                     <p
                       className="max-w-sm text-4xl leading-tight"
                       style={{
-                        fontFamily: "var(--font-instrument)",
+                        fontFamily:
+                          "var(--font-instrument)",
                       }}
                     >
                       Engineering with precision.
@@ -286,7 +438,8 @@ export default function Navbar() {
                     <p
                       className="mt-6 max-w-xs text-[10px] uppercase leading-relaxed tracking-[0.15em]"
                       style={{
-                        fontFamily: "var(--font-dm-mono)",
+                        fontFamily:
+                          "var(--font-dm-mono)",
                         color: "var(--muted)",
                       }}
                     >
@@ -300,7 +453,7 @@ export default function Navbar() {
             </aside>
           </div>
 
-          {/* Footer metadata */}
+          {/* Footer Metadata */}
           <div className="absolute bottom-7 left-[clamp(1.5rem,6vw,6rem)] right-[clamp(1.5rem,6vw,6rem)] flex items-end justify-between">
             <p
               className="text-[10px] uppercase tracking-[0.18em]"

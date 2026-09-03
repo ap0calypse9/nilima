@@ -9,21 +9,21 @@ const projects = [
     title: "RESIDENTIAL STRUCTURE",
     category: "Structural Design",
     location: "Kolkata / West Bengal",
-    image: "/images/projects/project-01.jpg",
+    image: "/images/projects/project4.jpeg",
   },
   {
     number: "02",
     title: "COMMERCIAL COMPLEX",
     category: "Structural Consultancy",
     location: "New Garia / Kolkata",
-    image: "/images/projects/project-02.jpg",
+    image: "/images/projects/project2.jpeg",
   },
   {
     number: "03",
     title: "INDUSTRIAL FACILITY",
     category: "Foundation Engineering",
     location: "West Bengal / India",
-    image: "/images/projects/project-03.jpg",
+    image: "/images/projects/project1.jpeg",
   },
 ];
 
