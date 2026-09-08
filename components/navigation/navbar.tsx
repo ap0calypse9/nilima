@@ -164,7 +164,7 @@ export default function Navbar() {
             className="group flex items-center gap-4"
           >
             <span
-              className="text-xs uppercase tracking-[0.25em]"
+              className="text-xs uppercase tracking-[0.25em] text-white"
               style={{
                 fontFamily: "var(--font-dm-mono)",
               }}
@@ -173,7 +173,7 @@ export default function Navbar() {
             </span>
 
             <span className="flex flex-col gap-[5px]">
-              <span className="block h-px w-8 bg-[var(--foreground)] transition-all duration-300 group-hover:w-10" />
+              <span className="block h-px w-8 bg-white transition-all duration-300 group-hover:w-10" />
 
               <span className="ml-auto block h-px w-5 bg-[var(--aqua)] transition-all duration-300 group-hover:w-8" />
             </span>
@@ -183,7 +183,7 @@ export default function Navbar() {
 
       {/* Fullscreen Navigation */}
       <div
-        className={`fixed inset-0 z-[100] flex flex-col bg-[#070707] transition-transform duration-700 ease-[cubic-bezier(0.76,0,0.24,1)] ${
+        className={`fixed inset-0 z-[100] flex flex-col bg-[var(--navy)] transition-transform duration-700 ease-[cubic-bezier(0.76,0,0.24,1)] ${
           open
             ? "pointer-events-auto translate-x-0"
             : "pointer-events-none translate-x-full"
@@ -220,7 +220,7 @@ export default function Navbar() {
             className="group flex items-center gap-4"
           >
             <span
-              className="text-xs uppercase tracking-[0.25em]"
+              className="text-xs uppercase tracking-[0.25em] text-white"
               style={{
                 fontFamily: "var(--font-dm-mono)",
               }}
@@ -229,7 +229,7 @@ export default function Navbar() {
             </span>
 
             <span className="relative h-6 w-7">
-              <span className="absolute left-0 top-1/2 h-px w-7 rotate-45 bg-[var(--foreground)] transition-transform duration-300 group-hover:rotate-[35deg]" />
+              <span className="absolute left-0 top-1/2 h-px w-7 rotate-45 bg-white transition-transform duration-300 group-hover:rotate-[35deg]" />
 
               <span className="absolute left-0 top-1/2 h-px w-7 -rotate-45 bg-[var(--aqua)] transition-transform duration-300 group-hover:-rotate-[35deg]" />
             </span>
@@ -258,7 +258,7 @@ export default function Navbar() {
 
                     {/* Main row */}
                     <div
-                      className="group flex w-full items-end justify-between border-b border-[var(--line)]"
+                      className="group flex w-full items-end justify-between border-b border-white/15"
                       onMouseEnter={() => {
                         if (hasChildren) {
                           setActiveItem(item.title);
@@ -282,7 +282,7 @@ export default function Navbar() {
                           {item.number}
                         </span>
 
-                        <span className="text-[clamp(1.8rem,3.8vw,4.25rem)] leading-[0.9] tracking-[-0.035em] transition-transform duration-500 group-hover:translate-x-3">
+                        <span className="text-[clamp(1.8rem,3.8vw,4.25rem)] leading-[0.9] tracking-[-0.035em] text-white transition-transform duration-500 group-hover:translate-x-3">
                           {item.title}
                         </span>
                       </Link>
@@ -299,7 +299,7 @@ export default function Navbar() {
                           className="flex h-full items-center px-4 py-5 md:px-6"
                         >
                           <span
-                            className={`text-xl font-light transition-transform duration-300 ${
+                            className={`text-xl font-light text-white transition-transform duration-300 ${
                               isActive
                                 ? "rotate-45"
                                 : ""
@@ -313,7 +313,7 @@ export default function Navbar() {
 
                     {/* Mobile submenu */}
                     {hasChildren && isActive && (
-                      <div className="border-b border-[var(--line)] py-4 lg:hidden">
+                      <div className="border-b border-white/15 py-4 lg:hidden">
                         <div className="grid grid-cols-1 gap-2 pl-9">
                           {item.children?.map(
                             (child) => (
@@ -321,7 +321,7 @@ export default function Navbar() {
                                 href={child.href}
                                 key={child.title}
                                 onClick={handleClose}
-                                className="py-1 text-left text-sm uppercase tracking-[0.12em] text-[var(--muted)] transition-colors hover:text-[var(--aqua)]"
+                                className="py-1 text-left text-sm uppercase tracking-[0.12em] text-white/60 transition-colors hover:text-[var(--aqua)]"
                                 style={{
                                   fontFamily:
                                     "var(--font-dm-mono)",
@@ -370,11 +370,10 @@ export default function Navbar() {
                               className="group flex w-full items-center gap-4 text-left"
                             >
                               <span
-                                className="text-[10px]"
+                                className="text-[10px] text-white/50"
                                 style={{
                                   fontFamily:
                                     "var(--font-dm-mono)",
-                                  color: "var(--muted)",
                                 }}
                               >
                                 {String(
@@ -382,7 +381,7 @@ export default function Navbar() {
                                 ).padStart(2, "0")}
                               </span>
 
-                              <span className="text-sm uppercase tracking-[0.12em] text-[var(--muted)] transition-colors group-hover:text-[var(--foreground)]">
+                              <span className="text-sm uppercase tracking-[0.12em] text-white/60 transition-colors group-hover:text-white">
                                 {child.title}
                               </span>
 
@@ -410,7 +409,7 @@ export default function Navbar() {
                           )!.href
                         }
                         onClick={handleClose}
-                        className="mt-10 inline-flex items-center gap-3 border-b border-[var(--line)] pb-2 text-[10px] uppercase tracking-[0.18em] transition-colors hover:border-[var(--aqua)] hover:text-[var(--aqua)]"
+                        className="mt-10 inline-flex items-center gap-3 border-b border-white/20 pb-2 text-[10px] uppercase tracking-[0.18em] text-white transition-colors hover:border-[var(--aqua)] hover:text-[var(--aqua)]"
                         style={{
                           fontFamily:
                             "var(--font-dm-mono)",
@@ -423,10 +422,10 @@ export default function Navbar() {
                   </div>
                 ) : (
                   <div>
-                    <div className="mb-6 h-px w-full bg-[var(--line)]" />
+                    <div className="mb-6 h-px w-full bg-white/15" />
 
                     <p
-                      className="max-w-sm text-4xl leading-tight"
+                      className="max-w-sm text-4xl leading-tight text-white"
                       style={{
                         fontFamily:
                           "var(--font-instrument)",
@@ -436,11 +435,10 @@ export default function Navbar() {
                     </p>
 
                     <p
-                      className="mt-6 max-w-xs text-[10px] uppercase leading-relaxed tracking-[0.15em]"
+                      className="mt-6 max-w-xs text-[10px] uppercase leading-relaxed tracking-[0.15em] text-white/50"
                       style={{
                         fontFamily:
                           "var(--font-dm-mono)",
-                        color: "var(--muted)",
                       }}
                     >
                       Civil & Structural Engineering
@@ -456,10 +454,9 @@ export default function Navbar() {
           {/* Footer Metadata */}
           <div className="absolute bottom-7 left-[clamp(1.5rem,6vw,6rem)] right-[clamp(1.5rem,6vw,6rem)] flex items-end justify-between">
             <p
-              className="text-[10px] uppercase tracking-[0.18em]"
+              className="text-[10px] uppercase tracking-[0.18em] text-white/50"
               style={{
                 fontFamily: "var(--font-dm-mono)",
-                color: "var(--muted)",
               }}
             >
               Civil & Structural Engineering
@@ -468,10 +465,9 @@ export default function Navbar() {
             </p>
 
             <p
-              className="text-[10px] tracking-[0.18em]"
+              className="text-[10px] tracking-[0.18em] text-white/50"
               style={{
                 fontFamily: "var(--font-dm-mono)",
-                color: "var(--muted)",
               }}
             >
               NDA / 2026

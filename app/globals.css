@@ -2,11 +2,19 @@
 @import "lenis/dist/lenis.css";
 
 :root {
-  --background: #0a0a0a;
-  --foreground: #f2f0eb;
-  --aqua: #56e6e6;
+  --background: #ffffff;
+  --background-alt: #f5f7f8;      /* light gray section backgrounds, like About/Stats */
+  --foreground: #0a0a0a;          /* dark text */
+  --foreground-muted: #5a5f66;    /* body copy gray */
+
+  --aqua: #29ABE2;                /* primary brand blue, from logo */
+  --green: #8DC63F;               /* secondary accent, from logo */
+  --navy: #0a2540;                /* deep accent for footer / dark CTA blocks */
+
   --muted: #8a8a8a;
-  --line: rgba(242, 240, 235, 0.16);
+  --line: rgba(10, 10, 10, 0.1);  /* light border */
+
+  --page-padding: clamp(1.25rem, 3vw, 4rem);
 }
 
 * {
@@ -26,17 +34,7 @@ body {
 
 ::selection {
   background: var(--aqua);
-  color: #0a0a0a;
-}
-
-:root {
-  --background: #0a0a0a;
-  --foreground: #f2f0eb;
-  --aqua: #56e6e6;
-  --muted: #8a8a8a;
-  --line: rgba(242, 240, 235, 0.16);
-
-  --page-padding: clamp(1.25rem, 3vw, 4rem);
+  color: #ffffff;
 }
 
 .page-grid {

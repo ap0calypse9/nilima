@@ -1,211 +1,154 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 
 const capabilities = [
   {
-    number: "01",
-    title: "STRUCTURAL",
+    title: "Structural",
     subtitle: "Design & Engineering",
     description:
       "Structural design, analysis and engineering solutions for residential, commercial, industrial and infrastructure projects.",
     tags: ["ETABS", "STAAD.PRO", "REVIT"],
-    accent: "#071515",
+    image: "/images/capabilities/structural.jpg",
   },
   {
-    number: "02",
-    title: "FOUNDATION",
+    title: "Foundation",
     subtitle: "Soil & Deep Foundations",
     description:
       "Soil investigation, foundation engineering and pile testing for safe and reliable structural systems.",
     tags: ["SOIL TESTING", "DLT", "PIT", "CAPWAP"],
-    accent: "#102b2b",
+    image: "/images/capabilities/foundation.jpg",
   },
   {
-    number: "03",
-    title: "SURVEY",
+    title: "Survey",
     subtitle: "Land & Topography",
     description:
       "Land and topographical surveying for accurate planning, engineering and project execution.",
     tags: ["LAND SURVEY", "TOPOGRAPHY", "MAPPING"],
-    accent: "#123b46",
+    image: "/images/capabilities/survey.jpg",
   },
   {
-    number: "04",
-    title: "TESTING",
+    title: "Testing",
     subtitle: "NDT & Structural Health",
     description:
       "Non-destructive testing, structural audits and building health assessments for existing structures.",
     tags: ["NDT", "AUDIT", "CRACK ANALYSIS"],
-    accent: "#164d57",
+    image: "/images/capabilities/testing.jpg",
   },
   {
-    number: "05",
-    title: "REHABILITATION",
+    title: "Rehabilitation",
     subtitle: "Repair & Retrofitting",
     description:
       "Structural rehabilitation, retrofitting and repair strategies designed to extend the service life of structures.",
     tags: ["RETROFIT", "REPAIR", "STABILITY"],
-    accent: "#176d70",
+    image: "/images/capabilities/rehabilitation.jpg",
   },
 ];
 
 export default function Capabilities() {
   const [active, setActive] = useState(0);
-
   const current = capabilities[active];
 
   return (
-    <section className="relative bg-[var(--aqua)] text-[#071010]">
-      <div className="page-grid min-h-screen py-24 md:py-32">
-
-        {/* Section Header */}
-        <div className="col-span-12 flex items-start justify-between">
-          <div className="flex items-center gap-4">
-            <span
-              className="text-[10px] tracking-[0.2em]"
-              style={{ fontFamily: "var(--font-dm-mono)" }}
-            >
-              02
-            </span>
-
-            <span
-              className="text-[10px] uppercase tracking-[0.2em]"
-              style={{ fontFamily: "var(--font-dm-mono)" }}
-            >
-              Capabilities
-            </span>
-          </div>
-
-          <span
-            className="hidden text-[10px] uppercase tracking-[0.2em] md:block"
-            style={{ fontFamily: "var(--font-dm-mono)" }}
+    <section className="relative bg-[var(--background)] py-20 md:py-28">
+      <div className="page-grid">
+        {/* Section header */}
+        <div className="col-span-12">
+          <p
+            className="text-sm font-medium uppercase tracking-wide"
+            style={{ color: "var(--aqua)" }}
           >
-            Kolkata / India
-          </span>
-        </div>
+            Our Engineering Expertise
+          </p>
 
-        {/* Heading */}
-        <div className="col-span-12 mt-20 md:col-span-6">
-          <h2 className="text-[clamp(4rem,8vw,9rem)] leading-[0.78] tracking-[-0.055em]">
-            WHAT
-            <br />
-            WE
-            <br />
-            ENGINEER.
+          <h2 className="mt-3 max-w-2xl text-3xl font-semibold leading-tight text-[var(--foreground)] md:text-4xl">
+            Delivering Value Through Structural Excellence
           </h2>
+
+          <p className="mt-4 max-w-2xl text-base text-[var(--foreground-muted)]">
+            We partner with you across every stage of a structure&apos;s
+            life &mdash; from design and foundation to testing and
+            rehabilitation.
+          </p>
         </div>
 
-        {/* Interactive Visual */}
-        <div className="col-span-12 mt-16 md:col-span-6 md:mt-20">
-          <div
-            className="relative min-h-[430px] overflow-hidden p-8 transition-colors duration-700 md:min-h-[520px] md:p-10"
-            style={{
-              backgroundColor: current.accent,
-              color: "#f2f0eb",
-            }}
-          >
-            {/* Technical grid */}
-            <div className="pointer-events-none absolute inset-0 opacity-20">
-              <div className="absolute left-1/3 top-0 h-full w-px bg-[var(--aqua)]" />
-              <div className="absolute left-2/3 top-0 h-full w-px bg-[var(--aqua)]" />
-
-              <div className="absolute left-0 top-1/3 h-px w-full bg-[var(--aqua)]" />
-              <div className="absolute left-0 top-2/3 h-px w-full bg-[var(--aqua)]" />
-            </div>
-
-            {/* Number */}
-            <p
-              className="relative text-xs tracking-[0.2em] text-[var(--aqua)]"
-              style={{ fontFamily: "var(--font-dm-mono)" }}
-            >
-              {current.number} / 05
-            </p>
-
-            {/* Current capability */}
-            <div className="absolute bottom-8 left-8 right-8 md:bottom-10 md:left-10 md:right-10">
-              <p
-                className="mb-4 text-[10px] uppercase tracking-[0.2em] text-[var(--aqua)]"
-                style={{ fontFamily: "var(--font-dm-mono)" }}
+        {/* Tab selector */}
+        <div className="col-span-12 mt-10 flex flex-wrap gap-2 border-b border-[var(--line)]">
+          {capabilities.map((item, index) => {
+            const isActive = active === index;
+            return (
+              <button
+                key={item.title}
+                type="button"
+                onClick={() => setActive(index)}
+                className="relative px-4 py-3 text-sm font-medium transition-colors sm:px-5 sm:py-4"
+                style={{
+                  color: isActive ? "var(--aqua)" : "var(--foreground-muted)",
+                }}
               >
+                {item.title}
+                {isActive && (
+                  <span
+                    className="absolute inset-x-0 -bottom-px h-[2px]"
+                    style={{ backgroundColor: "var(--aqua)" }}
+                  />
+                )}
+              </button>
+            );
+          })}
+        </div>
+
+        {/* Highlighted card + image */}
+        <div className="col-span-12 mt-8 grid grid-cols-1 overflow-hidden rounded-lg shadow-sm ring-1 ring-[var(--line)] md:grid-cols-12">
+          <div
+            className="flex flex-col justify-between p-8 md:col-span-4 md:p-10"
+            style={{ backgroundColor: "var(--green)" }}
+          >
+            <div>
+              <p className="text-sm font-medium text-[var(--background)]/70">
                 {current.subtitle}
               </p>
 
-              <h3 className="text-[clamp(2.5rem,5vw,5rem)] leading-[0.85] tracking-[-0.045em]">
-                {current.title}
+              <h3 className="mt-3 text-2xl font-semibold leading-tight text-[var(--background)]">
+                Your reliable{" "}
+                <span className="font-bold">Structural Design Partner</span>
               </h3>
 
-              <p className="mt-6 max-w-md text-sm leading-6 text-white/65">
+              <p className="mt-4 text-sm leading-6 text-[var(--background)]/85">
                 {current.description}
               </p>
 
-              <div className="mt-8 flex flex-wrap gap-2">
+              <div className="mt-6 flex flex-wrap gap-2">
                 {current.tags.map((tag) => (
                   <span
                     key={tag}
-                    className="border border-white/20 px-3 py-2 text-[9px] uppercase tracking-[0.16em]"
-                    style={{ fontFamily: "var(--font-dm-mono)" }}
+                    className="rounded-full border border-[var(--background)]/25 px-3 py-1 text-xs font-medium text-[var(--background)]"
                   >
                     {tag}
                   </span>
                 ))}
               </div>
             </div>
+
+            <a
+              href="#"
+              className="mt-8 inline-flex w-fit items-center gap-2 text-sm font-semibold text-[var(--background)]"
+            >
+              Explore Now
+              <span aria-hidden>→</span>
+            </a>
           </div>
-        </div>
 
-        {/* Capability selector */}
-        <div className="col-span-12 mt-24 border-t border-black/30">
-          {capabilities.map((item, index) => {
-            const isActive = active === index;
-
-            return (
-              <button
-                key={item.title}
-                type="button"
-                onMouseEnter={() => setActive(index)}
-                onFocus={() => setActive(index)}
-                onClick={() => setActive(index)}
-                className="group grid w-full grid-cols-12 items-center border-b border-black/30 py-5 text-left md:py-6"
-              >
-                <span
-                  className="col-span-2 text-[10px] tracking-[0.2em] md:col-span-1"
-                  style={{ fontFamily: "var(--font-dm-mono)" }}
-                >
-                  {item.number}
-                </span>
-
-                <span
-                  className={`col-span-8 text-xl tracking-[-0.02em] transition-transform duration-300 md:col-span-7 md:text-3xl ${
-                    isActive ? "translate-x-3" : "group-hover:translate-x-3"
-                  }`}
-                >
-                  {item.title}
-                </span>
-
-                <span
-                  className="col-span-2 hidden text-[10px] uppercase tracking-[0.15em] md:block"
-                  style={{ fontFamily: "var(--font-dm-mono)" }}
-                >
-                  {item.subtitle}
-                </span>
-
-                <span className="col-span-2 text-right text-xl">
-                  {isActive ? "●" : "○"}
-                </span>
-              </button>
-            );
-          })}
-        </div>
-
-        {/* Dedicated page hint */}
-        <div className="col-span-12 mt-16 flex justify-end">
-          <p
-            className="text-[10px] uppercase tracking-[0.2em]"
-            style={{ fontFamily: "var(--font-dm-mono)" }}
-          >
-            Explore all capabilities ↗
-          </p>
+          <div className="relative min-h-[280px] md:col-span-8">
+            <Image
+              src={current.image}
+              alt={current.title}
+              fill
+              sizes="(max-width: 768px) 100vw, 60vw"
+              className="object-cover"
+            />
+          </div>
         </div>
       </div>
     </section>
