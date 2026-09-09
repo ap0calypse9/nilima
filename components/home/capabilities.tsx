@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 
 const capabilities = [
@@ -10,7 +10,9 @@ const capabilities = [
     description:
       "Structural design, analysis and engineering solutions for residential, commercial, industrial and infrastructure projects.",
     tags: ["ETABS", "STAAD.PRO", "REVIT"],
-    image: "/images/capabilities/structural.jpg",
+    scope: ["Concept to detailed design", "Seismic & wind analysis", "IS 456 / IS 1893 compliance"],
+    image: "/images/capabilities/structural.jpeg",
+    accent: "blueprint",
   },
   {
     title: "Foundation",
@@ -18,7 +20,9 @@ const capabilities = [
     description:
       "Soil investigation, foundation engineering and pile testing for safe and reliable structural systems.",
     tags: ["SOIL TESTING", "DLT", "PIT", "CAPWAP"],
-    image: "/images/capabilities/foundation.jpg",
+    scope: ["Geotechnical investigation", "Pile & raft design", "Load & integrity testing"],
+    image: "/images/capabilities/foundation.jpeg",
+    accent: "green",
   },
   {
     title: "Survey",
@@ -26,7 +30,9 @@ const capabilities = [
     description:
       "Land and topographical surveying for accurate planning, engineering and project execution.",
     tags: ["LAND SURVEY", "TOPOGRAPHY", "MAPPING"],
-    image: "/images/capabilities/survey.jpg",
+    scope: ["Total station survey", "Contour & topo mapping", "Boundary verification"],
+    image: "/images/capabilities/survey.jpeg",
+    accent: "blueprint",
   },
   {
     title: "Testing",
@@ -34,7 +40,9 @@ const capabilities = [
     description:
       "Non-destructive testing, structural audits and building health assessments for existing structures.",
     tags: ["NDT", "AUDIT", "CRACK ANALYSIS"],
-    image: "/images/capabilities/testing.jpg",
+    scope: ["Rebound hammer & UPV testing", "Distress & crack mapping", "Condition assessment reports"],
+    image: "/images/capabilities/test.jpeg",
+    accent: "green",
   },
   {
     title: "Rehabilitation",
@@ -42,112 +50,185 @@ const capabilities = [
     description:
       "Structural rehabilitation, retrofitting and repair strategies designed to extend the service life of structures.",
     tags: ["RETROFIT", "REPAIR", "STABILITY"],
-    image: "/images/capabilities/rehabilitation.jpg",
+    scope: ["Jacketing & strengthening", "Crack injection & repair", "Seismic retrofit design"],
+    image: "/images/capabilities/rehab.jpeg",
+    accent: "blueprint",
   },
 ];
 
 export default function Capabilities() {
   const [active, setActive] = useState(0);
+  const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
+
+  const startAutoplay = () => {
+    if (intervalRef.current) clearInterval(intervalRef.current);
+    intervalRef.current = setInterval(() => {
+      setActive((prev) => (prev + 1) % capabilities.length);
+    }, 4500);
+  };
+
+  useEffect(() => {
+    startAutoplay();
+    return () => {
+      if (intervalRef.current) clearInterval(intervalRef.current);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const handleSelect = (index: number) => {
+    setActive(index);
+    startAutoplay();
+  };
+
   const current = capabilities[active];
+  const accentVar =
+    current.accent === "blueprint" ? "var(--blueprint)" : "var(--green)";
 
   return (
-    <section className="relative bg-[var(--background)] py-20 md:py-28">
+    <section className="relative bg-[var(--paper)] py-24 md:py-32">
       <div className="page-grid">
-        {/* Section header */}
-        <div className="col-span-12">
-          <p
-            className="text-sm font-medium uppercase tracking-wide"
-            style={{ color: "var(--aqua)" }}
-          >
-            Our Engineering Expertise
-          </p>
-
-          <h2 className="mt-3 max-w-2xl text-3xl font-semibold leading-tight text-[var(--foreground)] md:text-4xl">
-            Delivering Value Through Structural Excellence
+        {/* Asymmetric header */}
+        <div className="col-span-12 md:col-span-7">
+          <h2 className="text-[clamp(2.75rem,6vw,5.5rem)] font-semibold leading-[0.95] tracking-[-0.03em] text-[var(--ink)]">
+            What we engineer.
           </h2>
+        </div>
 
-          <p className="mt-4 max-w-2xl text-base text-[var(--foreground-muted)]">
-            We partner with you across every stage of a structure&apos;s
-            life &mdash; from design and foundation to testing and
-            rehabilitation.
+        <div className="col-span-12 mt-6 md:col-span-4 md:col-start-9 md:mt-3">
+          <p className="text-base leading-relaxed text-[var(--graphite)]">
+            Five disciplines, one continuous practice — from first
+            calculation to final inspection.
           </p>
         </div>
 
-        {/* Tab selector */}
-        <div className="col-span-12 mt-10 flex flex-wrap gap-2 border-b border-[var(--line)]">
-          {capabilities.map((item, index) => {
-            const isActive = active === index;
-            return (
-              <button
-                key={item.title}
-                type="button"
-                onClick={() => setActive(index)}
-                className="relative px-4 py-3 text-sm font-medium transition-colors sm:px-5 sm:py-4"
-                style={{
-                  color: isActive ? "var(--aqua)" : "var(--foreground-muted)",
-                }}
-              >
-                {item.title}
-                {isActive && (
+        {/* Discipline index */}
+        <div className="col-span-12 mt-16 md:mt-20">
+          <div className="dimension-line" />
+          <div className="flex flex-wrap">
+            {capabilities.map((item, index) => {
+              const isActive = active === index;
+              const itemAccent =
+                item.accent === "blueprint" ? "var(--blueprint)" : "var(--green)";
+              return (
+                <button
+                  key={item.title}
+                  type="button"
+                  onClick={() => handleSelect(index)}
+                  className="group relative py-5 pr-8 text-left"
+                >
                   <span
-                    className="absolute inset-x-0 -bottom-px h-[2px]"
-                    style={{ backgroundColor: "var(--aqua)" }}
-                  />
-                )}
-              </button>
-            );
-          })}
+                    className="block text-xs tracking-wide"
+                    style={{
+                      fontFamily: "var(--font-dm-mono)",
+                      color: isActive ? itemAccent : "var(--graphite)",
+                    }}
+                  >
+                    {String(index + 1).padStart(2, "0")} / 05
+                  </span>
+                  <span
+                    className="mt-1 flex items-center gap-2 text-lg font-medium transition-colors"
+                    style={{ color: isActive ? "var(--ink)" : "var(--graphite)" }}
+                  >
+                    <span
+                      className="h-1.5 w-1.5 rounded-full transition-opacity"
+                      style={{
+                        backgroundColor: itemAccent,
+                        opacity: isActive ? 1 : 0,
+                      }}
+                    />
+                    {item.title}
+                  </span>
+                  {isActive && (
+                    <span
+                      className="absolute -bottom-px left-0 h-[2px] w-full"
+                      style={{ backgroundColor: itemAccent }}
+                    />
+                  )}
+                </button>
+              );
+            })}
+          </div>
+          <div className="dimension-line" />
         </div>
 
-        {/* Highlighted card + image */}
-        <div className="col-span-12 mt-8 grid grid-cols-1 overflow-hidden rounded-lg shadow-sm ring-1 ring-[var(--line)] md:grid-cols-12">
-          <div
-            className="flex flex-col justify-between p-8 md:col-span-4 md:p-10"
-            style={{ backgroundColor: "var(--green)" }}
-          >
-            <div>
-              <p className="text-sm font-medium text-[var(--background)]/70">
-                {current.subtitle}
-              </p>
-
-              <h3 className="mt-3 text-2xl font-semibold leading-tight text-[var(--background)]">
-                Your reliable{" "}
-                <span className="font-bold">Structural Design Partner</span>
-              </h3>
-
-              <p className="mt-4 text-sm leading-6 text-[var(--background)]/85">
-                {current.description}
-              </p>
-
-              <div className="mt-6 flex flex-wrap gap-2">
-                {current.tags.map((tag) => (
-                  <span
-                    key={tag}
-                    className="rounded-full border border-[var(--background)]/25 px-3 py-1 text-xs font-medium text-[var(--background)]"
-                  >
-                    {tag}
-                  </span>
-                ))}
-              </div>
+        {/* Spec-sheet layout */}
+        <div className="col-span-12 mt-16 grid grid-cols-1 gap-10 md:mt-20 md:grid-cols-12">
+          {/* Image, framed like a drawing sheet, accent-colored corner ticks */}
+          <div className="relative md:col-span-7">
+            <div className="relative aspect-[4/3] w-full border border-[var(--line)]">
+              <Image
+                src={current.image}
+                alt={current.title}
+                fill
+                sizes="(max-width: 768px) 100vw, 55vw"
+                className="object-cover transition-opacity duration-500"
+              />
+              {[
+                "left-3 top-3 border-l border-t",
+                "right-3 top-3 border-r border-t",
+                "left-3 bottom-3 border-l border-b",
+                "right-3 bottom-3 border-r border-b",
+              ].map((position) => (
+                <span
+                  key={position}
+                  className={`pointer-events-none absolute h-5 w-5 ${position}`}
+                  style={{ borderColor: accentVar }}
+                />
+              ))}
             </div>
-
-            <a
-              href="#"
-              className="mt-8 inline-flex w-fit items-center gap-2 text-sm font-semibold text-[var(--background)]"
-            >
-              Explore Now
-              <span aria-hidden>→</span>
-            </a>
           </div>
 
-          <div className="relative min-h-[280px] md:col-span-8">
-            <Image
-              src={current.image}
-              alt={current.title}
-              fill
-              sizes="(max-width: 768px) 100vw, 60vw"
-              className="object-cover"
+          {/* Technical spec panel with a hatch accent band behind it */}
+          <div className="relative md:col-span-5">
+            <div
+              className={`pointer-events-none absolute -inset-x-6 -inset-y-6 -z-10 hidden md:block ${
+                current.accent === "blueprint" ? "hatch-blueprint" : "hatch-green"
+              }`}
             />
+
+            <p
+              className="text-xs uppercase tracking-wide"
+              style={{ fontFamily: "var(--font-dm-mono)", color: accentVar }}
+            >
+              {current.subtitle}
+            </p>
+
+            <h3 className="mt-3 text-3xl font-semibold leading-tight text-[var(--ink)]">
+              {current.title}
+            </h3>
+
+            <p className="mt-4 max-w-md text-sm leading-6 text-[var(--graphite)]">
+              {current.description}
+            </p>
+
+            {/* Scope of work — real added detail */}
+            <ul className="mt-6 space-y-2">
+              {current.scope.map((line) => (
+                <li
+                  key={line}
+                  className="flex items-start gap-2 text-sm text-[var(--ink)]"
+                >
+                  <span
+                    className="mt-2 h-1 w-1 shrink-0 rounded-full"
+                    style={{ backgroundColor: accentVar }}
+                  />
+                  {line}
+                </li>
+              ))}
+            </ul>
+
+            {/* Tool tags */}
+            <div className="mt-6 flex flex-wrap gap-2">
+              {current.tags.map((tag) => (
+                <span
+                  key={tag}
+                  className="border px-2.5 py-1 text-[11px] tracking-wide text-[var(--graphite)]"
+                  style={{ fontFamily: "var(--font-dm-mono)", borderColor: accentVar }}
+                >
+                  {tag}
+                </span>
+              ))}
+            </div>
           </div>
         </div>
       </div>

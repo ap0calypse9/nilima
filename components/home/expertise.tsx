@@ -24,7 +24,7 @@ const expertise = [
     title: "Testing & NDT",
     description:
       "Testing and investigation techniques to evaluate concrete, steel and structural elements.",
-    image: "/images/expertise/testing-ndt.jpg",
+    image: "/images/expertise/testing-ndt.jpeg",
     accent: "green",
   },
   {

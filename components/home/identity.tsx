@@ -4,6 +4,7 @@ import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useRef } from "react";
+import Image from "next/image";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -12,6 +13,7 @@ export default function Identity() {
   const statement = useRef<HTMLHeadingElement>(null);
   const description = useRef<HTMLDivElement>(null);
   const capabilities = useRef<HTMLDivElement>(null);
+  const modelImage = useRef<HTMLDivElement>(null);
 
   useGSAP(
     () => {
@@ -39,6 +41,22 @@ export default function Identity() {
             duration: 1,
             ease: "power3.out",
           }
+        )
+        .fromTo(
+          modelImage.current,
+          {
+            y: 60,
+            opacity: 0,
+            scale: 0.9,
+          },
+          {
+            y: 0,
+            opacity: 1,
+            scale: 1,
+            duration: 0.9,
+            ease: "power3.out",
+          },
+          "-=0.5"
         )
         .fromTo(
           description.current,
@@ -122,6 +140,31 @@ export default function Identity() {
             <br />
             ENGINEERING.
           </h2>
+        </div>
+
+        {/* Structural model image — floating in the left gap below the headline */}
+        <div
+          ref={modelImage}
+          className="relative col-span-12 mt-20 flex items-center justify-center md:col-span-5 md:mt-32 md:justify-start"
+        >
+          {/* Blueprint grid backdrop, gives the transparent model something to sit on */}
+          <div className="grid-backdrop pointer-events-none absolute left-1/2 top-1/2 h-[420px] w-[420px] -translate-x-1/2 -translate-y-1/2 md:left-[45%]" />
+
+          {/* Soft ambient glow behind the model */}
+          <div className="glow-pulse pointer-events-none absolute left-1/2 top-1/2 h-72 w-72 -translate-x-1/2 -translate-y-1/2 rounded-full" />
+
+          <div className="model-float relative aspect-square w-full max-w-md">
+            <Image
+              src="/images/st.png"
+              alt="Structural analysis model, ETABS finite element rendering"
+              fill
+              sizes="(max-width: 768px) 100vw, 40vw"
+              className="object-contain"
+            />
+
+            {/* Scanning line sweep, constrained to the model itself */}
+            <div className="scan-line pointer-events-none absolute inset-x-[8%] h-px" />
+          </div>
         </div>
 
         {/* Description */}
@@ -239,6 +282,109 @@ export default function Identity() {
           </p>
         </div>
       </div>
+
+      <style jsx>{`
+        @keyframes model-float {
+          0% {
+            transform: translateY(0px) rotate(-1.2deg);
+          }
+          50% {
+            transform: translateY(-18px) rotate(1.2deg);
+          }
+          100% {
+            transform: translateY(0px) rotate(-1.2deg);
+          }
+        }
+        .model-float {
+          animation: model-float 7s ease-in-out infinite;
+          filter: drop-shadow(0 18px 22px rgba(23, 23, 23, 0.18));
+          animation-name: model-float, model-shadow;
+          animation-duration: 7s, 7s;
+          animation-timing-function: ease-in-out, ease-in-out;
+          animation-iteration-count: infinite, infinite;
+        }
+        @keyframes model-shadow {
+          0% {
+            filter: drop-shadow(0 14px 16px rgba(23, 23, 23, 0.16));
+          }
+          50% {
+            filter: drop-shadow(0 32px 28px rgba(23, 23, 23, 0.1));
+          }
+          100% {
+            filter: drop-shadow(0 14px 16px rgba(23, 23, 23, 0.16));
+          }
+        }
+
+        .grid-backdrop {
+          background-image: linear-gradient(
+              rgba(41, 171, 226, 0.14) 1px,
+              transparent 1px
+            ),
+            linear-gradient(
+              90deg,
+              rgba(41, 171, 226, 0.14) 1px,
+              transparent 1px
+            );
+          background-size: 28px 28px;
+          mask-image: radial-gradient(
+            circle at center,
+            black 0%,
+            transparent 72%
+          );
+          -webkit-mask-image: radial-gradient(
+            circle at center,
+            black 0%,
+            transparent 72%
+          );
+        }
+
+        @keyframes glow-pulse {
+          0%,
+          100% {
+            opacity: 0.35;
+            transform: translate(-50%, -50%) scale(0.94);
+          }
+          50% {
+            opacity: 0.6;
+            transform: translate(-50%, -50%) scale(1.04);
+          }
+        }
+        .glow-pulse {
+          background: radial-gradient(
+            circle,
+            rgba(141, 198, 63, 0.35),
+            transparent 70%
+          );
+          animation: glow-pulse 7s ease-in-out infinite;
+        }
+
+        @keyframes scan {
+          0% {
+            top: 4%;
+            opacity: 0;
+          }
+          12% {
+            opacity: 1;
+          }
+          88% {
+            opacity: 1;
+          }
+          100% {
+            top: 96%;
+            opacity: 0;
+          }
+        }
+        .scan-line {
+          background: linear-gradient(
+            90deg,
+            transparent,
+            rgba(41, 171, 226, 0.9),
+            transparent
+          );
+          box-shadow: 0 0 10px rgba(41, 171, 226, 0.7);
+          animation: scan 3.2s ease-in-out infinite;
+        }
+      `}</style>
     </section>
   );
 }

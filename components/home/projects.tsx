@@ -9,14 +9,16 @@ const projects = [
     title: "Residential Structure",
     category: "Structural Design",
     location: "Kolkata, West Bengal",
+    scope: ["G+4 residential structure", "RCC framed construction", "Completed 2024"],
     image: "/images/projects/project4.jpeg",
-    accent: "aqua",
+    accent: "blueprint",
   },
   {
     number: "02",
     title: "Commercial Complex",
     category: "Structural Consultancy",
     location: "New Garia, Kolkata",
+    scope: ["Mixed-use commercial complex", "Retrofitting & consultancy", "Ongoing project"],
     image: "/images/projects/project2.jpeg",
     accent: "green",
   },
@@ -25,44 +27,40 @@ const projects = [
     title: "Industrial Facility",
     category: "Foundation Engineering",
     location: "West Bengal, India",
+    scope: ["Deep foundation design", "Soil investigation & piling", "Completed 2023"],
     image: "/images/projects/project1.jpeg",
-    accent: "aqua",
+    accent: "blueprint",
   },
 ] as const;
 
 export default function Projects() {
   const [active, setActive] = useState(0);
   const current = projects[active];
-  const accentVar = current.accent === "aqua" ? "var(--aqua)" : "var(--green)";
+  const accentVar =
+    current.accent === "blueprint" ? "var(--blueprint)" : "var(--green)";
 
   const goPrev = () =>
     setActive((prev) => (prev - 1 + projects.length) % projects.length);
   const goNext = () => setActive((prev) => (prev + 1) % projects.length);
 
   return (
-    <section className="relative bg-[var(--background)] py-20 md:py-28">
+    <section className="relative bg-[var(--paper)] py-24 md:py-32">
       <div className="page-grid">
-        {/* Header */}
-        <div className="col-span-12 flex items-end justify-between">
-          <div>
-            <p
-              className="text-sm font-semibold uppercase tracking-wide"
-              style={{ color: "var(--aqua)" }}
-            >
-              Our Projects
-            </p>
-            <h2 className="mt-3 text-3xl font-bold leading-tight text-[var(--foreground)] md:text-4xl">
-              See Our Work in Action
+        {/* Asymmetric header */}
+        <div className="col-span-12 flex flex-wrap items-end justify-between gap-6 md:col-span-12">
+          <div className="md:max-w-xl">
+            <h2 className="text-[clamp(2.75rem,6vw,5.5rem)] font-semibold leading-[0.95] tracking-[-0.03em] text-[var(--ink)]">
+              Selected work.
             </h2>
           </div>
 
-          {/* Prev / next controls */}
-          <div className="hidden gap-3 md:flex">
+          <div className="flex gap-2">
             <button
               type="button"
               onClick={goPrev}
               aria-label="Previous project"
-              className="flex h-10 w-10 items-center justify-center rounded-full border border-[var(--line)] text-[var(--foreground)] transition-colors hover:border-[var(--aqua)] hover:text-[var(--aqua)]"
+              className="flex h-10 w-10 items-center justify-center border border-[var(--line)] text-[var(--ink)] transition-colors hover:border-[var(--ink)]"
+              style={{ borderColor: "var(--line)" }}
             >
               ←
             </button>
@@ -70,115 +68,123 @@ export default function Projects() {
               type="button"
               onClick={goNext}
               aria-label="Next project"
-              className="flex h-10 w-10 items-center justify-center rounded-full border border-[var(--line)] text-[var(--foreground)] transition-colors hover:border-[var(--aqua)] hover:text-[var(--aqua)]"
+              className="flex h-10 w-10 items-center justify-center border border-[var(--line)] text-[var(--ink)] transition-colors hover:border-[var(--ink)]"
             >
               →
             </button>
           </div>
         </div>
 
-        {/* Featured project card: image left, info right */}
-        <div className="col-span-12 mt-10 grid grid-cols-1 overflow-hidden rounded-xl shadow-md ring-1 ring-[var(--line)] md:grid-cols-12">
-          <div className="relative h-72 md:col-span-7 md:h-auto">
-            <Image
-              src={current.image}
-              alt={current.title}
-              fill
-              sizes="(max-width: 768px) 100vw, 60vw"
-              className="object-cover"
-            />
-            <span
-              className="absolute left-4 top-4 rounded-full px-3 py-1 text-xs font-bold text-white shadow-sm"
-              style={{ backgroundColor: accentVar }}
-            >
-              {current.number}
-            </span>
+        {/* Project index — dimension-line separated, mirrors Capabilities */}
+        <div className="col-span-12 mt-16 md:mt-20">
+          <div className="dimension-line" />
+          <div className="flex flex-wrap">
+            {projects.map((project, index) => {
+              const isActive = active === index;
+              const itemAccent =
+                project.accent === "blueprint" ? "var(--blueprint)" : "var(--green)";
+              return (
+                <button
+                  key={project.number}
+                  type="button"
+                  onClick={() => setActive(index)}
+                  className="group relative py-5 pr-8 text-left"
+                >
+                  <span
+                    className="block text-xs tracking-wide"
+                    style={{
+                      fontFamily: "var(--font-dm-mono)",
+                      color: isActive ? itemAccent : "var(--graphite)",
+                    }}
+                  >
+                    {project.number} / 03
+                  </span>
+                  <span
+                    className="mt-1 flex items-center gap-2 text-lg font-medium transition-colors"
+                    style={{ color: isActive ? "var(--ink)" : "var(--graphite)" }}
+                  >
+                    <span
+                      className="h-1.5 w-1.5 rounded-full transition-opacity"
+                      style={{ backgroundColor: itemAccent, opacity: isActive ? 1 : 0 }}
+                    />
+                    {project.title}
+                  </span>
+                  {isActive && (
+                    <span
+                      className="absolute -bottom-px left-0 h-[2px] w-full"
+                      style={{ backgroundColor: itemAccent }}
+                    />
+                  )}
+                </button>
+              );
+            })}
+          </div>
+          <div className="dimension-line" />
+        </div>
+
+        {/* Spec-sheet layout: framed image + detail panel */}
+        <div className="col-span-12 mt-16 grid grid-cols-1 gap-10 md:mt-20 md:grid-cols-12">
+          <div className="relative md:col-span-7">
+            <div className="relative aspect-[4/3] w-full border border-[var(--line)]">
+              <Image
+                src={current.image}
+                alt={current.title}
+                fill
+                sizes="(max-width: 768px) 100vw, 55vw"
+                className="object-cover transition-opacity duration-500"
+              />
+              {[
+                "left-3 top-3 border-l border-t",
+                "right-3 top-3 border-r border-t",
+                "left-3 bottom-3 border-l border-b",
+                "right-3 bottom-3 border-r border-b",
+              ].map((position) => (
+                <span
+                  key={position}
+                  className={`pointer-events-none absolute h-5 w-5 ${position}`}
+                  style={{ borderColor: accentVar }}
+                />
+              ))}
+            </div>
           </div>
 
-          <div className="flex flex-col justify-center bg-white p-8 md:col-span-5 md:p-10">
+          <div className="relative md:col-span-5">
+            <div
+              className={`pointer-events-none absolute -inset-x-6 -inset-y-6 -z-10 hidden md:block ${
+                current.accent === "blueprint" ? "hatch-blueprint" : "hatch-green"
+              }`}
+            />
+
             <p
-              className="text-sm font-semibold uppercase tracking-wide"
-              style={{ color: accentVar }}
+              className="text-xs uppercase tracking-wide"
+              style={{ fontFamily: "var(--font-dm-mono)", color: accentVar }}
             >
               {current.category}
             </p>
 
-            <h3 className="mt-3 text-2xl font-bold leading-tight text-[var(--foreground)] md:text-3xl">
+            <h3 className="mt-3 text-3xl font-semibold leading-tight text-[var(--ink)]">
               {current.title}
             </h3>
 
-            <p className="mt-3 text-sm text-[var(--foreground-muted)]">
+            <p className="mt-3 text-sm text-[var(--graphite)]">
               {current.location}
             </p>
 
-            <button
-              type="button"
-              className="mt-8 inline-flex w-fit items-center gap-2 text-sm font-semibold"
-              style={{ color: accentVar }}
-            >
-              View Project
-              <span aria-hidden>→</span>
-            </button>
-          </div>
-        </div>
-
-        {/* Mobile prev/next */}
-        <div className="col-span-12 mt-6 flex justify-center gap-3 md:hidden">
-          <button
-            type="button"
-            onClick={goPrev}
-            aria-label="Previous project"
-            className="flex h-10 w-10 items-center justify-center rounded-full border border-[var(--line)] text-[var(--foreground)]"
-          >
-            ←
-          </button>
-          <button
-            type="button"
-            onClick={goNext}
-            aria-label="Next project"
-            className="flex h-10 w-10 items-center justify-center rounded-full border border-[var(--line)] text-[var(--foreground)]"
-          >
-            →
-          </button>
-        </div>
-
-        {/* Project list / thumbnails */}
-        <div className="col-span-12 mt-12 grid grid-cols-1 gap-4 sm:grid-cols-3">
-          {projects.map((project, index) => {
-            const isActive = active === index;
-            const itemAccent =
-              project.accent === "aqua" ? "var(--aqua)" : "var(--green)";
-
-            return (
-              <button
-                key={project.number}
-                type="button"
-                onClick={() => setActive(index)}
-                className="flex items-center gap-4 rounded-lg border p-4 text-left transition-colors"
-                style={{
-                  borderColor: isActive ? itemAccent : "var(--line)",
-                  backgroundColor: isActive
-                    ? "var(--background-alt)"
-                    : "transparent",
-                }}
-              >
-                <span
-                  className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-xs font-bold text-white"
-                  style={{ backgroundColor: itemAccent }}
+            <ul className="mt-6 space-y-2">
+              {current.scope.map((line) => (
+                <li
+                  key={line}
+                  className="flex items-start gap-2 text-sm text-[var(--ink)]"
                 >
-                  {project.number}
-                </span>
-                <div>
-                  <p className="text-sm font-semibold text-[var(--foreground)]">
-                    {project.title}
-                  </p>
-                  <p className="text-xs text-[var(--foreground-muted)]">
-                    {project.category}
-                  </p>
-                </div>
-              </button>
-            );
-          })}
+                  <span
+                    className="mt-2 h-1 w-1 shrink-0 rounded-full"
+                    style={{ backgroundColor: accentVar }}
+                  />
+                  {line}
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
       </div>
     </section>

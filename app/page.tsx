@@ -8,15 +8,16 @@ import Expertise from "@/components/home/expertise";
 import Trust from "@/components/home/trust";
 import CTA from "@/components/home/cta";
 import Footer from "@/components/layout/footer";
+import TrustedBy from "@/components/home/clients";
 
 export default function Home() {
   return (
     <>
-      <SiteIntro />
       <Navbar />
 
       <main>
         <Hero />
+        <TrustedBy/>
         <Identity />
         <Capabilities />
         <Projects />

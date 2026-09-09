@@ -2,17 +2,24 @@
 @import "lenis/dist/lenis.css";
 
 :root {
+  /* Existing tokens — kept as-is so already-shipped components keep working */
   --background: #ffffff;
-  --background-alt: #f5f7f8;      /* light gray section backgrounds, like About/Stats */
-  --foreground: #0a0a0a;          /* dark text */
-  --foreground-muted: #5a5f66;    /* body copy gray */
+  --background-alt: #f5f7f8;
+  --foreground: #0a0a0a;
+  --foreground-muted: #5a5f66;
 
   --aqua: #29ABE2;                /* primary brand blue, from logo */
-  --green: #8DC63F;               /* secondary accent, from logo */
-  --navy: #0a2540;                /* deep accent for footer / dark CTA blocks */
+  --green: #8DC63F;                /* secondary accent, from logo */
+  --navy: #0a2540;                 /* deep accent for footer / dark CTA blocks */
 
   --muted: #8a8a8a;
-  --line: rgba(10, 10, 10, 0.1);  /* light border */
+  --line: rgba(10, 10, 10, 0.1);
+
+  /* New: blueprint/drafting direction tokens */
+  --paper: #FBFAF7;                /* warm drafting-paper white, use instead of pure white for section backgrounds */
+  --ink: #12181F;                  /* near-black for line work and headline text, not pure #000 */
+  --blueprint: var(--aqua);        /* semantic alias — use this name when a color is standing in for "structural/technical" */
+  --graphite: #6B7280;             /* muted body copy, technical labels */
 
   --page-padding: clamp(1.25rem, 3vw, 4rem);
 }
@@ -22,18 +29,18 @@
 }
 
 html {
-  background: var(--background);
+  background: var(--paper);
 }
 
 body {
   margin: 0;
-  background: var(--background);
-  color: var(--foreground);
+  background: var(--paper);
+  color: var(--ink);
   font-family: var(--font-bricolage), sans-serif;
 }
 
 ::selection {
-  background: var(--aqua);
+  background: var(--blueprint);
   color: #ffffff;
 }
 
@@ -42,4 +49,56 @@ body {
   grid-template-columns: repeat(12, minmax(0, 1fr));
   column-gap: clamp(0.75rem, 1.5vw, 1.5rem);
   padding-inline: var(--page-padding);
+}
+
+/* ---------------------------------------------------------- */
+/* Drafting utilities — reusable across components             */
+/* ---------------------------------------------------------- */
+
+/* A horizontal dimension line with tick caps at each end, like
+   the measurement lines on a structural drawing. Use as a thin
+   full-width or fixed-width divider between related elements. */
+.dimension-line {
+  position: relative;
+  height: 1px;
+  background: var(--ink);
+  opacity: 0.25;
+}
+.dimension-line::before,
+.dimension-line::after {
+  content: "";
+  position: absolute;
+  top: -4px;
+  width: 1px;
+  height: 9px;
+  background: var(--ink);
+  opacity: 0.6;
+}
+.dimension-line::before {
+  left: 0;
+}
+.dimension-line::after {
+  right: 0;
+}
+
+/* A subtle diagonal hatch fill, like the material hatching on a
+   section drawing. Use sparingly — one accent block per section,
+   not on every card. */
+.hatch-blueprint {
+  background-image: repeating-linear-gradient(
+    45deg,
+    rgba(41, 171, 226, 0.14) 0px,
+    rgba(41, 171, 226, 0.14) 1px,
+    transparent 1px,
+    transparent 9px
+  );
+}
+.hatch-green {
+  background-image: repeating-linear-gradient(
+    45deg,
+    rgba(141, 198, 63, 0.14) 0px,
+    rgba(141, 198, 63, 0.14) 1px,
+    transparent 1px,
+    transparent 9px
+  );
 }
