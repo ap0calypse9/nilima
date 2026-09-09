@@ -142,24 +142,25 @@ export default function Identity() {
           </h2>
         </div>
 
-        {/* Structural model image — floating in the left gap below the headline */}
+        {/* Structural model image — larger, floating in the left gap below the headline */}
         <div
           ref={modelImage}
-          className="relative col-span-12 mt-20 flex items-center justify-center md:col-span-5 md:mt-32 md:justify-start"
+          className="relative col-span-12 mt-20 flex items-center justify-center md:col-span-6 md:mt-32 md:justify-start"
         >
           {/* Blueprint grid backdrop, gives the transparent model something to sit on */}
-          <div className="grid-backdrop pointer-events-none absolute left-1/2 top-1/2 h-[420px] w-[420px] -translate-x-1/2 -translate-y-1/2 md:left-[45%]" />
+          <div className="grid-backdrop pointer-events-none absolute left-1/2 top-1/2 h-[520px] w-[520px] -translate-x-1/2 -translate-y-1/2 md:left-[48%]" />
 
           {/* Soft ambient glow behind the model */}
-          <div className="glow-pulse pointer-events-none absolute left-1/2 top-1/2 h-72 w-72 -translate-x-1/2 -translate-y-1/2 rounded-full" />
+          <div className="glow-pulse pointer-events-none absolute left-1/2 top-1/2 h-96 w-96 -translate-x-1/2 -translate-y-1/2 rounded-full" />
 
-          <div className="model-float relative aspect-square w-full max-w-md">
+          <div className="model-float relative aspect-square w-full max-w-xl">
             <Image
               src="/images/st.png"
               alt="Structural analysis model, ETABS finite element rendering"
               fill
-              sizes="(max-width: 768px) 100vw, 40vw"
+              sizes="(max-width: 768px) 100vw, 48vw"
               className="object-contain"
+              priority
             />
 
             {/* Scanning line sweep, constrained to the model itself */}
@@ -170,7 +171,7 @@ export default function Identity() {
         {/* Description */}
         <div
           ref={description}
-          className="col-span-12 mt-20 md:col-span-5 md:col-start-7 md:mt-32"
+          className="col-span-12 mt-20 md:col-span-5 md:col-start-8 md:mt-32"
         >
           <p
             className="text-xl leading-relaxed md:text-2xl"
@@ -286,32 +287,33 @@ export default function Identity() {
       <style jsx>{`
         @keyframes model-float {
           0% {
-            transform: translateY(0px) rotate(-1.2deg);
+            transform: translate(0px, 0px) rotate(-0.8deg);
+          }
+          25% {
+            transform: translate(4px, -10px) rotate(0.4deg);
           }
           50% {
-            transform: translateY(-18px) rotate(1.2deg);
+            transform: translate(0px, -20px) rotate(0.8deg);
+          }
+          75% {
+            transform: translate(-4px, -10px) rotate(-0.4deg);
           }
           100% {
-            transform: translateY(0px) rotate(-1.2deg);
+            transform: translate(0px, 0px) rotate(-0.8deg);
           }
         }
         .model-float {
-          animation: model-float 7s ease-in-out infinite;
-          filter: drop-shadow(0 18px 22px rgba(23, 23, 23, 0.18));
-          animation-name: model-float, model-shadow;
-          animation-duration: 7s, 7s;
-          animation-timing-function: ease-in-out, ease-in-out;
-          animation-iteration-count: infinite, infinite;
+          animation: model-float 9s cubic-bezier(0.45, 0.05, 0.55, 0.95)
+              infinite,
+            model-shadow 9s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite;
         }
         @keyframes model-shadow {
-          0% {
+          0%,
+          100% {
             filter: drop-shadow(0 14px 16px rgba(23, 23, 23, 0.16));
           }
           50% {
-            filter: drop-shadow(0 32px 28px rgba(23, 23, 23, 0.1));
-          }
-          100% {
-            filter: drop-shadow(0 14px 16px rgba(23, 23, 23, 0.16));
+            filter: drop-shadow(0 34px 30px rgba(23, 23, 23, 0.1));
           }
         }
 
@@ -346,7 +348,7 @@ export default function Identity() {
           }
           50% {
             opacity: 0.6;
-            transform: translate(-50%, -50%) scale(1.04);
+            transform: translate(-50%, -50%) scale(1.06);
           }
         }
         .glow-pulse {
@@ -355,7 +357,8 @@ export default function Identity() {
             rgba(141, 198, 63, 0.35),
             transparent 70%
           );
-          animation: glow-pulse 7s ease-in-out infinite;
+          animation: glow-pulse 9s cubic-bezier(0.45, 0.05, 0.55, 0.95)
+            infinite;
         }
 
         @keyframes scan {
@@ -382,7 +385,15 @@ export default function Identity() {
             transparent
           );
           box-shadow: 0 0 10px rgba(41, 171, 226, 0.7);
-          animation: scan 3.2s ease-in-out infinite;
+          animation: scan 3.6s ease-in-out infinite;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+          .model-float,
+          .glow-pulse,
+          .scan-line {
+            animation: none;
+          }
         }
       `}</style>
     </section>
