@@ -8,6 +8,7 @@ import Image from "next/image";
 const clientNames = [
   "Public Health Engineering, Govt. of West Bengal",
   "Indian Railways",
+  "American Embassy",
   "Bharat Petroleum Corporation Limited (BPCL)",
   "Irrigation & Waterways Department, Govt. of West Bengal",
   "Exide Industries Limited",

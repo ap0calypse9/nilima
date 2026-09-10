@@ -9,7 +9,7 @@ const expertise = [
     description:
       "Assessment of existing structures to understand condition, stability, distress and safety.",
     image: "/images/expertise/structural-audit.jpg",
-    accent: "aqua",
+    accent: "blueprint",
   },
   {
     number: "02",
@@ -33,85 +33,89 @@ const expertise = [
     description:
       "Repair, retrofitting and rehabilitation strategies for renewed structural performance.",
     image: "/images/expertise/rehabilitation.jpg",
-    accent: "aqua",
+    accent: "blueprint",
   },
 ] as const;
 
 export default function Expertise() {
   return (
-    <section className="relative bg-[var(--background-alt)] py-20 md:py-28">
+    <section className="relative bg-[var(--paper)] py-24 md:py-32">
       <div className="page-grid">
-        {/* Section header */}
-        <div className="col-span-12 md:col-span-8">
-          <p
-            className="text-sm font-semibold uppercase tracking-wide"
-            style={{ color: "var(--aqua)" }}
-          >
-            Our Technical Expertise
-          </p>
-
-          <h2 className="mt-3 text-3xl font-bold leading-tight text-[var(--foreground)] md:text-4xl">
-            Solving Structural Challenges,{" "}
-            <span style={{ color: "var(--green)" }}>With Precision</span>
+        {/* Asymmetric header — no color-split headline, punch comes from scale not color */}
+        <div className="col-span-12 md:col-span-7">
+          <h2 className="text-[clamp(2.75rem,6vw,5.5rem)] font-semibold leading-[0.95] tracking-[-0.03em] text-[var(--ink)]">
+            Where precision
+            <br />
+            gets tested.
           </h2>
+        </div>
 
-          <p className="mt-4 max-w-xl text-base text-[var(--foreground-muted)]">
-            From investigation to rehabilitation, we combine field
-            experience with advanced technical tools to keep structures
-            safe, compliant, and built to last.
+        <div className="col-span-12 mt-6 md:col-span-4 md:col-start-9 md:mt-3">
+          <p className="text-base leading-relaxed text-[var(--graphite)]">
+            Four disciplines that keep existing structures safe, standing,
+            and code-compliant — long after the ribbon-cutting.
           </p>
         </div>
 
-        {/* Card grid */}
-        <div className="col-span-12 mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="col-span-12 mt-14">
+          <div className="dimension-line" />
+        </div>
+
+        {/* Framed grid */}
+        <div className="col-span-12 mt-14 grid grid-cols-1 gap-x-8 gap-y-16 sm:grid-cols-2 lg:grid-cols-4">
           {expertise.map((item) => {
             const accentVar =
-              item.accent === "aqua" ? "var(--aqua)" : "var(--green)";
+              item.accent === "blueprint" ? "var(--blueprint)" : "var(--green)";
 
             return (
-              <div
-                key={item.title}
-                className="group relative flex h-96 flex-col justify-end overflow-hidden rounded-xl shadow-md ring-1 ring-black/5 transition-transform duration-300 hover:-translate-y-1"
-              >
-                {/* Background image */}
-                <div className="absolute inset-0">
+              <div key={item.title} className="group">
+                {/* Framed image, drafting-sheet corner ticks, accent-colored */}
+                <div className="relative aspect-[4/5] w-full overflow-hidden border border-[var(--line)]">
                   <Image
                     src={item.image}
                     alt={item.title}
                     fill
                     sizes="(max-width: 768px) 100vw, 25vw"
-                    className="object-cover transition-transform duration-500 group-hover:scale-110"
+                    className="object-cover transition-transform duration-500 group-hover:scale-105"
                   />
-                  {/* Fallback color wash so text always stays readable even if image fails to load */}
-                  <div
-                    className="absolute inset-0 mix-blend-multiply"
-                    style={{ backgroundColor: accentVar, opacity: 0.25 }}
-                  />
-                  {/* Dark gradient for text legibility */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-black/0" />
+
+                  {[
+                    "left-3 top-3 border-l border-t",
+                    "right-3 top-3 border-r border-t",
+                    "left-3 bottom-3 border-l border-b",
+                    "right-3 bottom-3 border-r border-b",
+                  ].map((position) => (
+                    <span
+                      key={position}
+                      className={`pointer-events-none absolute h-5 w-5 ${position}`}
+                      style={{ borderColor: accentVar }}
+                    />
+                  ))}
+
+                  {/* Index tag — solid accent square, not a circular badge */}
+                  <span
+                    className="absolute left-0 top-0 flex h-9 w-9 items-center justify-center text-xs font-bold text-white"
+                    style={{
+                      backgroundColor: accentVar,
+                      fontFamily: "var(--font-dm-mono)",
+                    }}
+                  >
+                    {item.number}
+                  </span>
                 </div>
 
-                {/* Number badge */}
-                <span
-                  className="absolute right-4 top-4 flex h-9 w-9 items-center justify-center rounded-full text-sm font-bold text-white shadow-sm"
-                  style={{ backgroundColor: accentVar }}
-                >
-                  {item.number}
-                </span>
-
-                {/* Text content, explicitly white for guaranteed contrast on the image */}
-                <div className="relative z-10 p-6">
-                  <h3 className="text-xl font-bold text-white">
-                    {item.title}
-                  </h3>
-                  <p className="mt-2 text-sm leading-6 text-white/85">
-                    {item.description}
-                  </p>
-
+                {/* Text lives below the frame, full ink contrast — not overlaid on the photo */}
+                <div className="mt-5">
                   <span
-                    className="mt-4 inline-block h-1 w-10 rounded-full"
+                    className="block h-[3px] w-10"
                     style={{ backgroundColor: accentVar }}
                   />
+                  <h3 className="mt-4 text-xl font-semibold leading-tight text-[var(--ink)]">
+                    {item.title}
+                  </h3>
+                  <p className="mt-2 text-sm leading-6 text-[var(--graphite)]">
+                    {item.description}
+                  </p>
                 </div>
               </div>
             );

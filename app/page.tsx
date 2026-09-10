@@ -9,6 +9,7 @@ import Trust from "@/components/home/trust";
 import CTA from "@/components/home/cta";
 import Footer from "@/components/layout/footer";
 import TrustedBy from "@/components/home/clients";
+import Location from "@/components/home/location";
 
 export default function Home() {
   return (
@@ -23,6 +24,7 @@ export default function Home() {
         <Projects />
         <Expertise />
         <Trust />
+        <Location/>
         <CTA />
       </main>
       <Footer />

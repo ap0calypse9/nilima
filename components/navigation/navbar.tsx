@@ -28,40 +28,40 @@ const menuItems = [
     number: "02",
     title: "CAPABILITIES",
     href: "/capabilities",
-   children: [
-  {
-    title: "Structural Engineering",
-    href: "/capabilities#structural-engineering",
-  },
-  {
-    title: "Foundation Engineering",
-    href: "/capabilities#foundation-engineering",
-  },
-  {
-    title: "Soil Investigation",
-    href: "/capabilities#soil-investigation",
-  },
-  {
-    title: "Pile Testing",
-    href: "/capabilities#pile-testing",
-  },
-  {
-    title: "Land Survey",
-    href: "/capabilities#land-survey",
-  },
-  {
-    title: "NDT",
-    href: "/capabilities#non-destructive-testing",
-  },
-  {
-    title: "Structural Audit",
-    href: "/capabilities#structural-audit",
-  },
-  {
-    title: "Rehabilitation",
-    href: "/capabilities#rehabilitation",
-  },
-],
+    children: [
+      {
+        title: "Structural Engineering",
+        href: "/capabilities#structural-engineering",
+      },
+      {
+        title: "Foundation Engineering",
+        href: "/capabilities#foundation-engineering",
+      },
+      {
+        title: "Soil Investigation",
+        href: "/capabilities#soil-investigation",
+      },
+      {
+        title: "Pile Testing",
+        href: "/capabilities#pile-testing",
+      },
+      {
+        title: "Land Survey",
+        href: "/capabilities#land-survey",
+      },
+      {
+        title: "NDT",
+        href: "/capabilities#non-destructive-testing",
+      },
+      {
+        title: "Structural Audit",
+        href: "/capabilities#structural-audit",
+      },
+      {
+        title: "Rehabilitation",
+        href: "/capabilities#rehabilitation",
+      },
+    ],
   },
   {
     number: "03",
@@ -88,30 +88,11 @@ const menuItems = [
   },
   {
     number: "04",
-    title: "EXPERTISE",
-    href: "/expertise",
-    children: [
-      {
-        title: "Engineering",
-        href: "/expertise#engineering",
-      },
-      {
-        title: "Testing",
-        href: "/expertise#testing",
-      },
-      {
-        title: "Technology",
-        href: "/expertise#technology",
-      },
-    ],
-  },
-  {
-    number: "05",
     title: "INSIGHTS",
     href: "/insights",
   },
   {
-    number: "06",
+    number: "05",
     title: "CONTACT",
     href: "/contact",
   },
@@ -134,28 +115,29 @@ export default function Navbar() {
 
   return (
     <>
-      {/* Floating Navbar */}
-      <header className="fixed left-0 top-0 z-50 w-full px-[clamp(1.25rem,3vw,4rem)] py-7">
+      {/* Floating Navbar — solid paper background so it stays visible
+          over both the dark hero photo and the light sections below */}
+      <header className="fixed left-0 top-0 z-50 w-full border-b border-[var(--line)] bg-[var(--paper)]/95 px-[clamp(1.25rem,3vw,4rem)] py-5 backdrop-blur-sm">
         <div className="flex items-center justify-between">
 
-          {/* Logo */}
+          {/* Logo — bigger, no cropping scale hack, full mark visible */}
           <Link
             href="/"
             onClick={handleClose}
             aria-label="Nilima Design Associates home"
-            className="group relative h-12 w-16 overflow-hidden"
+            className="relative h-16 w-32 shrink-0"
           >
             <Image
               src="/images/logo.jpeg"
               alt="Nilima Design Associates"
               fill
               priority
-              sizes="64px"
-              className="scale-[2.4] object-contain transition-transform duration-500 group-hover:scale-[2.55]"
+              sizes="128px"
+              className="object-contain"
             />
           </Link>
 
-          {/* Menu Trigger */}
+          {/* Menu Trigger — ink color, always visible on the paper bar */}
           <button
             type="button"
             onClick={() => setOpen(true)}
@@ -164,7 +146,7 @@ export default function Navbar() {
             className="group flex items-center gap-4"
           >
             <span
-              className="text-xs uppercase tracking-[0.25em] text-white"
+              className="text-xs uppercase tracking-[0.25em] text-[var(--ink)]"
               style={{
                 fontFamily: "var(--font-dm-mono)",
               }}
@@ -173,9 +155,9 @@ export default function Navbar() {
             </span>
 
             <span className="flex flex-col gap-[5px]">
-              <span className="block h-px w-8 bg-white transition-all duration-300 group-hover:w-10" />
+              <span className="block h-[2px] w-8 bg-[var(--ink)] transition-all duration-300 group-hover:w-10" />
 
-              <span className="ml-auto block h-px w-5 bg-[var(--aqua)] transition-all duration-300 group-hover:w-8" />
+              <span className="ml-auto block h-[2px] w-5 bg-[var(--blueprint)] transition-all duration-300 group-hover:w-8" />
             </span>
           </button>
         </div>
@@ -191,7 +173,7 @@ export default function Navbar() {
         aria-hidden={!open}
       >
         {/* Aqua edge */}
-        <div className="pointer-events-none absolute right-0 top-0 h-full w-[3px] bg-[var(--aqua)]" />
+        <div className="pointer-events-none absolute right-0 top-0 h-full w-[3px] bg-[var(--blueprint)]" />
 
         {/* Menu Header */}
         <div className="flex w-full items-center justify-between px-[clamp(1.25rem,3vw,4rem)] py-7">
@@ -201,14 +183,14 @@ export default function Navbar() {
             href="/"
             onClick={handleClose}
             aria-label="Nilima Design Associates home"
-            className="relative h-12 w-16 overflow-hidden"
+            className="relative h-16 w-32 shrink-0"
           >
             <Image
               src="/images/logo.jpeg"
               alt="Nilima Design Associates"
               fill
-              sizes="64px"
-              className="scale-[2.4] object-contain"
+              sizes="128px"
+              className="object-contain"
             />
           </Link>
 
@@ -231,7 +213,7 @@ export default function Navbar() {
             <span className="relative h-6 w-7">
               <span className="absolute left-0 top-1/2 h-px w-7 rotate-45 bg-white transition-transform duration-300 group-hover:rotate-[35deg]" />
 
-              <span className="absolute left-0 top-1/2 h-px w-7 -rotate-45 bg-[var(--aqua)] transition-transform duration-300 group-hover:-rotate-[35deg]" />
+              <span className="absolute left-0 top-1/2 h-px w-7 -rotate-45 bg-[var(--blueprint)] transition-transform duration-300 group-hover:-rotate-[35deg]" />
             </span>
           </button>
         </div>
@@ -276,7 +258,7 @@ export default function Navbar() {
                           style={{
                             fontFamily:
                               "var(--font-dm-mono)",
-                            color: "var(--aqua)",
+                            color: "var(--blueprint)",
                           }}
                         >
                           {item.number}
@@ -321,7 +303,7 @@ export default function Navbar() {
                                 href={child.href}
                                 key={child.title}
                                 onClick={handleClose}
-                                className="py-1 text-left text-sm uppercase tracking-[0.12em] text-white/60 transition-colors hover:text-[var(--aqua)]"
+                                className="py-1 text-left text-sm uppercase tracking-[0.12em] text-white/60 transition-colors hover:text-[var(--blueprint)]"
                                 style={{
                                   fontFamily:
                                     "var(--font-dm-mono)",
@@ -349,7 +331,7 @@ export default function Navbar() {
                       style={{
                         fontFamily:
                           "var(--font-dm-mono)",
-                        color: "var(--aqua)",
+                        color: "var(--blueprint)",
                       }}
                     >
                       {activeItem}
@@ -385,7 +367,7 @@ export default function Navbar() {
                                 {child.title}
                               </span>
 
-                              <span className="ml-auto translate-x-[-8px] text-[var(--aqua)] opacity-0 transition-all duration-300 group-hover:translate-x-0 group-hover:opacity-100">
+                              <span className="ml-auto translate-x-[-8px] text-[var(--blueprint)] opacity-0 transition-all duration-300 group-hover:translate-x-0 group-hover:opacity-100">
                                 →
                               </span>
                             </Link>
@@ -409,7 +391,7 @@ export default function Navbar() {
                           )!.href
                         }
                         onClick={handleClose}
-                        className="mt-10 inline-flex items-center gap-3 border-b border-white/20 pb-2 text-[10px] uppercase tracking-[0.18em] text-white transition-colors hover:border-[var(--aqua)] hover:text-[var(--aqua)]"
+                        className="mt-10 inline-flex items-center gap-3 border-b border-white/20 pb-2 text-[10px] uppercase tracking-[0.18em] text-white transition-colors hover:border-[var(--blueprint)] hover:text-[var(--blueprint)]"
                         style={{
                           fontFamily:
                             "var(--font-dm-mono)",

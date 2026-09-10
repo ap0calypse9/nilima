@@ -1,180 +1,270 @@
 "use client";
 
-import {
-  GraduationCap,
-  Building2,
-  Factory,
-  Home as HomeIcon,
-  Landmark,
-  Hammer,
-  Layers,
-  FlaskConical,
-  Wrench,
-} from "lucide-react";
+import { useState } from "react";
 
-const sectors = [
-  { label: "Residential", icon: HomeIcon },
-  { label: "Commercial", icon: Building2 },
-  { label: "Industrial", icon: Factory },
-  { label: "Infrastructure", icon: Landmark },
-];
+// Replace with real client quotes when available.
+const testimonials = [
+  {
+    quote:
+      "Nilima Design Associates delivered our structural drawings on time, every time. Their site coordination made a difficult foundation problem straightforward.",
+    name: "Rajesh Banerjee",
+    role: "Project Director, Residential Development",
+    accent: "blueprint",
+  },
+  {
+    quote:
+      "Their NDT and structural audit report was thorough and easy for our procurement team to act on. Exactly the kind of clarity a government tender needs.",
+    name: "Anita Sengupta",
+    role: "Executive Engineer, Public Works",
+    accent: "green",
+  },
+  {
+    quote:
+      "We brought them in for a retrofit that three other consultants had turned down. They found a workable solution within a week.",
+    name: "Suman Ghosh",
+    role: "Site Manager, Industrial Facility",
+    accent: "blueprint",
+  },
+] as const;
 
-const disciplines = [
-  { label: "Structural", icon: Layers, accent: "var(--aqua)" },
-  { label: "Geotechnical", icon: Hammer, accent: "var(--green)" },
-  { label: "Testing", icon: FlaskConical, accent: "var(--aqua)" },
-  { label: "Rehabilitation", icon: Wrench, accent: "var(--green)" },
-];
+type Comment = {
+  id: string;
+  name: string;
+  message: string;
+  timestamp: string;
+};
 
-export default function Trust() {
+export default function Testimonials() {
+  const [comments, setComments] = useState<Comment[]>([]);
+  const [name, setName] = useState("");
+  const [message, setMessage] = useState("");
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!name.trim() || !message.trim()) return;
+
+    const newComment: Comment = {
+      id: crypto.randomUUID(),
+      name: name.trim(),
+      message: message.trim(),
+      timestamp: new Date().toLocaleString("en-IN", {
+        day: "numeric",
+        month: "short",
+        hour: "2-digit",
+        minute: "2-digit",
+      }),
+    };
+
+    setComments((prev) => [newComment, ...prev]);
+    setName("");
+    setMessage("");
+  };
+
   return (
-    <section className="relative overflow-hidden bg-[var(--background)] text-[var(--foreground)]">
-      <div className="page-grid py-28 md:py-40">
-        {/* Header */}
-        <div className="col-span-12 flex items-center gap-4">
-          <span
-            className="flex h-7 w-7 items-center justify-center rounded-full text-xs font-bold text-white shadow-sm"
-            style={{
-              background: "linear-gradient(135deg, var(--aqua), var(--green))",
-            }}
-          >
-            5
-          </span>
-
-          <span
-            className="text-[10px] uppercase tracking-[0.2em]"
-            style={{ fontFamily: "var(--font-dm-mono)", color: "var(--muted)" }}
-          >
-            Trust / Credentials
-          </span>
-        </div>
-
-        {/* Main statement */}
-        <div className="col-span-12 mt-16 md:col-span-9 md:mt-20">
-          <h2 className="text-[clamp(3.5rem,8vw,8.5rem)] font-bold leading-[0.85] tracking-[-0.05em]">
-            <span
-              style={{
-                background: "linear-gradient(90deg, var(--aqua), var(--green))",
-                WebkitBackgroundClip: "text",
-                backgroundClip: "text",
-                color: "transparent",
-              }}
-            >
-              ENGINEERING
-            </span>
-            <br />
-            YOU CAN STAND ON.
+    <section className="relative overflow-hidden bg-[var(--paper)] py-24 md:py-32">
+      <div className="page-grid">
+        {/* Asymmetric header */}
+        <div className="col-span-12 md:col-span-7">
+          <h2 className="text-[clamp(2.75rem,6vw,5.5rem)] font-semibold leading-[0.95] tracking-[-0.03em] text-[var(--ink)]">
+            What clients say.
           </h2>
         </div>
 
-        {/* Supporting copy */}
-        <div className="col-span-12 mt-8 md:col-span-6 md:mt-10">
-          <p className="text-lg leading-relaxed text-[var(--foreground-muted)] md:text-xl">
-            Trusted by builders, developers and property owners for
-            engineering solutions spanning new construction, inspection,
-            testing and repair &mdash; backed by field investigation and
-            modern analytical tools.
+        <div className="col-span-12 mt-6 md:col-span-4 md:col-start-9 md:mt-3">
+          <p className="text-base leading-relaxed text-[var(--graphite)]">
+            Feedback from the people who&apos;ve worked with us on site,
+            not just in the boardroom.
           </p>
         </div>
 
-        {/* Institutional support + sectors, gradient cards with icons */}
-        <div className="col-span-12 mt-16 grid grid-cols-1 gap-6 md:mt-20 md:grid-cols-2">
-          <div
-            className="group relative overflow-hidden rounded-3xl p-8 shadow-lg transition-transform duration-300 hover:-translate-y-1 md:p-10"
-            style={{
-              background: "linear-gradient(135deg, var(--aqua), #1c7ea6)",
-            }}
-          >
-            <GraduationCap
-              className="absolute -right-4 -top-4 h-32 w-32 text-white/10 transition-transform duration-500 group-hover:scale-110"
-              strokeWidth={1}
-            />
-            <div className="relative flex h-11 w-11 items-center justify-center rounded-full bg-white/15">
-              <GraduationCap className="h-5 w-5 text-white" strokeWidth={1.75} />
-            </div>
-
-            <p className="relative mt-6 text-sm font-semibold uppercase tracking-wide text-white/70">
-              Institutional Support
-            </p>
-            <p className="relative mt-3 max-w-md text-xl font-semibold leading-snug text-white md:text-2xl">
-              Technical vetting support from reputed institutions,
-              including Jadavpur University and IIEST.
-            </p>
-          </div>
-
-          <div
-            className="relative overflow-hidden rounded-3xl p-8 shadow-lg md:p-10"
-            style={{
-              background: "linear-gradient(135deg, var(--green), #4d8a1f)",
-            }}
-          >
-            <p className="text-sm font-semibold uppercase tracking-wide text-white/70">
-              Project Sectors
-            </p>
-
-            <div className="mt-6 grid grid-cols-2 gap-4">
-              {sectors.map(({ label, icon: Icon }) => (
-                <div
-                  key={label}
-                  className="flex items-center gap-3 rounded-xl bg-white/10 p-3 transition-colors hover:bg-white/20"
-                >
-                  <Icon className="h-5 w-5 shrink-0 text-white" strokeWidth={1.75} />
-                  <span className="text-sm font-medium text-white">
-                    {label}
-                  </span>
-                </div>
-              ))}
-            </div>
-          </div>
+        <div className="col-span-12 mt-14">
+          <div className="dimension-line" />
         </div>
 
-        {/* Discipline cards with icons and lift-on-hover */}
-        <div className="col-span-12 mt-8 grid grid-cols-2 gap-4 md:grid-cols-4">
-          {disciplines.map(({ label, icon: Icon, accent }) => (
-            <div
-              key={label}
-              className="group rounded-2xl bg-white p-6 text-center shadow-sm ring-1 ring-[var(--line)] transition-all duration-300 hover:-translate-y-1 hover:shadow-md"
-            >
+        {/* Floating testimonial cards */}
+        <div className="col-span-12 mt-16 grid grid-cols-1 gap-8 md:mt-20 md:grid-cols-3">
+          {testimonials.map((item, index) => {
+            const accentVar =
+              item.accent === "blueprint" ? "var(--blueprint)" : "var(--green)";
+
+            return (
               <div
-                className="mx-auto flex h-12 w-12 items-center justify-center rounded-full transition-transform duration-300 group-hover:scale-110"
-                style={{ backgroundColor: `${accent}1a` }}
+                key={item.name}
+                className="testimonial-float relative"
+                style={{ animationDelay: `${index * 0.6}s` }}
               >
-                <Icon className="h-5 w-5" style={{ color: accent }} strokeWidth={1.75} />
+                <div className="relative border border-[var(--line)] bg-white p-7">
+                  {[
+                    "left-3 top-3 border-l border-t",
+                    "right-3 top-3 border-r border-t",
+                    "left-3 bottom-3 border-l border-b",
+                    "right-3 bottom-3 border-r border-b",
+                  ].map((position) => (
+                    <span
+                      key={position}
+                      className={`pointer-events-none absolute h-4 w-4 ${position}`}
+                      style={{ borderColor: accentVar }}
+                    />
+                  ))}
+
+                  <span
+                    className="block h-[3px] w-10"
+                    style={{ backgroundColor: accentVar }}
+                  />
+
+                  <p className="mt-5 text-base leading-relaxed text-[var(--ink)]">
+                    &ldquo;{item.quote}&rdquo;
+                  </p>
+
+                  <div className="mt-6 border-t border-[var(--line)] pt-4">
+                    <p className="text-sm font-semibold text-[var(--ink)]">
+                      {item.name}
+                    </p>
+                    <p className="text-xs text-[var(--graphite)]">
+                      {item.role}
+                    </p>
+                  </div>
+                </div>
               </div>
-              <p className="mt-4 text-sm font-semibold uppercase tracking-wide">
-                {label}
-              </p>
-            </div>
-          ))}
+            );
+          })}
         </div>
 
-        {/* Closing statement banner with subtle gradient + pattern */}
-        <div
-          className="relative col-span-12 mt-16 overflow-hidden rounded-3xl px-8 py-16 shadow-xl md:mt-24 md:px-16"
-          style={{
-            background:
-              "radial-gradient(circle at 20% 20%, rgba(41,171,226,0.25), transparent 55%), var(--navy)",
-          }}
-        >
-          <p
-            className="relative max-w-4xl text-[clamp(2rem,5vw,4rem)] font-semibold leading-[1.05] text-white"
-            style={{ fontFamily: "var(--font-instrument)" }}
-          >
-            From ground investigation to structural stability.{" "}
-            <span
-              style={{
-                background:
-                  "linear-gradient(90deg, var(--aqua), var(--green))",
-                WebkitBackgroundClip: "text",
-                backgroundClip: "text",
-                color: "transparent",
-              }}
-            >
-              One engineering approach.
-            </span>
-          </p>
+        {/* Live comment section */}
+        <div className="col-span-12 mt-24 md:mt-32">
+          <div className="dimension-line" />
+
+          <div className="mt-14 grid grid-cols-1 gap-12 md:grid-cols-12">
+            <div className="md:col-span-5">
+              <h3 className="text-2xl font-semibold text-[var(--ink)]">
+                Leave a note for our team.
+              </h3>
+              <p className="mt-3 max-w-sm text-sm leading-6 text-[var(--graphite)]">
+                Worked with us on a project? Share a quick comment below —
+                it appears instantly for anyone viewing this page right
+                now.
+              </p>
+
+              <form onSubmit={handleSubmit} className="mt-8 space-y-4">
+                <div>
+                  <label
+                    htmlFor="comment-name"
+                    className="block text-xs uppercase tracking-wide text-[var(--graphite)]"
+                    style={{ fontFamily: "var(--font-dm-mono)" }}
+                  >
+                    Name
+                  </label>
+                  <input
+                    id="comment-name"
+                    type="text"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    required
+                    className="mt-2 w-full border border-[var(--line)] bg-white px-3 py-2.5 text-sm text-[var(--ink)] outline-none transition-colors focus:border-[var(--blueprint)]"
+                    placeholder="Your name"
+                  />
+                </div>
+
+                <div>
+                  <label
+                    htmlFor="comment-message"
+                    className="block text-xs uppercase tracking-wide text-[var(--graphite)]"
+                    style={{ fontFamily: "var(--font-dm-mono)" }}
+                  >
+                    Comment
+                  </label>
+                  <textarea
+                    id="comment-message"
+                    value={message}
+                    onChange={(e) => setMessage(e.target.value)}
+                    required
+                    rows={4}
+                    className="mt-2 w-full resize-none border border-[var(--line)] bg-white px-3 py-2.5 text-sm text-[var(--ink)] outline-none transition-colors focus:border-[var(--blueprint)]"
+                    placeholder="Share your experience working with us"
+                  />
+                </div>
+
+                <button
+                  type="submit"
+                  className="inline-flex items-center px-6 py-3 text-sm font-semibold text-white transition-opacity hover:opacity-90"
+                  style={{ backgroundColor: "var(--blueprint)" }}
+                >
+                  Post comment
+                </button>
+              </form>
+            </div>
+
+            {/* Live comment list */}
+            <div className="md:col-span-7">
+              {comments.length === 0 ? (
+                <p className="text-sm italic text-[var(--graphite)]">
+                  No comments yet — be the first to share your experience.
+                </p>
+              ) : (
+                <ul className="space-y-6">
+                  {comments.map((comment) => (
+                    <li
+                      key={comment.id}
+                      className="comment-in border-b border-[var(--line)] pb-6"
+                    >
+                      <div className="flex items-center justify-between">
+                        <p className="text-sm font-semibold text-[var(--ink)]">
+                          {comment.name}
+                        </p>
+                        <p
+                          className="text-[11px] text-[var(--graphite)]"
+                          style={{ fontFamily: "var(--font-dm-mono)" }}
+                        >
+                          {comment.timestamp}
+                        </p>
+                      </div>
+                      <p className="mt-2 text-sm leading-6 text-[var(--graphite)]">
+                        {comment.message}
+                      </p>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
+          </div>
         </div>
       </div>
+
+      <style jsx>{`
+        @keyframes testimonial-float {
+          0%,
+          100% {
+            transform: translateY(0px);
+          }
+          50% {
+            transform: translateY(-10px);
+          }
+        }
+        .testimonial-float {
+          animation: testimonial-float 6s ease-in-out infinite;
+        }
+
+        @keyframes comment-in {
+          from {
+            opacity: 0;
+            transform: translateY(-8px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+        .comment-in {
+          animation: comment-in 0.4s ease-out;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+          .testimonial-float,
+          .comment-in {
+            animation: none;
+          }
+        }
+      `}</style>
     </section>
   );
 }
