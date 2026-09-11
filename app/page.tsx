@@ -10,6 +10,7 @@ import CTA from "@/components/home/cta";
 import Footer from "@/components/layout/footer";
 import TrustedBy from "@/components/home/clients";
 import Location from "@/components/home/location";
+import FloatingContact from "@/components/contact/floating-contact";
 
 export default function Home() {
   return (
@@ -25,6 +26,7 @@ export default function Home() {
         <Expertise />
         <Trust />
         <Location/>
+        <FloatingContact />
         <CTA />
       </main>
       <Footer />

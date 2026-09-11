@@ -9,6 +9,8 @@ const clientNames = [
   "Public Health Engineering, Govt. of West Bengal",
   "Indian Railways",
   "American Embassy",
+  "Switz Food pvt ltd",
+  "Switz International",
   "Bharat Petroleum Corporation Limited (BPCL)",
   "Irrigation & Waterways Department, Govt. of West Bengal",
   "Exide Industries Limited",

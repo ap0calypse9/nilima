@@ -127,6 +127,18 @@ export default function Location() {
                   8972697919
                 </a>
               </li>
+                            <li className="flex items-center gap-3 text-sm text-[var(--ink)]">
+                <span
+                  className="h-1.5 w-1.5 shrink-0 rounded-full"
+                  style={{ backgroundColor: "var(--blueprint)" }}
+                />
+                <a
+                  href="tel:8972697919"
+                  className="transition-colors hover:text-[var(--blueprint)]"
+                >
+                  9735574908
+                </a>
+              </li>
               <li className="flex items-center gap-3 text-sm text-[var(--ink)]">
                 <span
                   className="h-1.5 w-1.5 shrink-0 rounded-full"
