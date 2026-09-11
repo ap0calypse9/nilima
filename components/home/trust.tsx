@@ -25,6 +25,27 @@ const testimonials = [
     role: "Site Manager, Industrial Facility",
     accent: "blueprint",
   },
+  {
+    quote:
+      "Pile integrity testing was scheduled around our pour dates without any delay to the contractor. Reporting turnaround was faster than we budgeted for.",
+    name: "Debjani Roy",
+    role: "Site Engineer, Commercial Complex",
+    accent: "green",
+  },
+  {
+    quote:
+      "We needed a structural vetting done quickly before a CPWD submission deadline. They turned it around accurately and on time.",
+    name: "Amitava Dutta",
+    role: "Contractor, CPWD Project",
+    accent: "blueprint",
+  },
+  {
+    quote:
+      "Their soil investigation report caught a foundation issue our first consultant had missed entirely. Saved us a costly redesign later.",
+    name: "Priya Mukherjee",
+    role: "Developer, Housing Project",
+    accent: "green",
+  },
 ] as const;
 
 type Comment = {
@@ -60,6 +81,9 @@ export default function Testimonials() {
     setMessage("");
   };
 
+  // duplicated once for a seamless looping marquee
+  const marqueeItems = [...testimonials, ...testimonials];
+
   return (
     <section className="relative overflow-hidden bg-[var(--paper)] py-24 md:py-32">
       <div className="page-grid">
@@ -80,20 +104,25 @@ export default function Testimonials() {
         <div className="col-span-12 mt-14">
           <div className="dimension-line" />
         </div>
+      </div>
 
-        {/* Floating testimonial cards */}
-        <div className="col-span-12 mt-16 grid grid-cols-1 gap-8 md:mt-20 md:grid-cols-3">
-          {testimonials.map((item, index) => {
+      {/* Sliding testimonial marquee */}
+      <div className="group relative mt-14 w-full overflow-hidden md:mt-16">
+        {/* Edge fade masks */}
+        <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-12 bg-gradient-to-r from-[var(--paper)] to-transparent md:w-28" />
+        <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-12 bg-gradient-to-l from-[var(--paper)] to-transparent md:w-28" />
+
+        <div className="marquee-track flex w-max items-stretch gap-6 group-hover:[animation-play-state:paused]">
+          {marqueeItems.map((item, index) => {
             const accentVar =
               item.accent === "blueprint" ? "var(--blueprint)" : "var(--green)";
 
             return (
               <div
-                key={item.name}
-                className="testimonial-float relative"
-                style={{ animationDelay: `${index * 0.6}s` }}
+                key={`${item.name}-${index}`}
+                className="relative w-[320px] shrink-0 md:w-[380px]"
               >
-                <div className="relative border border-[var(--line)] bg-white p-7">
+                <div className="relative h-full border border-[var(--line)] bg-white p-7">
                   {[
                     "left-3 top-3 border-l border-t",
                     "right-3 top-3 border-r border-t",
@@ -129,119 +158,120 @@ export default function Testimonials() {
             );
           })}
         </div>
+      </div>
 
-        {/* Live comment section */}
-        <div className="col-span-12 mt-24 md:mt-32">
+      {/* Live comment section */}
+      <div className="page-grid mt-24 md:mt-32">
+        <div className="col-span-12">
           <div className="dimension-line" />
+        </div>
 
-          <div className="mt-14 grid grid-cols-1 gap-12 md:grid-cols-12">
-            <div className="md:col-span-5">
-              <h3 className="text-2xl font-semibold text-[var(--ink)]">
-                Leave a note for our team.
-              </h3>
-              <p className="mt-3 max-w-sm text-sm leading-6 text-[var(--graphite)]">
-                Worked with us on a project? Share a quick comment below —
-                it appears instantly for anyone viewing this page right
-                now.
-              </p>
+        <div className="col-span-12 mt-14 grid grid-cols-1 gap-12 md:grid-cols-12">
+          <div className="md:col-span-5">
+            <h3 className="text-2xl font-semibold text-[var(--ink)]">
+              Leave a note for our team.
+            </h3>
+            <p className="mt-3 max-w-sm text-sm leading-6 text-[var(--graphite)]">
+              Worked with us on a project? Share a quick comment below —
+              it appears instantly for anyone viewing this page right
+              now.
+            </p>
 
-              <form onSubmit={handleSubmit} className="mt-8 space-y-4">
-                <div>
-                  <label
-                    htmlFor="comment-name"
-                    className="block text-xs uppercase tracking-wide text-[var(--graphite)]"
-                    style={{ fontFamily: "var(--font-dm-mono)" }}
-                  >
-                    Name
-                  </label>
-                  <input
-                    id="comment-name"
-                    type="text"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                    required
-                    className="mt-2 w-full border border-[var(--line)] bg-white px-3 py-2.5 text-sm text-[var(--ink)] outline-none transition-colors focus:border-[var(--blueprint)]"
-                    placeholder="Your name"
-                  />
-                </div>
-
-                <div>
-                  <label
-                    htmlFor="comment-message"
-                    className="block text-xs uppercase tracking-wide text-[var(--graphite)]"
-                    style={{ fontFamily: "var(--font-dm-mono)" }}
-                  >
-                    Comment
-                  </label>
-                  <textarea
-                    id="comment-message"
-                    value={message}
-                    onChange={(e) => setMessage(e.target.value)}
-                    required
-                    rows={4}
-                    className="mt-2 w-full resize-none border border-[var(--line)] bg-white px-3 py-2.5 text-sm text-[var(--ink)] outline-none transition-colors focus:border-[var(--blueprint)]"
-                    placeholder="Share your experience working with us"
-                  />
-                </div>
-
-                <button
-                  type="submit"
-                  className="inline-flex items-center px-6 py-3 text-sm font-semibold text-white transition-opacity hover:opacity-90"
-                  style={{ backgroundColor: "var(--blueprint)" }}
+            <form onSubmit={handleSubmit} className="mt-8 space-y-4">
+              <div>
+                <label
+                  htmlFor="comment-name"
+                  className="block text-xs uppercase tracking-wide text-[var(--graphite)]"
+                  style={{ fontFamily: "var(--font-dm-mono)" }}
                 >
-                  Post comment
-                </button>
-              </form>
-            </div>
+                  Name
+                </label>
+                <input
+                  id="comment-name"
+                  type="text"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  required
+                  className="mt-2 w-full border border-[var(--line)] bg-white px-3 py-2.5 text-sm text-[var(--ink)] outline-none transition-colors focus:border-[var(--blueprint)]"
+                  placeholder="Your name"
+                />
+              </div>
 
-            {/* Live comment list */}
-            <div className="md:col-span-7">
-              {comments.length === 0 ? (
-                <p className="text-sm italic text-[var(--graphite)]">
-                  No comments yet — be the first to share your experience.
-                </p>
-              ) : (
-                <ul className="space-y-6">
-                  {comments.map((comment) => (
-                    <li
-                      key={comment.id}
-                      className="comment-in border-b border-[var(--line)] pb-6"
-                    >
-                      <div className="flex items-center justify-between">
-                        <p className="text-sm font-semibold text-[var(--ink)]">
-                          {comment.name}
-                        </p>
-                        <p
-                          className="text-[11px] text-[var(--graphite)]"
-                          style={{ fontFamily: "var(--font-dm-mono)" }}
-                        >
-                          {comment.timestamp}
-                        </p>
-                      </div>
-                      <p className="mt-2 text-sm leading-6 text-[var(--graphite)]">
-                        {comment.message}
+              <div>
+                <label
+                  htmlFor="comment-message"
+                  className="block text-xs uppercase tracking-wide text-[var(--graphite)]"
+                  style={{ fontFamily: "var(--font-dm-mono)" }}
+                >
+                  Comment
+                </label>
+                <textarea
+                  id="comment-message"
+                  value={message}
+                  onChange={(e) => setMessage(e.target.value)}
+                  required
+                  rows={4}
+                  className="mt-2 w-full resize-none border border-[var(--line)] bg-white px-3 py-2.5 text-sm text-[var(--ink)] outline-none transition-colors focus:border-[var(--blueprint)]"
+                  placeholder="Share your experience working with us"
+                />
+              </div>
+
+              <button
+                type="submit"
+                className="inline-flex items-center px-6 py-3 text-sm font-semibold text-white transition-opacity hover:opacity-90"
+                style={{ backgroundColor: "var(--blueprint)" }}
+              >
+                Post comment
+              </button>
+            </form>
+          </div>
+
+          {/* Live comment list */}
+          <div className="md:col-span-7">
+            {comments.length === 0 ? (
+              <p className="text-sm italic text-[var(--graphite)]">
+                No comments yet — be the first to share your experience.
+              </p>
+            ) : (
+              <ul className="space-y-6">
+                {comments.map((comment) => (
+                  <li
+                    key={comment.id}
+                    className="comment-in border-b border-[var(--line)] pb-6"
+                  >
+                    <div className="flex items-center justify-between">
+                      <p className="text-sm font-semibold text-[var(--ink)]">
+                        {comment.name}
                       </p>
-                    </li>
-                  ))}
-                </ul>
-              )}
-            </div>
+                      <p
+                        className="text-[11px] text-[var(--graphite)]"
+                        style={{ fontFamily: "var(--font-dm-mono)" }}
+                      >
+                        {comment.timestamp}
+                      </p>
+                    </div>
+                    <p className="mt-2 text-sm leading-6 text-[var(--graphite)]">
+                      {comment.message}
+                    </p>
+                  </li>
+                ))}
+              </ul>
+            )}
           </div>
         </div>
       </div>
 
       <style jsx>{`
-        @keyframes testimonial-float {
-          0%,
-          100% {
-            transform: translateY(0px);
+        @keyframes marquee-scroll {
+          from {
+            transform: translateX(0);
           }
-          50% {
-            transform: translateY(-10px);
+          to {
+            transform: translateX(-50%);
           }
         }
-        .testimonial-float {
-          animation: testimonial-float 6s ease-in-out infinite;
+        .marquee-track {
+          animation: marquee-scroll 45s linear infinite;
         }
 
         @keyframes comment-in {
@@ -259,7 +289,7 @@ export default function Testimonials() {
         }
 
         @media (prefers-reduced-motion: reduce) {
-          .testimonial-float,
+          .marquee-track,
           .comment-in {
             animation: none;
           }

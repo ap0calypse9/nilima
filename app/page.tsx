@@ -11,6 +11,7 @@ import Footer from "@/components/layout/footer";
 import TrustedBy from "@/components/home/clients";
 import Location from "@/components/home/location";
 import FloatingContact from "@/components/contact/floating-contact";
+import FeaturedVideo from "@/components/home/yt";
 
 export default function Home() {
   return (
@@ -23,6 +24,7 @@ export default function Home() {
         <Identity />
         <Capabilities />
         <Projects />
+        <FeaturedVideo/>
         <Expertise />
         <Trust />
         <Location/>

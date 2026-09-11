@@ -3,16 +3,61 @@ import Link from "next/link";
 import Navbar from "@/components/navigation/navbar";
 import Footer from "@/components/layout/footer";
 
-const practiceAreas = [
-  "Structural Design",
-  "Foundation Engineering",
-  "Soil Investigation",
-  "Pile Testing",
-  "Land Survey",
-  "Non-Destructive Testing",
-  "Structural Audit",
-  "Rehabilitation",
+const whatWeDo = [
+  "Structural Design & Analysis",
+  "Building Planning & Civil Engineering Consultancy",
+  "Structural Health Assessment & Stability Evaluation",
+  "Non-Destructive Testing (NDT) of Concrete & Structures",
+  "Soil Investigation & Geotechnical Investigation",
+  "Pile Testing & Foundation Investigation",
+  "Land & Topographical Survey",
+  "Quantity Estimation & Technical Documentation",
+  "Existing Building Assessment",
+  "Repair, Rehabilitation & Strengthening Consultancy",
+  "Construction Quality Inspection & Technical Consultancy",
 ];
+
+const approachSteps = [
+  "Investigation",
+  "Analysis",
+  "Design",
+  "Testing",
+  "Technical Evaluation",
+  "Practical Solution",
+];
+
+const whyChooseUs = [
+  {
+    title: "Professional Engineering Expertise",
+    description:
+      "Technically focused engineering consultancy backed by practical understanding of construction and site conditions.",
+    accent: "blueprint",
+  },
+  {
+    title: "Accurate Investigation & Testing",
+    description:
+      "Systematic field investigation, appropriate testing procedures, and reliable interpretation of results.",
+    accent: "green",
+  },
+  {
+    title: "Practical & Economical Solutions",
+    description:
+      "Recommendations that consider structural safety alongside constructability, durability and project practicality.",
+    accent: "blueprint",
+  },
+  {
+    title: "Clear Technical Documentation",
+    description:
+      "Organized reports, drawings, calculations, observations and recommendations that are easy to act on.",
+    accent: "green",
+  },
+  {
+    title: "Client-Focused Service",
+    description:
+      "We work closely with clients and project teams to provide solutions suited to the specific project.",
+    accent: "blueprint",
+  },
+] as const;
 
 export default function AboutPage() {
   return (
@@ -35,27 +80,33 @@ export default function AboutPage() {
               </p>
             </div>
 
-            <div className="col-span-12 mt-8 md:col-span-10">
-              <h1 className="text-[clamp(3.5rem,9vw,10rem)] font-semibold leading-[0.88] tracking-[-0.04em] text-[var(--ink)]">
-                Engineering
+            <div className="col-span-12 mt-8 md:col-span-11">
+              <p
+                className="text-sm uppercase tracking-wide"
+                style={{ fontFamily: "var(--font-dm-mono)", color: "var(--blueprint)" }}
+              >
+                About Us
+              </p>
+              <h1 className="mt-4 text-[clamp(2.75rem,6.5vw,6.5rem)] font-semibold leading-[0.98] tracking-[-0.03em] text-[var(--ink)]">
+                Engineering solutions built on
                 <br />
-                with{" "}
-                <span style={{ color: "var(--blueprint)" }}>purpose.</span>
+                knowledge, precision &amp; trust.
               </h1>
             </div>
 
-            <div className="col-span-12 mt-14 md:col-span-5 md:col-start-8 md:mt-16">
+            <div className="col-span-12 mt-14 md:col-span-6 md:mt-16">
               <p className="text-xl leading-relaxed text-[var(--ink)] md:text-2xl">
-                Nilima Design Associates is a multidisciplinary structural
-                engineering consultancy delivering precise, safe and
-                cost-effective engineering solutions across West Bengal
-                and India.
+                Nilima Design Associates is a professional engineering
+                consultancy providing reliable structural engineering,
+                civil engineering, geotechnical investigation, land
+                surveying, non-destructive testing (NDT), structural
+                assessment, and building design services.
               </p>
             </div>
           </div>
         </section>
 
-        {/* The Practice */}
+        {/* Approach + who we work with */}
         <section className="relative pb-24 md:pb-32">
           <div className="page-grid">
             <div className="col-span-12">
@@ -68,23 +119,25 @@ export default function AboutPage() {
                   className="text-xs uppercase tracking-wide"
                   style={{ fontFamily: "var(--font-dm-mono)", color: "var(--blueprint)" }}
                 >
-                  The practice
+                  How we work
                 </p>
               </div>
 
               <div className="md:col-span-7 md:col-start-5">
-                <p className="text-2xl leading-tight text-[var(--ink)] md:text-4xl">
-                  From new construction to inspection, testing and
-                  rehabilitation, Nilima Design Associates provides
-                  end-to-end engineering consultancy tailored to project
-                  requirements.
+                <p className="text-lg leading-relaxed text-[var(--ink)] md:text-xl">
+                  Our approach combines engineering knowledge, practical
+                  site experience, modern testing techniques, and careful
+                  technical analysis to deliver solutions that are safe,
+                  practical, economical, and compliant with applicable
+                  codes and standards.
                 </p>
 
-                <p className="mt-8 max-w-2xl text-sm leading-7 text-[var(--graphite)]">
-                  The practice works across residential, commercial,
-                  industrial and infrastructure projects, combining field
-                  investigation with structural analysis, design and
-                  engineering judgement.
+                <p className="mt-6 max-w-2xl text-sm leading-7 text-[var(--graphite)]">
+                  We work with property owners, developers, contractors,
+                  architects, institutions, and other professionals to
+                  support projects from initial investigation and
+                  planning through design, construction, testing, and
+                  structural assessment.
                 </p>
 
                 <Link
@@ -94,6 +147,127 @@ export default function AboutPage() {
                   More about the company
                 </Link>
               </div>
+            </div>
+          </div>
+        </section>
+
+        {/* What We Do */}
+        <section className="relative bg-[var(--background-alt)] py-24 md:py-32">
+          <div className="page-grid">
+            <div className="col-span-12 md:col-span-7">
+              <h2 className="text-[clamp(2.25rem,5vw,3.5rem)] font-semibold leading-[1] tracking-[-0.03em] text-[var(--ink)]">
+                What we do.
+              </h2>
+            </div>
+
+            <div className="col-span-12 mt-14">
+              <div className="dimension-line" />
+            </div>
+
+            <div className="col-span-12 mt-14 grid grid-cols-1 gap-x-12 md:grid-cols-2">
+              {whatWeDo.map((item, index) => {
+                const accentVar =
+                  index % 2 === 0 ? "var(--blueprint)" : "var(--green)";
+                return (
+                  <div
+                    key={item}
+                    className="flex items-center gap-4 border-b border-[var(--line)] py-4"
+                  >
+                    <span
+                      className="h-1.5 w-1.5 shrink-0"
+                      style={{ backgroundColor: accentVar }}
+                    />
+                    <span className="text-sm text-[var(--ink)] md:text-base">
+                      {item}
+                    </span>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+
+        {/* Our Engineering Approach — process flow */}
+        <section className="relative py-24 md:py-32">
+          <div className="page-grid">
+            <div className="col-span-12 md:col-span-7">
+              <h2 className="text-[clamp(2.25rem,5vw,3.5rem)] font-semibold leading-[1] tracking-[-0.03em] text-[var(--ink)]">
+                Our engineering approach.
+              </h2>
+            </div>
+
+            <div className="col-span-12 mt-6 md:col-span-4 md:col-start-9 md:mt-3">
+              <p className="text-base leading-relaxed text-[var(--graphite)]">
+                Good engineering begins with understanding the site,
+                structure, materials, loads, soil conditions, and actual
+                project requirements.
+              </p>
+            </div>
+
+            {/* Process flow */}
+            <div className="col-span-12 mt-16 md:mt-20">
+              <div className="flex flex-wrap items-center gap-x-2 gap-y-6">
+                {approachSteps.map((step, index) => {
+                  const accentVar =
+                    index % 2 === 0 ? "var(--blueprint)" : "var(--green)";
+                  const isLast = index === approachSteps.length - 1;
+                  return (
+                    <div key={step} className="flex items-center gap-2">
+                      <div className="border px-4 py-3" style={{ borderColor: accentVar }}>
+                        <span
+                          className="text-xs uppercase tracking-wide"
+                          style={{ fontFamily: "var(--font-dm-mono)", color: accentVar }}
+                        >
+                          {String(index + 1).padStart(2, "0")}
+                        </span>
+                        <p className="mt-1 text-sm font-medium text-[var(--ink)] md:text-base">
+                          {step}
+                        </p>
+                      </div>
+                      {!isLast && (
+                        <span className="text-[var(--graphite)]" aria-hidden>
+                          →
+                        </span>
+                      )}
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+
+            <div className="col-span-12 mt-16 md:col-span-8 md:mt-20">
+              <p className="text-base leading-relaxed text-[var(--graphite)]">
+                Every project is approached with attention to technical
+                accuracy, documentation, constructability, safety, and
+                long-term performance.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* Commitment to Quality */}
+        <section className="relative overflow-hidden bg-[var(--navy)] py-20 text-white md:py-28">
+          <div className="page-grid">
+            <div className="col-span-12 md:col-span-8">
+              <p
+                className="text-xs uppercase tracking-wide text-white/50"
+                style={{ fontFamily: "var(--font-dm-mono)" }}
+              >
+                Commitment to Quality
+              </p>
+              <p className="mt-4 text-2xl font-medium leading-snug md:text-3xl">
+                Engineering decisions directly affect the safety,
+                durability, and value of a building or infrastructure
+                project.
+              </p>
+              <p className="mt-6 max-w-2xl text-sm leading-7 text-white/70">
+                That is why we emphasize proper investigation, engineering
+                calculations, appropriate testing, site observations, and
+                clear technical reporting. Our objective is not simply to
+                provide a report or drawing, but to provide engineering
+                information that helps our clients make confident and
+                informed decisions.
+              </p>
             </div>
           </div>
         </section>
@@ -142,7 +316,7 @@ export default function AboutPage() {
                 </p>
 
                 <Link
-                  href="/about/company"
+                  href="/about/leadership"
                   className="mt-8 inline-block w-fit border-b border-[var(--ink)] pb-1 text-sm font-medium text-[var(--ink)] transition-colors hover:border-[var(--blueprint)] hover:text-[var(--blueprint)]"
                 >
                   Meet the full team
@@ -152,44 +326,80 @@ export default function AboutPage() {
           </div>
         </section>
 
-        {/* Areas of practice */}
+        {/* Why Choose Nilima Design Associates */}
         <section className="relative py-24 md:py-32">
           <div className="page-grid">
             <div className="col-span-12 md:col-span-7">
               <h2 className="text-[clamp(2.25rem,5vw,3.5rem)] font-semibold leading-[1] tracking-[-0.03em] text-[var(--ink)]">
-                Areas of practice.
+                Why choose Nilima
+                <br />
+                Design Associates?
               </h2>
             </div>
 
-            <div className="col-span-12 mt-14">
-              <div className="dimension-line" />
-            </div>
-
-            <div className="col-span-12 mt-14 grid grid-cols-1 gap-x-12 md:grid-cols-2">
-              {practiceAreas.map((item, index) => {
+            <div className="col-span-12 mt-14 grid grid-cols-1 gap-x-8 gap-y-12 md:mt-20 md:grid-cols-2">
+              {whyChooseUs.map((item) => {
                 const accentVar =
-                  index % 2 === 0 ? "var(--blueprint)" : "var(--green)";
+                  item.accent === "blueprint" ? "var(--blueprint)" : "var(--green)";
                 return (
-                  <div
-                    key={item}
-                    className="flex items-center gap-4 border-b border-[var(--line)] py-5"
-                  >
+                  <div key={item.title}>
                     <span
-                      className="text-xs"
-                      style={{ fontFamily: "var(--font-dm-mono)", color: "var(--graphite)" }}
-                    >
-                      {String(index + 1).padStart(2, "0")}
-                    </span>
-                    <span
-                      className="h-1.5 w-1.5 shrink-0"
+                      className="block h-[3px] w-10"
                       style={{ backgroundColor: accentVar }}
                     />
-                    <span className="text-lg text-[var(--ink)] md:text-xl">
-                      {item}
-                    </span>
+                    <h3 className="mt-4 text-lg font-semibold text-[var(--ink)]">
+                      {item.title}
+                    </h3>
+                    <p className="mt-2 text-sm leading-6 text-[var(--graphite)]">
+                      {item.description}
+                    </p>
                   </div>
                 );
               })}
+            </div>
+          </div>
+        </section>
+
+        {/* Vision + Mission */}
+        <section className="relative bg-[var(--background-alt)] py-24 md:py-32">
+          <div className="page-grid">
+            <div className="col-span-12 grid grid-cols-1 gap-6 md:grid-cols-2">
+              <div className="border border-[var(--line)] bg-white p-8">
+                <span
+                  className="block h-[3px] w-10"
+                  style={{ backgroundColor: "var(--blueprint)" }}
+                />
+                <p
+                  className="mt-5 text-xs uppercase tracking-wide"
+                  style={{ fontFamily: "var(--font-dm-mono)", color: "var(--blueprint)" }}
+                >
+                  Our Vision
+                </p>
+                <p className="mt-3 text-lg leading-relaxed text-[var(--ink)]">
+                  To become a trusted engineering consultancy known for
+                  technical excellence, integrity, accuracy, and practical
+                  engineering solutions.
+                </p>
+              </div>
+
+              <div className="border border-[var(--line)] bg-white p-8">
+                <span
+                  className="block h-[3px] w-10"
+                  style={{ backgroundColor: "var(--green)" }}
+                />
+                <p
+                  className="mt-5 text-xs uppercase tracking-wide"
+                  style={{ fontFamily: "var(--font-dm-mono)", color: "var(--green)" }}
+                >
+                  Our Mission
+                </p>
+                <p className="mt-3 text-lg leading-relaxed text-[var(--ink)]">
+                  To provide dependable engineering and technical
+                  consultancy that contributes to safe structures, better
+                  construction practices, informed decision-making, and
+                  long-term value for our clients.
+                </p>
+              </div>
             </div>
           </div>
         </section>
