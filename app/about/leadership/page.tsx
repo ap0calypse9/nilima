@@ -4,8 +4,8 @@ import Navbar from "@/components/navigation/navbar";
 import Footer from "@/components/layout/footer";
 
 const leadership = [
-  { name: "Koushik Chatterjee", role: "Managing Director & Structural Engineer", featured: true },
-  { name: "Er. Tapan Jana", role: "Technical Advisor & CEO" },
+  { name: "Koushik Chatterjee", role: "Managing Director & Structural Engineer", image: "/images/leadership/koushik.jpeg", featured: true },
+  { name: "Er. Tapan Jana", role: "Managing Director", image: "/images/leadership/tapan.jpeg", featured: true },
   { name: "Mr. Koushik Ghatak", role: "Accountant" },
   { name: "Adv. Arpita Chatterjee", role: "Legal Advisor" },
   { name: "Mr. Supratik Manna", role: "Technical Advisor & Senior Manager" },
@@ -83,7 +83,7 @@ function TeamGroup({
 }
 
 export default function LeadershipPage() {
-  const featured = leadership.find((person) => person.featured)!;
+  const featuredLeaders = leadership.filter((person) => person.featured);
   const restOfLeadership = leadership.filter((person) => !person.featured);
 
   return (
@@ -118,89 +118,97 @@ export default function LeadershipPage() {
           </div>
         </section>
 
-        {/* Featured: Koushik Chatterjee, portrait */}
+        {/* Featured: Koushik Chatterjee + Tapan Jana, portraits side by side */}
         <section className="relative pb-24 md:pb-32">
           <div className="page-grid">
             <div className="col-span-12">
               <div className="dimension-line" />
             </div>
 
-            <div className="col-span-12 mt-16 grid grid-cols-1 gap-12 md:mt-20 md:grid-cols-12">
-              {/* Portrait, framed */}
-              <div className="relative md:col-span-4">
-                <div className="relative aspect-[3/4] w-full max-w-sm border border-[var(--line)]">
-                  <Image
-                    src="/images/leadership/koushik.jpeg"
-                    alt={featured.name}
-                    fill
-                    sizes="(max-width: 768px) 100vw, 33vw"
-                    className="object-cover"
-                  />
-                  {[
-                    "left-3 top-3 border-l border-t",
-                    "right-3 top-3 border-r border-t",
-                    "left-3 bottom-3 border-l border-b",
-                    "right-3 bottom-3 border-r border-b",
-                  ].map((position) => (
-                    <span
-                      key={position}
-                      className={`pointer-events-none absolute h-5 w-5 ${position}`}
-                      style={{ borderColor: "var(--blueprint)" }}
-                    />
-                  ))}
-                </div>
-              </div>
-
-              {/* Name + role + rest of leadership list */}
-              <div className="md:col-span-8">
-                <span
-                  className="block h-[3px] w-10"
-                  style={{ backgroundColor: "var(--blueprint)" }}
-                />
-                <h2 className="mt-4 text-3xl font-semibold leading-tight text-[var(--ink)] md:text-4xl">
-                  {featured.name}
-                </h2>
-                <p
-                  className="mt-2 text-sm uppercase tracking-wide"
-                  style={{ fontFamily: "var(--font-dm-mono)", color: "var(--blueprint)" }}
+            <div className="col-span-12 mt-16 grid grid-cols-1 gap-x-8 gap-y-16 md:mt-20 md:grid-cols-2">
+              {featuredLeaders.map((leader) => (
+                <div
+                  key={leader.name}
+                  className="grid grid-cols-1 gap-6 sm:grid-cols-12 sm:items-end"
                 >
-                  {featured.role}
-                </p>
+                  {/* Portrait, framed */}
+                  <div className="relative sm:col-span-5">
+                    <div className="relative aspect-[3/4] w-full border border-[var(--line)]">
+                      <Image
+                        src={leader.image!}
+                        alt={leader.name}
+                        fill
+                        sizes="(max-width: 768px) 100vw, 25vw"
+                        className="object-cover"
+                      />
+                      {[
+                        "left-3 top-3 border-l border-t",
+                        "right-3 top-3 border-r border-t",
+                        "left-3 bottom-3 border-l border-b",
+                        "right-3 bottom-3 border-r border-b",
+                      ].map((position) => (
+                        <span
+                          key={position}
+                          className={`pointer-events-none absolute h-5 w-5 ${position}`}
+                          style={{ borderColor: "var(--blueprint)" }}
+                        />
+                      ))}
+                    </div>
+                  </div>
 
-                <div className="mt-12">
-                  <p
-                    className="mb-5 text-xs uppercase tracking-wide"
-                    style={{ fontFamily: "var(--font-dm-mono)", color: "var(--graphite)" }}
-                  >
-                    Leadership &amp; Management
-                  </p>
-
-                  <div className="space-y-0">
-                    {restOfLeadership.map((person, index) => {
-                      const accentVar =
-                        index % 2 === 0 ? "var(--blueprint)" : "var(--green)";
-                      return (
-                        <div
-                          key={person.name}
-                          className="flex items-center gap-4 border-b border-[var(--line)] py-4"
-                        >
-                          <span
-                            className="h-1.5 w-1.5 shrink-0"
-                            style={{ backgroundColor: accentVar }}
-                          />
-                          <div>
-                            <p className="text-sm font-medium text-[var(--ink)]">
-                              {person.name}
-                            </p>
-                            <p className="text-xs text-[var(--graphite)]">
-                              {person.role}
-                            </p>
-                          </div>
-                        </div>
-                      );
-                    })}
+                  {/* Name + role */}
+                  <div className="sm:col-span-7">
+                    <span
+                      className="block h-[3px] w-10"
+                      style={{ backgroundColor: "var(--blueprint)" }}
+                    />
+                    <h2 className="mt-4 text-2xl font-semibold leading-tight text-[var(--ink)] md:text-3xl">
+                      {leader.name}
+                    </h2>
+                    <p
+                      className="mt-2 text-sm uppercase tracking-wide"
+                      style={{ fontFamily: "var(--font-dm-mono)", color: "var(--blueprint)" }}
+                    >
+                      {leader.role}
+                    </p>
                   </div>
                 </div>
+              ))}
+            </div>
+
+            {/* Rest of leadership */}
+            <div className="col-span-12 mt-20 md:mt-24">
+              <p
+                className="mb-5 text-xs uppercase tracking-wide"
+                style={{ fontFamily: "var(--font-dm-mono)", color: "var(--graphite)" }}
+              >
+                Leadership &amp; Management
+              </p>
+
+              <div className="grid grid-cols-1 md:grid-cols-2">
+                {restOfLeadership.map((person, index) => {
+                  const accentVar =
+                    index % 2 === 0 ? "var(--blueprint)" : "var(--green)";
+                  return (
+                    <div
+                      key={person.name}
+                      className="flex items-center gap-4 border-b border-[var(--line)] py-4"
+                    >
+                      <span
+                        className="h-1.5 w-1.5 shrink-0"
+                        style={{ backgroundColor: accentVar }}
+                      />
+                      <div>
+                        <p className="text-sm font-medium text-[var(--ink)]">
+                          {person.name}
+                        </p>
+                        <p className="text-xs text-[var(--graphite)]">
+                          {person.role}
+                        </p>
+                      </div>
+                    </div>
+                  );
+                })}
               </div>
             </div>
           </div>

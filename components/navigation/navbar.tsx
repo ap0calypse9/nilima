@@ -74,15 +74,15 @@ const menuItems = [
       },
       {
         title: "Buildings",
-        href: "/projects?type=buildings",
+        href: "/projects?type=Buildings",
       },
       {
         title: "Infrastructure",
-        href: "/projects?type=infrastructure",
+        href: "/projects?type=Infrastructure",
       },
       {
         title: "Industrial",
-        href: "/projects?type=industrial",
+        href: "/projects?type=Industrial",
       },
     ],
   },
