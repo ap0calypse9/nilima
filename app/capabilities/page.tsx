@@ -1,109 +1,134 @@
+import Image from "next/image";
+import Link from "next/link";
 import Navbar from "@/components/navigation/navbar";
+import Footer from "@/components/layout/footer";
 
-const capabilities = [
+type Capability = {
+  id: string;
+  number: string;
+  title: string;
+  description: string;
+  scope: string[];
+  tools?: string[];
+  accent: "blueprint" | "green";
+  image: string;
+};
+
+const capabilities: Capability[] = [
   {
+    id: "structural-engineering",
     number: "01",
-    title: "Structural Design",
-    short: "Design",
+    title: "Structural Engineering",
     description:
-      "Structural engineering solutions for residential, commercial, industrial and infrastructure projects, developed with attention to safety, performance and practicality.",
+      "Structural design, analysis and engineering solutions for residential, commercial, industrial and infrastructure projects — grounded in code-based engineering practice, not assumption.",
     scope: [
-      "Structural analysis",
-      "Building design",
-      "Steel structures",
-      "Concrete structures",
+      "Concept to detailed structural design",
+      "Seismic & wind load analysis",
+      "IS 456 / IS 1893 code compliance",
     ],
+    tools: ["ETABS", "STAAD.PRO", "REVIT"],
+    accent: "blueprint",
+    image: "/images/capabilities/structural.jpeg",
   },
   {
+    id: "foundation-engineering",
     number: "02",
     title: "Foundation Engineering",
-    short: "Foundation",
     description:
-      "Foundation solutions informed by site conditions, investigation and structural requirements, from conventional systems to deep foundation design.",
+      "Foundation systems designed around what the soil investigation actually shows for the site — not a generic template applied regardless of ground conditions.",
     scope: [
-      "Foundation design",
-      "Deep foundations",
-      "Pile systems",
-      "Foundation assessment",
+      "Shallow & deep foundation design",
+      "Raft, pile and combined footing systems",
+      "Foundation review for existing structures",
     ],
+    accent: "green",
+    image: "/images/capabilities/foundation.jpeg",
   },
   {
+    id: "soil-investigation",
     number: "03",
     title: "Soil Investigation",
-    short: "Geotechnical",
     description:
-      "Investigation of subsurface conditions to establish the information required for safe and appropriate foundation decisions.",
+      "Soil investigation and testing to establish safe bearing capacity, settlement behaviour and subsurface conditions before design decisions are locked in.",
     scope: [
-      "Soil investigation",
-      "Site assessment",
-      "Subsurface investigation",
-      "Foundation recommendations",
+      "Bore hole investigation & SPT",
+      "Laboratory soil testing",
+      "Geotechnical reporting",
     ],
+    accent: "blueprint",
+    image: "/images/capabilities/soil-investigation.jpeg",
   },
   {
+    id: "pile-testing",
     number: "04",
     title: "Pile Testing",
-    short: "Testing",
     description:
-      "Pile testing services including dynamic and integrity testing to evaluate pile performance and support foundation decisions.",
+      "Pile Integrity Testing, Dynamic Load Testing, and vertical & lateral load testing to verify pile capacity and integrity before and after construction.",
     scope: [
-      "Dynamic Load Testing",
-      "Pile Integrity Testing",
-      "CAPWAP analysis",
-      "Pile performance assessment",
+      "Pile Integrity Test (PIT)",
+      "Dynamic Load Test (DLT)",
+      "Vertical & lateral pile load testing",
     ],
+    tools: ["PIT", "DLT", "CAPWAP"],
+    accent: "green",
+    image: "/images/capabilities/pile-testing.jpeg",
   },
   {
+    id: "land-survey",
     number: "05",
     title: "Land Survey",
-    short: "Survey",
     description:
-      "Surveying services providing accurate site information for planning, design and construction activities.",
+      "Land and topographical surveying for accurate planning, engineering and project execution — from boundary verification to full-site contour mapping.",
     scope: [
-      "Topographical survey",
-      "Land survey",
-      "Site measurement",
-      "Survey documentation",
+      "Land & building surveys",
+      "Topographic survey",
+      "DGPS & layout measurement",
     ],
+    accent: "blueprint",
+    image: "/images/capabilities/survey.jpeg",
   },
   {
+    id: "non-destructive-testing",
     number: "06",
     title: "Non-Destructive Testing",
-    short: "NDT",
     description:
-      "Investigation and testing techniques used to assess existing structural elements while minimizing disruption to the structure.",
+      "NDT and material testing to evaluate concrete and steel elements in existing structures without compromising them — critical input for audits and rehabilitation decisions.",
     scope: [
-      "Concrete testing",
-      "Structural investigation",
-      "Material assessment",
-      "Existing structure evaluation",
+      "Rebound hammer & UPV testing",
+      "Concrete & steel bar testing",
+      "Crack & distress analysis",
     ],
+    tools: ["NDT", "UPV", "Rebound Hammer"],
+    accent: "green",
+    image: "/images/capabilities/test.jpeg",
   },
   {
+    id: "structural-audit",
     number: "07",
     title: "Structural Audit",
-    short: "Audit",
     description:
-      "Systematic assessment of existing structures to understand condition, structural performance and potential areas requiring intervention.",
+      "Assessment of existing structures to understand condition, stability, distress and safety — the technical basis for repair, retrofit or reassurance.",
     scope: [
-      "Structural audit",
-      "Building health check-up",
-      "Crack analysis",
-      "Stability assessment",
+      "Structural health check-up",
+      "Condition assessment & distress mapping",
+      "Safety and stability evaluation",
     ],
+    accent: "blueprint",
+    image: "/images/capabilities/structural-audit.jpeg",
   },
   {
+    id: "rehabilitation",
     number: "08",
     title: "Rehabilitation",
-    short: "Rehabilitation",
     description:
-      "Repair, retrofitting and rehabilitation strategies designed to address structural distress and extend the service life of existing structures.",
+      "Repair, retrofitting and rehabilitation strategies designed to extend the service life of structures, built on what the audit and testing actually found.",
     scope: [
-      "Structural repair",
-      "Retrofitting",
-      "Crack remediation",
-      "Rehabilitation strategy",
+      "Structural strengthening & jacketing",
+      "Crack injection & repair",
+      "Seismic retrofit design",
     ],
+    accent: "green",
+    image: "/images/capabilities/rehabilitation.jpeg",
   },
 ];
 
@@ -112,253 +137,172 @@ export default function CapabilitiesPage() {
     <>
       <Navbar />
 
-      <main className="bg-[var(--background)] text-[var(--foreground)]">
-
-        {/* Hero */}
-        <section className="min-h-screen">
-          <div className="page-grid py-32 md:py-40">
-
-            <div className="col-span-12 flex items-center gap-4">
-              <span
-                className="text-[10px] tracking-[0.2em]"
-                style={{
-                  fontFamily: "var(--font-dm-mono)",
-                  color: "var(--aqua)",
-                }}
+      <main className="bg-[var(--paper)] text-[var(--ink)]">
+        {/* Page header */}
+        <section className="relative pb-16 pt-40 md:pb-20 md:pt-48">
+          <div className="page-grid">
+            <div className="col-span-12">
+              <p
+                className="text-xs uppercase tracking-wide text-[var(--graphite)]"
+                style={{ fontFamily: "var(--font-dm-mono)" }}
               >
-                02
-              </span>
+                <Link href="/" className="hover:text-[var(--blueprint)]">
+                  Home
+                </Link>{" "}
+                / <span className="text-[var(--ink)]">Capabilities</span>
+              </p>
 
-              <span
-                className="text-[10px] uppercase tracking-[0.2em]"
-                style={{
-                  fontFamily: "var(--font-dm-mono)",
-                  color: "var(--muted)",
-                }}
-              >
-                Capabilities
-              </span>
-            </div>
-
-            <div className="col-span-12 mt-24 md:mt-32">
-              <h1 className="max-w-6xl text-[clamp(4rem,10vw,12rem)] leading-[0.76] tracking-[-0.06em]">
-                WHAT
-                <br />
-                WE
-                <br />
-                <span style={{ color: "var(--aqua)" }}>
-                  ENGINEER.
-                </span>
+              <h1 className="mt-5 max-w-4xl text-[clamp(3rem,7vw,6.5rem)] font-semibold leading-[0.95] tracking-[-0.03em] text-[var(--ink)]">
+                What we engineer.
               </h1>
-            </div>
 
-            <div className="col-span-12 mt-20 md:col-span-5 md:col-start-7 md:mt-32">
-              <p className="text-xl leading-relaxed md:text-2xl">
-                A multidisciplinary engineering practice covering structural
-                design, foundations, investigation, testing, surveying and
-                rehabilitation.
+              <p className="mt-6 max-w-xl text-base leading-relaxed text-[var(--graphite)]">
+                Eight disciplines, one continuous practice — from ground
+                investigation through design, testing and rehabilitation.
               </p>
             </div>
           </div>
         </section>
 
-        {/* Capability index */}
-        <section className="border-t border-[var(--line)]">
-          <div className="page-grid py-24 md:py-32">
-
-            <div className="col-span-12 mb-16 flex items-center justify-between">
-              <p
-                className="text-[10px] uppercase tracking-[0.2em]"
-                style={{
-                  fontFamily: "var(--font-dm-mono)",
-                  color: "var(--aqua)",
-                }}
-              >
-                Scope of practice
-              </p>
-
-              <p
-                className="text-[10px] uppercase tracking-[0.2em]"
-                style={{
-                  fontFamily: "var(--font-dm-mono)",
-                  color: "var(--muted)",
-                }}
-              >
-                08 / 08
-              </p>
-            </div>
-
+        {/* Quick jump index */}
+        <section className="relative">
+          <div className="page-grid">
             <div className="col-span-12">
-              {capabilities.map((item) => (
-                <article
-                  key={item.number}
-                  id={item.title
-                    .toLowerCase()
-                    .replace(/[^a-z0-9]+/g, "-")
-                    .replace(/^-|-$/g, "")}
-                  className="group border-t border-[var(--line)] py-10 md:py-14"
+              <div className="dimension-line" />
+              <div className="flex flex-wrap">
+                {capabilities.map((item) => (
+                  <a
+                    key={item.id}
+                    href={`#${item.id}`}
+                    className="px-4 py-4 text-sm font-medium text-[var(--graphite)] transition-colors hover:text-[var(--blueprint)] sm:px-5"
+                  >
+                    {item.title}
+                  </a>
+                ))}
+              </div>
+              <div className="dimension-line" />
+            </div>
+          </div>
+        </section>
+
+        {/* Capability sections */}
+        {capabilities.map((item, index) => {
+          const accentVar =
+            item.accent === "blueprint" ? "var(--blueprint)" : "var(--green)";
+          const isEven = index % 2 === 0;
+          const bgClass = index % 2 === 0 ? "" : "bg-[var(--background-alt)]";
+
+          return (
+            <section
+              key={item.id}
+              id={item.id}
+              className={`relative scroll-mt-24 py-20 md:py-28 ${bgClass}`}
+            >
+              <div className="page-grid">
+                <div
+                  className={`col-span-12 grid grid-cols-1 gap-12 md:grid-cols-12 ${
+                    isEven ? "" : "md:[&>*:first-child]:order-2"
+                  }`}
                 >
-                  <div className="grid grid-cols-12 gap-y-8 md:gap-x-8">
-
-                    {/* Number */}
-                    <div className="col-span-2 md:col-span-1">
-                      <span
-                        className="text-[10px] tracking-[0.2em]"
-                        style={{
-                          fontFamily: "var(--font-dm-mono)",
-                          color: "var(--aqua)",
-                        }}
-                      >
-                        {item.number}
-                      </span>
+                  {/* Image, framed */}
+                  <div className="relative md:col-span-6">
+                    <div className="relative aspect-[4/3] w-full border border-[var(--line)]">
+                      <Image
+                        src={item.image}
+                        alt={item.title}
+                        fill
+                        sizes="(max-width: 768px) 100vw, 50vw"
+                        className="object-cover"
+                      />
+                      {[
+                        "left-3 top-3 border-l border-t",
+                        "right-3 top-3 border-r border-t",
+                        "left-3 bottom-3 border-l border-b",
+                        "right-3 bottom-3 border-r border-b",
+                      ].map((position) => (
+                        <span
+                          key={position}
+                          className={`pointer-events-none absolute h-5 w-5 ${position}`}
+                          style={{ borderColor: accentVar }}
+                        />
+                      ))}
                     </div>
+                  </div>
 
-                    {/* Title */}
-                    <div className="col-span-10 md:col-span-5">
-                      <h2 className="text-[clamp(2.5rem,5vw,5.5rem)] leading-[0.85] tracking-[-0.05em] transition-transform duration-500 group-hover:translate-x-3">
-                        {item.title}
-                      </h2>
-                    </div>
+                  {/* Content */}
+                  <div className="md:col-span-6">
+                    <p
+                      className="text-xs tracking-wide"
+                      style={{ fontFamily: "var(--font-dm-mono)", color: accentVar }}
+                    >
+                      {item.number} / 08
+                    </p>
 
-                    {/* Description */}
-                    <div className="col-span-12 md:col-span-4 md:col-start-8">
-                      <p className="max-w-lg text-base leading-relaxed md:text-lg">
-                        {item.description}
-                      </p>
+                    <h2 className="mt-3 text-3xl font-semibold leading-tight text-[var(--ink)] md:text-4xl">
+                      {item.title}
+                    </h2>
 
-                      <p
-                        className="mt-6 text-[10px] uppercase tracking-[0.16em]"
-                        style={{
-                          fontFamily: "var(--font-dm-mono)",
-                          color: "var(--muted)",
-                        }}
-                      >
-                        {item.short}
-                      </p>
-                    </div>
+                    <p className="mt-4 text-base leading-relaxed text-[var(--graphite)]">
+                      {item.description}
+                    </p>
 
-                    {/* Scope */}
-                    <div className="col-span-12 md:col-span-5 md:col-start-2">
-                      <div className="mt-2 flex flex-wrap gap-x-6 gap-y-3">
-                        {item.scope.map((scope) => (
+                    <ul className="mt-6 space-y-2">
+                      {item.scope.map((line) => (
+                        <li
+                          key={line}
+                          className="flex items-start gap-2 text-sm text-[var(--ink)]"
+                        >
                           <span
-                            key={scope}
-                            className="text-xs uppercase tracking-[0.08em]"
-                            style={{
-                              fontFamily: "var(--font-dm-mono)",
-                              color: "var(--muted)",
-                            }}
+                            className="mt-2 h-1 w-1 shrink-0 rounded-full"
+                            style={{ backgroundColor: accentVar }}
+                          />
+                          {line}
+                        </li>
+                      ))}
+                    </ul>
+
+                    {item.tools && (
+                      <div className="mt-6 flex flex-wrap gap-2">
+                        {item.tools.map((tool) => (
+                          <span
+                            key={tool}
+                            className="border px-2.5 py-1 text-[11px] tracking-wide text-[var(--graphite)]"
+                            style={{ fontFamily: "var(--font-dm-mono)", borderColor: accentVar }}
                           >
-                            {scope}
+                            {tool}
                           </span>
                         ))}
                       </div>
-                    </div>
-
-                    {/* Arrow */}
-                    <div className="col-span-12 flex justify-end md:col-span-1 md:col-start-12">
-                      <span
-                        className="text-2xl transition-transform duration-500 group-hover:translate-x-2 group-hover:-translate-y-2"
-                        style={{
-                          color: "var(--aqua)",
-                        }}
-                      >
-                        ↗
-                      </span>
-                    </div>
+                    )}
                   </div>
-                </article>
-              ))}
-            </div>
+                </div>
+              </div>
+            </section>
+          );
+        })}
 
-            {/* Bottom border */}
-            <div className="col-span-12 border-t border-[var(--line)]" />
-          </div>
-        </section>
-
-        {/* Engineering approach */}
-        <section className="bg-[var(--aqua)] text-[#070909]">
-          <div className="page-grid py-28 md:py-40">
-
-            <div className="col-span-12 md:col-span-3">
-              <p
-                className="text-[10px] uppercase tracking-[0.2em]"
-                style={{
-                  fontFamily: "var(--font-dm-mono)",
-                }}
-              >
-                Our approach
-              </p>
-            </div>
-
-            <div className="col-span-12 mt-12 md:col-span-8 md:col-start-5 md:mt-0">
-              <p
-                className="text-[clamp(2.5rem,5vw,5.5rem)] leading-[0.9] tracking-[-0.04em]"
-                style={{
-                  fontFamily: "var(--font-instrument)",
-                }}
-              >
-                Investigation before assumption.
-                <br />
-                Analysis before decision.
-                <br />
-                Engineering before compromise.
-              </p>
-            </div>
-          </div>
-        </section>
-
-        {/* CTA */}
-        <section>
-          <div className="page-grid py-32 md:py-48">
-
-            <div className="col-span-12 md:col-span-8">
-              <p
-                className="text-[10px] uppercase tracking-[0.2em]"
-                style={{
-                  fontFamily: "var(--font-dm-mono)",
-                  color: "var(--aqua)",
-                }}
-              >
-                Have a project?
+        {/* Closing CTA */}
+        <section className="relative overflow-hidden bg-[var(--navy)] py-20 text-white md:py-28">
+          <div className="page-grid">
+            <div className="col-span-12 flex flex-col items-start justify-between gap-8 md:flex-row md:items-end">
+              <p className="max-w-xl text-2xl font-medium leading-snug md:text-4xl">
+                Not sure which discipline your project needs? Tell us
+                what you&apos;re working on.
               </p>
 
-              <h2 className="mt-8 text-[clamp(3.5rem,7vw,8rem)] leading-[0.8] tracking-[-0.06em]">
-                LET&apos;S
-                <br />
-                ENGINEER
-                <br />
-                IT.
-              </h2>
-            </div>
-
-            <div className="col-span-12 mt-12 md:col-span-4 md:col-start-9 md:mt-32">
-              <p
-                className="text-sm leading-7"
-                style={{
-                  color: "var(--muted)",
-                }}
-              >
-                Tell us about your project, site or structural requirement.
-                We can discuss the appropriate engineering approach.
-              </p>
-
-              <a
+              <Link
                 href="/contact"
-                className="group mt-8 inline-flex items-center gap-4 border-b border-[var(--line)] pb-3 text-[10px] uppercase tracking-[0.18em] transition-colors hover:border-[var(--aqua)] hover:text-[var(--aqua)]"
-                style={{
-                  fontFamily: "var(--font-dm-mono)",
-                }}
+                className="shrink-0 px-6 py-3 text-sm font-semibold text-white transition-opacity hover:opacity-90"
+                style={{ backgroundColor: "var(--blueprint)" }}
               >
-                Contact Nilima
-                <span className="text-lg transition-transform duration-300 group-hover:translate-x-2">
-                  →
-                </span>
-              </a>
+                Get in touch
+              </Link>
             </div>
           </div>
         </section>
       </main>
+
+      <Footer />
     </>
   );
 }

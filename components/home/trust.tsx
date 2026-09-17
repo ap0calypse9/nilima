@@ -16,7 +16,7 @@ const testimonials = [
       "Their NDT and structural audit report was thorough and easy for our procurement team to act on. Exactly the kind of clarity a government tender needs.",
     name: "Anita Sengupta",
     role: "Executive Engineer, Public Works",
-    accent: "green",
+    accent: "blueprint",
   },
   {
     quote:
@@ -30,21 +30,21 @@ const testimonials = [
       "Pile integrity testing was scheduled around our pour dates without any delay to the contractor. Reporting turnaround was faster than we budgeted for.",
     name: "Debjani Roy",
     role: "Site Engineer, Commercial Complex",
-    accent: "green",
+    accent: "blueprint",
   },
   {
     quote:
       "We needed a structural vetting done quickly before a CPWD submission deadline. They turned it around accurately and on time.",
     name: "Amitava Dutta",
     role: "Contractor, CPWD Project",
-    accent: "blueprint",
+    accent: "green",
   },
   {
     quote:
       "Their soil investigation report caught a foundation issue our first consultant had missed entirely. Saved us a costly redesign later.",
     name: "Priya Mukherjee",
     role: "Developer, Housing Project",
-    accent: "green",
+    accent: "blueprint",
   },
 ] as const;
 
@@ -122,7 +122,10 @@ export default function Testimonials() {
                 key={`${item.name}-${index}`}
                 className="relative w-[320px] shrink-0 md:w-[380px]"
               >
-                <div className="relative h-full border border-[var(--line)] bg-white p-7">
+                <div
+                  className="relative h-full border border-[var(--line)] border-t-[3px] bg-white p-7"
+                  style={{ borderTopColor: accentVar }}
+                >
                   {[
                     "left-3 top-3 border-l border-t",
                     "right-3 top-3 border-r border-t",
@@ -136,12 +139,7 @@ export default function Testimonials() {
                     />
                   ))}
 
-                  <span
-                    className="block h-[3px] w-10"
-                    style={{ backgroundColor: accentVar }}
-                  />
-
-                  <p className="mt-5 text-base leading-relaxed text-[var(--ink)]">
+                  <p className="mt-2 text-base leading-relaxed text-[var(--ink)]">
                     &ldquo;{item.quote}&rdquo;
                   </p>
 
