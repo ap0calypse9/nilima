@@ -56,7 +56,7 @@ const capabilities: Capability[] = [
       "Geotechnical reporting",
     ],
     accent: "blueprint",
-    image: "/images/capabilities/soil-investigation.jpeg",
+    image: "/images/capabilities/soil.png",
   },
   {
     id: "pile-testing",
@@ -128,7 +128,7 @@ const capabilities: Capability[] = [
       "Seismic retrofit design",
     ],
     accent: "green",
-    image: "/images/capabilities/rehabilitation.jpeg",
+    image: "/images/capabilities/rehab.jpeg",
   },
 ];
 
