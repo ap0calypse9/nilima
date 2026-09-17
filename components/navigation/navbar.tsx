@@ -128,7 +128,7 @@ export default function Navbar() {
             className="relative h-16 w-32 shrink-0"
           >
             <Image
-              src="/images/logo.jpeg"
+              src="/images/logo.png"
               alt="Nilima Design Associates"
               fill
               priority
@@ -186,7 +186,7 @@ export default function Navbar() {
             className="relative h-16 w-32 shrink-0"
           >
             <Image
-              src="/images/logo.jpeg"
+              src="/images/logo.png"
               alt="Nilima Design Associates"
               fill
               sizes="128px"
