@@ -8,7 +8,7 @@ const expertise = [
     title: "Structural Audit",
     description:
       "Assessment of existing structures to understand condition, stability, distress and safety.",
-    image: "/images/expertise/structural-audit.jpg",
+    image: "/images/expertise/structural-audit.jpeg",
     accent: "blueprint",
   },
   {
@@ -16,7 +16,7 @@ const expertise = [
     title: "Foundation Engineering",
     description:
       "Engineering solutions for foundations, soil investigation and deep foundation systems.",
-    image: "/images/expertise/foundation-engineering.jpg",
+    image: "/images/expertise/soil.jpeg",
     accent: "green",
   },
   {
@@ -32,7 +32,7 @@ const expertise = [
     title: "Rehabilitation",
     description:
       "Repair, retrofitting and rehabilitation strategies for renewed structural performance.",
-    image: "/images/expertise/rehabilitation.jpg",
+    image: "/images/expertise/repair.jpeg",
     accent: "blueprint",
   },
 ] as const;

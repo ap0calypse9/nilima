@@ -120,24 +120,24 @@ export default function Navbar() {
       <header className="fixed left-0 top-0 z-50 w-full border-b border-[var(--line)] bg-[var(--paper)]/95 px-[clamp(1.25rem,3vw,4rem)] py-5 backdrop-blur-sm">
         <div className="flex items-center justify-between">
 
-          {/* Logo — bigger, no cropping scale hack, full mark visible */}
+          {/* Logo — increased size */}
           <Link
             href="/"
             onClick={handleClose}
             aria-label="Nilima Design Associates home"
-            className="relative h-16 w-32 shrink-0"
+            className="relative h-20 w-40 shrink-0"
           >
             <Image
               src="/images/logo.png"
               alt="Nilima Design Associates"
               fill
               priority
-              sizes="128px"
+              sizes="160px"
               className="object-contain"
             />
           </Link>
 
-          {/* Menu Trigger — ink color, always visible on the paper bar */}
+          {/* Menu Trigger */}
           <button
             type="button"
             onClick={() => setOpen(true)}
@@ -178,18 +178,18 @@ export default function Navbar() {
         {/* Menu Header */}
         <div className="flex w-full items-center justify-between px-[clamp(1.25rem,3vw,4rem)] py-7">
 
-          {/* Logo */}
+          {/* Logo — increased size */}
           <Link
             href="/"
             onClick={handleClose}
             aria-label="Nilima Design Associates home"
-            className="relative h-16 w-32 shrink-0"
+            className="relative h-20 w-40 shrink-0"
           >
             <Image
               src="/images/logo.png"
               alt="Nilima Design Associates"
               fill
-              sizes="128px"
+              sizes="160px"
               className="object-contain"
             />
           </Link>
@@ -247,6 +247,7 @@ export default function Navbar() {
                         }
                       }}
                     >
+
                       {/* Actual page navigation */}
                       <Link
                         href={item.href}

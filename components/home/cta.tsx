@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function CTA() {
   return (
     <section className="relative overflow-hidden bg-[var(--aqua)] text-[#070909]">
@@ -71,9 +73,9 @@ export default function CTA() {
           </div>
 
           {/* Contact button */}
-          <button
-            type="button"
-            className="group flex items-center gap-6 self-start border-b-2 border-[#070909] pb-4 text-sm uppercase tracking-[0.16em] md:self-end"
+          <Link
+            href="/contact"
+            className="group flex items-center gap-6 self-start border-b-2 border-[#070909] pb-4 text-sm uppercase tracking-[0.16em] transition-opacity hover:opacity-60 md:self-end"
             style={{
               fontFamily: "var(--font-dm-mono)",
             }}
@@ -83,7 +85,7 @@ export default function CTA() {
             <span className="text-2xl transition-transform duration-300 group-hover:translate-x-3">
               →
             </span>
-          </button>
+          </Link>
         </div>
 
         {/* Decorative mark */}
