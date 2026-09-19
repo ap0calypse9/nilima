@@ -1,31 +1,47 @@
-"use client";
-
-import { useState } from "react";
-import Image from "next/image";
+import fs from "fs";
+import path from "path";
 import Link from "next/link";
 import Navbar from "@/components/navigation/navbar";
 import Footer from "@/components/layout/footer";
+import CredentialsGallery, { type Doc } from "@/components/about/credentials-gallery";
 
-// Add/remove entries and swap in real filenames as scanned documents
-// come in. Caption is optional — leave blank if the document speaks
-// for itself once enlarged.
-const documents = [
-  { file: "doc-1.jpg", caption: "" },
-  { file: "doc-2.jpg", caption: "" },
-  { file: "doc-3.jpg", caption: "" },
-  { file: "doc-4.jpg", caption: "" },
-  { file: "doc-5.jpg", caption: "" },
-  { file: "doc-6.jpg", caption: "" },
+// Manually curated images — keep adding entries here the same way.
+const imageDocuments: Doc[] = [
+  { type: "image", file: "doc-1.jpg", src: "/images/credentials/doc-1.jpg", caption: "" },
+  { type: "image", file: "doc-2.jpg", src: "/images/credentials/doc-2.jpg", caption: "" },
 ];
 
-export default function CredentialsPage() {
-  const [activeIndex, setActiveIndex] = useState<number | null>(null);
+// Everything in /public/documents/credentials shows up automatically,
+// whatever it's named — no code edits needed per PDF. Optionally give
+// a specific ugly filename a real label here, keyed by exact filename.
+const CAPTIONS: Record<string, string> = {
+  // "scan0043829.pdf": "ISO 9001:2015 Certificate",
+};
 
-  const close = () => setActiveIndex(null);
-  const showPrev = () =>
-    setActiveIndex((i) => (i === null ? null : (i - 1 + documents.length) % documents.length));
-  const showNext = () =>
-    setActiveIndex((i) => (i === null ? null : (i + 1) % documents.length));
+function getPdfDocuments(): Doc[] {
+  const dir = path.join(process.cwd(), "public", "documents", "credentials");
+
+  let files: string[] = [];
+  try {
+    files = fs
+      .readdirSync(dir)
+      .filter((file) => file.toLowerCase().endsWith(".pdf"))
+      .sort();
+  } catch {
+    // Folder doesn't exist yet — fine, just skip until it does.
+    files = [];
+  }
+
+  return files.map((file, index) => ({
+    type: "pdf",
+    file,
+    src: `/documents/credentials/${file}`,
+    caption: CAPTIONS[file] || `Document ${String(index + 1).padStart(2, "0")}`,
+  }));
+}
+
+export default function CredentialsPage() {
+  const documents: Doc[] = [...imageDocuments, ...getPdfDocuments()];
 
   return (
     <>
@@ -66,60 +82,22 @@ export default function CredentialsPage() {
           </div>
         </section>
 
-        {/* Document gallery */}
+        {/* Document gallery — client component handles the grid + lightbox */}
         <section className="relative pb-24 md:pb-32">
           <div className="page-grid">
             <div className="col-span-12">
               <div className="dimension-line" />
             </div>
 
-            <div className="col-span-12 mt-14 grid grid-cols-2 gap-6 sm:grid-cols-3 lg:grid-cols-4">
-              {documents.map((doc, index) => {
-                const accentVar =
-                  index % 2 === 0 ? "var(--blueprint)" : "var(--green)";
-                return (
-                  <button
-                    key={doc.file}
-                    type="button"
-                    onClick={() => setActiveIndex(index)}
-                    className="group relative aspect-[3/4] w-full overflow-hidden border border-[var(--line)] text-left"
-                  >
-                    <Image
-                      src={`/images/credentials/${doc.file}`}
-                      alt={doc.caption || `Certificate ${index + 1}`}
-                      fill
-                      sizes="(max-width: 768px) 50vw, 25vw"
-                      className="object-cover transition-transform duration-300 group-hover:scale-105"
-                    />
-
-                    {[
-                      "left-2 top-2 border-l border-t",
-                      "right-2 top-2 border-r border-t",
-                      "left-2 bottom-2 border-l border-b",
-                      "right-2 bottom-2 border-r border-b",
-                    ].map((position) => (
-                      <span
-                        key={position}
-                        className={`pointer-events-none absolute h-4 w-4 ${position}`}
-                        style={{ borderColor: accentVar }}
-                      />
-                    ))}
-
-                    <span
-                      className="absolute left-0 top-0 flex h-7 w-7 items-center justify-center text-[10px] font-bold text-white"
-                      style={{ backgroundColor: accentVar, fontFamily: "var(--font-dm-mono)" }}
-                    >
-                      {String(index + 1).padStart(2, "0")}
-                    </span>
-
-                    {doc.caption && (
-                      <span className="absolute inset-x-0 bottom-0 bg-[var(--paper)]/95 px-3 py-2 text-xs text-[var(--ink)]">
-                        {doc.caption}
-                      </span>
-                    )}
-                  </button>
-                );
-              })}
+            <div className="col-span-12 mt-14">
+              {documents.length === 0 ? (
+                <p className="text-sm italic text-[var(--graphite)]">
+                  No documents yet — add images above or drop PDFs into
+                  /public/documents/credentials.
+                </p>
+              ) : (
+                <CredentialsGallery documents={documents} />
+              )}
             </div>
           </div>
         </section>
@@ -145,60 +123,6 @@ export default function CredentialsPage() {
       </main>
 
       <Footer />
-
-      {/* Lightbox */}
-      {activeIndex !== null && (
-        <div
-          className="fixed inset-0 z-[200] flex items-center justify-center bg-[var(--ink)]/90 p-6"
-          onClick={close}
-        >
-          <button
-            type="button"
-            onClick={close}
-            aria-label="Close"
-            className="absolute right-6 top-6 flex h-10 w-10 items-center justify-center border border-white/30 text-white"
-          >
-            ✕
-          </button>
-
-          <button
-            type="button"
-            onClick={(e) => {
-              e.stopPropagation();
-              showPrev();
-            }}
-            aria-label="Previous document"
-            className="absolute left-4 flex h-10 w-10 items-center justify-center border border-white/30 text-white md:left-8"
-          >
-            ←
-          </button>
-
-          <div
-            className="relative h-[80vh] w-full max-w-xl"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <Image
-              src={`/images/credentials/${documents[activeIndex].file}`}
-              alt={documents[activeIndex].caption || `Certificate ${activeIndex + 1}`}
-              fill
-              sizes="90vw"
-              className="object-contain"
-            />
-          </div>
-
-          <button
-            type="button"
-            onClick={(e) => {
-              e.stopPropagation();
-              showNext();
-            }}
-            aria-label="Next document"
-            className="absolute right-4 flex h-10 w-10 items-center justify-center border border-white/30 text-white md:right-8"
-          >
-            →
-          </button>
-        </div>
-      )}
     </>
   );
 }
