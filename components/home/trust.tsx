@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 // Replace with real client quotes when available.
 const testimonials = [
@@ -49,37 +49,73 @@ const testimonials = [
 ] as const;
 
 type Comment = {
-  id: string;
+  id: number;
   name: string;
   message: string;
-  timestamp: string;
+  created_at: string;
 };
 
 export default function Testimonials() {
   const [comments, setComments] = useState<Comment[]>([]);
+  const [loading, setLoading] = useState(true);
   const [name, setName] = useState("");
   const [message, setMessage] = useState("");
+  const [submitting, setSubmitting] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!name.trim() || !message.trim()) return;
-
-    const newComment: Comment = {
-      id: crypto.randomUUID(),
-      name: name.trim(),
-      message: message.trim(),
-      timestamp: new Date().toLocaleString("en-IN", {
-        day: "numeric",
-        month: "short",
-        hour: "2-digit",
-        minute: "2-digit",
-      }),
-    };
-
-    setComments((prev) => [newComment, ...prev]);
-    setName("");
-    setMessage("");
+  const loadComments = async () => {
+    try {
+      const res = await fetch("/api/comments");
+      if (!res.ok) return;
+      const data = await res.json();
+      setComments(data.comments ?? []);
+    } catch {
+      // Silently ignore — keeps showing whatever was last loaded
+    } finally {
+      setLoading(false);
+    }
   };
+
+  useEffect(() => {
+    loadComments();
+    // Poll every 15s so other visitors' comments show up without
+    // a manual refresh — not true realtime, but close enough for
+    // a low-traffic comments section without adding websockets.
+    const interval = setInterval(loadComments, 15000);
+    return () => clearInterval(interval);
+  }, []);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!name.trim() || !message.trim() || submitting) return;
+
+    setSubmitting(true);
+    try {
+      const res = await fetch("/api/comments", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, message }),
+      });
+
+      if (res.ok) {
+        const data = await res.json();
+        setComments((prev) => [data.comment, ...prev]);
+        setName("");
+        setMessage("");
+      }
+    } catch {
+      // Could add a visible error state here if you want
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
+  const formatTimestamp = (iso: string) =>
+    new Date(iso).toLocaleString("en-IN", {
+      day: "numeric",
+      month: "short",
+      hour: "2-digit",
+      minute: "2-digit",
+    });
 
   // duplicated once for a seamless looping marquee
   const marqueeItems = [...testimonials, ...testimonials];
@@ -216,17 +252,20 @@ export default function Testimonials() {
 
               <button
                 type="submit"
-                className="inline-flex items-center px-6 py-3 text-sm font-semibold text-white transition-opacity hover:opacity-90"
+                disabled={submitting}
+                className="inline-flex items-center px-6 py-3 text-sm font-semibold text-white transition-opacity hover:opacity-90 disabled:opacity-60"
                 style={{ backgroundColor: "var(--blueprint)" }}
               >
-                Post comment
+                {submitting ? "Posting…" : "Post comment"}
               </button>
             </form>
           </div>
 
           {/* Live comment list */}
           <div className="md:col-span-7">
-            {comments.length === 0 ? (
+            {loading ? (
+              <p className="text-sm text-[var(--graphite)]">Loading comments…</p>
+            ) : comments.length === 0 ? (
               <p className="text-sm italic text-[var(--graphite)]">
                 No comments yet — be the first to share your experience.
               </p>
@@ -245,7 +284,7 @@ export default function Testimonials() {
                         className="text-[11px] text-[var(--graphite)]"
                         style={{ fontFamily: "var(--font-dm-mono)" }}
                       >
-                        {comment.timestamp}
+                        {formatTimestamp(comment.created_at)}
                       </p>
                     </div>
                     <p className="mt-2 text-sm leading-6 text-[var(--graphite)]">

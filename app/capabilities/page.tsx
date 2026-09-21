@@ -56,7 +56,7 @@ const capabilities: Capability[] = [
       "Geotechnical reporting",
     ],
     accent: "blueprint",
-    image: "/images/capabilities/soil.png",
+    image: "/images/capabilities/soil2.jpeg",
   },
   {
     id: "pile-testing",
@@ -119,9 +119,9 @@ const capabilities: Capability[] = [
   {
     id: "rehabilitation",
     number: "08",
-    title: "Rehabilitation",
+    title: "Structural Rehabilitation",
     description:
-      "Repair, retrofitting and rehabilitation strategies designed to extend the service life of structures, built on what the audit and testing actually found.",
+      "We provide professional structural rehabilitation services to restore, strengthen, and improve the safety and durability of existing buildings and structures. Our services include damage assessment, repair, strengthening, crack treatment, grouting, retrofitting, and structural restoration using suitable engineering solutions.",
     scope: [
       "Structural strengthening & jacketing",
       "Crack injection & repair",
