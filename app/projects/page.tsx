@@ -89,6 +89,19 @@ const projects: Project[] = [
       "/images/projects/sreebhumi-sporting-club-survey/3.jpeg",
     ],
   },
+    {
+    slug: "bsf-indira-point-dynamic-load-test",
+    title: "Dynamic Load Test — Border Security Force",
+    category: "Infrastructure",
+    location: "Indira Point, Andaman & Nicobar Islands",
+    images: [
+      "/images/projects/bsf-indira-point-dynamic-load-test/1.jpeg",
+      "/images/projects/bsf-indira-point-dynamic-load-test/2.jpeg",
+      "/images/projects/bsf-indira-point-dynamic-load-test/3.jpeg",
+      "/images/projects/bsf-indira-point-dynamic-load-test/4.jpeg",
+    ],
+  },
+
 ];
 
 const filters: { label: string; value: Category | "All" }[] = [
