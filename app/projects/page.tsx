@@ -101,7 +101,17 @@ const projects: Project[] = [
       "/images/projects/bsf-indira-point-dynamic-load-test/4.jpeg",
     ],
   },
-
+{
+    slug: "shopping-mall",
+    title: "Shopping mall site inspection with Senior Technical Consultant Mr Biman Mukherjee",
+    category: "Buildings",
+    location: "Mumbai",
+    images: [
+      "/images/projects/shopping-mall/1.jpeg",
+      "/images/projects/shopping-mall/2.jpeg",
+      "/images/projects/shopping-mall/3.jpeg",
+    ],
+  },
 ];
 
 const filters: { label: string; value: Category | "All" }[] = [
