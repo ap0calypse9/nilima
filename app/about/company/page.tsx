@@ -80,36 +80,78 @@ const teamImages = [
 export default function CompanyPage() {
   return (
     <>
+    <main>
       <Navbar />
 
-      <main className="bg-[var(--paper)] text-[var(--ink)]">
-        {/* Page header */}
-        <section className="relative pb-16 pt-40 md:pb-20 md:pt-48">
-          <div className="page-grid">
-            <div className="col-span-12">
-              <p
-                className="text-xs uppercase tracking-wide text-[var(--graphite)]"
-                style={{ fontFamily: "var(--font-dm-mono)" }}
-              >
-                <Link href="/" className="hover:text-[var(--blueprint)]">
-                  Home
-                </Link>{" "}
-                / <span className="text-[var(--ink)]">About / Company</span>
-              </p>
+      {/* Page header */}
+<section className="relative pb-16 pt-40 md:pb-20 md:pt-48">
+  <div className="page-grid">
+    {/* Hero text */}
+    <div className="col-span-12 md:col-span-6">
+      <p
+        className="text-xs uppercase tracking-wide text-[var(--graphite)]"
+        style={{ fontFamily: "var(--font-dm-mono)" }}
+      >
+        <Link href="/" className="hover:text-[var(--blueprint)]">
+          Home
+        </Link>{" "}
+        / <span className="text-[var(--ink)]">About / Company</span>
+      </p>
 
-              <h1 className="mt-5 text-[clamp(3rem,7vw,6.5rem)] font-semibold leading-[0.95] tracking-[-0.03em] text-[var(--ink)]">
-                Who we are.
-              </h1>
+      <h1 className="mt-5 text-[clamp(3rem,7vw,6.5rem)] font-semibold leading-[0.95] tracking-[-0.03em] text-[var(--ink)]">
+        Who we are.
+      </h1>
 
-              <p
-                className="mt-4 text-sm uppercase tracking-wide"
-                style={{ fontFamily: "var(--font-dm-mono)", color: "var(--blueprint)" }}
-              >
-                Civil Engineering &amp; Structural Consultancy
-              </p>
-            </div>
-          </div>
-        </section>
+      <p
+        className="mt-4 text-sm uppercase tracking-wide"
+        style={{
+          fontFamily: "var(--font-dm-mono)",
+          color: "var(--blueprint)",
+        }}
+      >
+        Civil Engineering &amp; Structural Consultancy
+      </p>
+    </div>
+
+    {/* Hero image */}
+    <div className="col-span-12 mt-12 md:col-span-6 md:mt-0">
+      <div className="relative aspect-[4/3] w-full border border-[var(--line)]">
+        <Image
+          src="/images/about/company-hero.jpeg"
+          alt="Nilima Design Associates"
+          fill
+          sizes="(max-width: 768px) 100vw, 50vw"
+          className="object-cover"
+          priority
+        />
+
+        {/* Blueprint corner details */}
+        {[
+          "left-3 top-3 border-l border-t",
+          "right-3 top-3 border-r border-t",
+          "left-3 bottom-3 border-l border-b",
+          "right-3 bottom-3 border-r border-b",
+        ].map((position) => (
+          <span
+            key={position}
+            className={`pointer-events-none absolute h-6 w-6 ${position}`}
+            style={{ borderColor: "var(--blueprint)" }}
+          />
+        ))}
+
+        {/* Technical label */}
+        <div className="absolute bottom-3 left-3 border border-white/30 bg-[var(--navy)]/80 px-3 py-2 backdrop-blur-sm">
+          <span
+            className="text-[10px] uppercase tracking-[0.16em] text-white/80"
+            style={{ fontFamily: "var(--font-dm-mono)" }}
+          >
+            Nilima Design Associates
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
         {/* Overview: text + image */}
         <section className="relative pb-24 md:pb-32">

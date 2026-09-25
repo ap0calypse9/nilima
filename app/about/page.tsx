@@ -151,6 +151,80 @@ export default function AboutPage() {
           </div>
         </section>
 
+      {/* =========================================================
+    COMPANY OFFICE
+========================================================= */}
+<section className="relative pb-24 md:pb-32">
+  <div className="page-grid">
+    <div className="col-span-12">
+      <div className="dimension-line" />
+    </div>
+
+    <div className="col-span-12 mt-14 grid grid-cols-1 gap-10 md:mt-20 md:grid-cols-12 md:items-end">
+      {/* Section heading */}
+      <div className="md:col-span-4">
+        <p
+          className="text-xs uppercase tracking-wide"
+          style={{
+            fontFamily: "var(--font-dm-mono)",
+            color: "var(--blueprint)",
+          }}
+        >
+          Our Office
+        </p>
+
+        <h2 className="mt-4 text-[clamp(2.25rem,5vw,3.5rem)] font-semibold leading-[1] tracking-[-0.03em] text-[var(--ink)]">
+          Where ideas
+          <br />
+          become structures.
+        </h2>
+
+        <p className="mt-6 max-w-sm text-sm leading-7 text-[var(--graphite)]">
+          Our office brings together the people, technical knowledge and
+          collaborative thinking behind every project we undertake.
+        </p>
+      </div>
+
+      {/* Office photograph */}
+      <div className="md:col-span-8">
+        <div className="relative aspect-[3/4] w-full border border-[var(--line)]">
+          <Image
+            src="/images/company/office.jpeg"
+            alt="Nilima Design Associates office"
+            fill
+            sizes="(max-width: 768px) 100vw, 66vw"
+            className="object-cover"
+          />
+
+          {/* Blueprint corner details */}
+          {[
+            "left-4 top-4 border-l border-t",
+            "right-4 top-4 border-r border-t",
+            "left-4 bottom-4 border-l border-b",
+            "right-4 bottom-4 border-r border-b",
+          ].map((position) => (
+            <span
+              key={position}
+              className={`pointer-events-none absolute h-6 w-6 ${position}`}
+              style={{ borderColor: "var(--blueprint)" }}
+            />
+          ))}
+
+          {/* Technical image label */}
+          <div className="absolute bottom-4 left-4 border border-white/30 bg-[var(--navy)]/80 px-3 py-2 backdrop-blur-sm">
+            <p
+              className="text-[10px] uppercase tracking-[0.16em] text-white/80"
+              style={{ fontFamily: "var(--font-dm-mono)" }}
+            >
+              Nilima Design Associates
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
         {/* What We Do */}
         <section className="relative bg-[var(--background-alt)] py-24 md:py-32">
           <div className="page-grid">

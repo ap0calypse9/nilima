@@ -35,6 +35,14 @@ const expertise = [
     image: "/images/expertise/repair.jpeg",
     accent: "blueprint",
   },
+  {
+    number: "05",
+    title: "Vertical Load Test",
+    description:
+      "Field testing to evaluate the load-bearing capacity and performance of piles and foundation systems.",
+    image: "/images/expertise/vertical.jpeg",
+    accent: "blueprint",
+  },
 ] as const;
 
 export default function Expertise() {
@@ -52,8 +60,9 @@ export default function Expertise() {
 
         <div className="col-span-12 mt-6 md:col-span-4 md:col-start-9 md:mt-3">
           <p className="text-base leading-relaxed text-[var(--graphite)]">
-            Four disciplines that keep existing structures safe, standing,
-            and code-compliant — long after the ribbon-cutting.
+            {expertise.length} disciplines that keep existing structures
+            safe, standing, and code-compliant — long after the
+            ribbon-cutting.
           </p>
         </div>
 
@@ -62,7 +71,7 @@ export default function Expertise() {
         </div>
 
         {/* Framed grid */}
-        <div className="col-span-12 mt-14 grid grid-cols-1 gap-x-8 gap-y-16 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="col-span-12 mt-14 grid grid-cols-1 gap-x-8 gap-y-16 sm:grid-cols-2 lg:grid-cols-3">
           {expertise.map((item) => {
             const accentVar =
               item.accent === "blueprint" ? "var(--blueprint)" : "var(--green)";
