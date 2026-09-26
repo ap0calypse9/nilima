@@ -1,5 +1,7 @@
 "use client";
 
+import Image from "next/image";
+
 const navItems = ["About", "Capabilities", "Projects", "Insights", "Contact"];
 
 export default function Footer() {
@@ -139,14 +141,18 @@ export default function Footer() {
         </div>
 
         {/* Large brand mark, with a faint blueprint grid behind it for texture */}
-        <div className="relative col-span-12 mt-16 overflow-hidden">
+        <div className="relative col-span-12 overflow-hidden py-[clamp(4rem,10vw,10rem)]">
           <div className="footer-grid pointer-events-none absolute inset-0" />
-          <p
-            className="relative whitespace-nowrap text-[clamp(5rem,17vw,18rem)] leading-[0.7] tracking-[-0.08em] text-white/95"
-            style={{ fontFamily: "var(--font-bricolage)" }}
-          >
-            NILIMA
-          </p>
+          <div className="relative h-[clamp(10.5rem,21vw,21rem)] w-full">
+            <Image
+              src="/images/logo-3d.png"
+              alt="Nilima Design Associates"
+              fill
+              sizes="100vw"
+              className="object-cover object-center"
+              priority={false}
+            />
+          </div>
         </div>
       </div>
 
