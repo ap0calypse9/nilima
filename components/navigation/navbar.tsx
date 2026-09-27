@@ -65,6 +65,45 @@ const menuItems = [
   },
   {
     number: "03",
+    title: "SERVICES",
+    href: "/services",
+    children: [
+      {
+        title: "Rebound Hammer Test",
+        href: "/services#rebound-hammer-test",
+      },
+      {
+        title: "UPV Test",
+        href: "/services#upv-test",
+      },
+      {
+        title: "Rebar Scanning",
+        href: "/services#rebar-scanning",
+      },
+      {
+        title: "Pile Integrity Test",
+        href: "/services#pile-integrity-test",
+      },
+      {
+        title: "Corrosion Assessment",
+        href: "/services#corrosion-assessment",
+      },
+      {
+        title: "Structural Health Assessment",
+        href: "/services#structural-health-assessment",
+      },
+      {
+        title: "Engineering Survey",
+        href: "/services#engineering-survey",
+      },
+      {
+        title: "Pile Testing Services",
+        href: "/services#pile-testing-services",
+      },
+    ],
+  },
+  {
+    number: "04",
     title: "PROJECTS",
     href: "/projects",
     children: [
@@ -87,12 +126,12 @@ const menuItems = [
     ],
   },
   {
-    number: "04",
+    number: "05",
     title: "INSIGHTS",
     href: "/insights",
   },
   {
-    number: "05",
+    number: "06",
     title: "CONTACT",
     href: "/contact",
   },

@@ -13,6 +13,9 @@ import Location from "@/components/home/location";
 import FloatingContact from "@/components/contact/floating-contact";
 import FeaturedVideo from "@/components/home/yt";
 import IsoStripe from "@/components/home/iso";
+import Faq from "@/components/home/faq";
+import Stats from "@/components/home/stat";
+import SurveyButton from "@/components/contact/survey-button";
 
 export default function Home() {
   return (
@@ -24,13 +27,16 @@ export default function Home() {
         <IsoStripe/>
         <TrustedBy/>
         <Identity />
+        <Stats/>
         <Capabilities />
         <Projects />
         <FeaturedVideo/>
         <Expertise />
         <Trust />
         <Location/>
+        <SurveyButton />
         <FloatingContact />
+        <Faq/>
         <CTA />
       </main>
       <Footer />
