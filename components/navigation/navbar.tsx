@@ -256,49 +256,33 @@ export default function Navbar() {
             onClick={() => setOpen(true)}
             aria-label="Open navigation"
             aria-expanded={open}
-            className="group flex items-center gap-4"
+            className="
+              group
+              flex
+              h-12
+              w-12
+              shrink-0
+              flex-col
+              items-center
+              justify-center
+              gap-[5px]
+              rounded-full
+              bg-[var(--blueprint)]
+              shadow-lg
+              ring-4
+              ring-[var(--blueprint)]/20
+              transition-all
+              duration-300
+              hover:scale-105
+              hover:ring-8
+              active:scale-95
+            "
           >
-            <span
-              className="
-                text-sm
-                font-bold
-                uppercase
-                tracking-[0.22em]
-                text-[var(--ink)]
-              "
-              style={{
-                fontFamily: "var(--font-dm-mono)",
-              }}
-            >
-              Menu
-            </span>
+            <span className="block h-[2px] w-5 bg-white transition-all duration-300" />
 
-            <span className="flex flex-col gap-[5px]">
-              <span
-                className="
-                  block
-                  h-[2px]
-                  w-8
-                  bg-[var(--ink)]
-                  transition-all
-                  duration-300
-                  group-hover:w-10
-                "
-              />
+            <span className="block h-[2px] w-3.5 bg-white transition-all duration-300 group-hover:w-5" />
 
-              <span
-                className="
-                  ml-auto
-                  block
-                  h-[2px]
-                  w-5
-                  bg-[var(--blueprint)]
-                  transition-all
-                  duration-300
-                  group-hover:w-8
-                "
-              />
-            </span>
+            <span className="block h-[2px] w-5 bg-white transition-all duration-300" />
           </button>
         </div>
       </header>
