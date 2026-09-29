@@ -72,20 +72,58 @@ export default function CTA() {
             </p>
           </div>
 
-          {/* Contact button */}
-          <Link
-            href="/contact"
-            className="group flex items-center gap-6 self-start border-b-2 border-[#070909] pb-4 text-sm uppercase tracking-[0.16em] transition-opacity hover:opacity-60 md:self-end"
-            style={{
-              fontFamily: "var(--font-dm-mono)",
-            }}
-          >
-            <span>Contact Nilima</span>
+        {/* Contact button */}
+<Link
+  href="/contact"
+  className="
+    group
+    inline-flex
+    items-center
+    gap-5
+    self-start
+    rounded-full
+    border
+    border-[#070909]
+    bg-[#070909]
+    px-7
+    py-4
+    text-sm
+    font-bold
+    uppercase
+    tracking-[0.14em]
+    text-white
+    transition-all
+    duration-300
+    hover:bg-transparent
+    hover:text-[#070909]
+    md:self-end
+  "
+  style={{
+    fontFamily: "var(--font-dm-mono)",
+  }}
+>
+  <span>Contact Nilima</span>
 
-            <span className="text-2xl transition-transform duration-300 group-hover:translate-x-3">
-              →
-            </span>
-          </Link>
+  <span
+    className="
+      flex
+      h-8
+      w-8
+      items-center
+      justify-center
+      rounded-full
+      bg-[var(--aqua)]
+      text-lg
+      text-[#070909]
+      transition-transform
+      duration-300
+      group-hover:translate-x-1
+    "
+  >
+    →
+  </span>
+</Link>
+
         </div>
 
         {/* Decorative mark */}

@@ -4,6 +4,8 @@ import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import Navbar from "@/components/navigation/navbar";
+import Footer from "@/components/layout/footer";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -240,6 +242,7 @@ export default function EquipmentPage() {
       ref={pageRef}
       className="min-h-screen bg-white text-black"
     >
+      <Navbar/>
       {/* =====================================================
           HERO
       ===================================================== */}
@@ -498,6 +501,7 @@ export default function EquipmentPage() {
           </div>
         </div>
       </section>
+    <Footer/>
     </main>
   );
 }
