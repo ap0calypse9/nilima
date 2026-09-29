@@ -155,21 +155,6 @@ export default function Footer() {
           </div>
         </div>
       </div>
-
-      <style jsx>{`
-        .footer-grid {
-          background-image: linear-gradient(
-              rgba(41, 171, 226, 0.08) 1px,
-              transparent 1px
-            ),
-            linear-gradient(
-              90deg,
-              rgba(41, 171, 226, 0.08) 1px,
-              transparent 1px
-            );
-          background-size: 32px 32px;
-        }
-      `}</style>
     </footer>
   );
 }
