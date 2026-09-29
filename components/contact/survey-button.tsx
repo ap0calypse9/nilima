@@ -30,23 +30,33 @@ const serviceShortNames: Record<string, string> = {
   Other: "Other",
 };
 
+type FormState = {
+  name: string;
+  phone: string;
+  email: string;
+  service: string;
+  location: string;
+  message: string;
+};
+
+const initialForm: FormState = {
+  name: "",
+  phone: "",
+  email: "",
+  service: "",
+  location: "",
+  message: "",
+};
+
 export default function SurveyButton() {
   const [open, setOpen] = useState(false);
   const [submitted, setSubmitted] = useState(false);
 
-  const [form, setForm] = useState({
-    name: "",
-    phone: "",
-    email: "",
-    service: "",
-    location: "",
-    message: "",
-  });
+  const [form, setForm] = useState<FormState>(initialForm);
 
-  /* -------------------------------------------------------------
-     LOCK WEBSITE SCROLL WHEN MODAL IS OPEN
-  ------------------------------------------------------------- */
-
+  /*
+   * Lock page scrolling while modal is open.
+   */
   useEffect(() => {
     if (!open) return;
 
@@ -68,14 +78,11 @@ export default function SurveyButton() {
     };
   }, [open]);
 
-  /* -------------------------------------------------------------
-     FORM CHANGE
-  ------------------------------------------------------------- */
-
+  /*
+   * Input changes.
+   */
   const handleChange = (
-    event: React.ChangeEvent<
-      HTMLInputElement | HTMLTextAreaElement
-    >
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     const { name, value } = event.target;
 
@@ -85,10 +92,9 @@ export default function SurveyButton() {
     }));
   };
 
-  /* -------------------------------------------------------------
-     SERVICE SELECTION
-  ------------------------------------------------------------- */
-
+  /*
+   * Service selection.
+   */
   const selectService = (service: string) => {
     setForm((current) => ({
       ...current,
@@ -96,24 +102,24 @@ export default function SurveyButton() {
     }));
   };
 
-  /* -------------------------------------------------------------
-     CLOSE
-  ------------------------------------------------------------- */
-
+  /*
+   * Close modal.
+   */
   const close = () => {
     if (!submitted) {
       setOpen(false);
     }
   };
 
-  /* -------------------------------------------------------------
-     SUBMIT
-  ------------------------------------------------------------- */
-
-  const handleSubmit = (
-    event: React.FormEvent<HTMLFormElement>
-  ) => {
+  /*
+   * Submit enquiry to WhatsApp.
+   */
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+
+    if (!form.service) {
+      return;
+    }
 
     const message = `
 *NEW CLIENT ENQUIRY*
@@ -141,34 +147,24 @@ ${form.message || "Not provided"}
 Website enquiry — Nilima Design Associates
     `.trim();
 
-    const whatsappUrl =
-      `https://wa.me/919735574908?text=` +
-      encodeURIComponent(message);
+    const whatsappUrl = `https://wa.me/919735574908?text=${encodeURIComponent(
+      message
+    )}`;
 
     setSubmitted(true);
 
-    window.open(whatsappUrl, "_blank");
+    window.open(whatsappUrl, "_blank", "noopener,noreferrer");
 
     setTimeout(() => {
       setSubmitted(false);
       setOpen(false);
-
-      setForm({
-        name: "",
-        phone: "",
-        email: "",
-        service: "",
-        location: "",
-        message: "",
-      });
+      setForm(initialForm);
     }, 1400);
   };
 
   return (
     <>
-      {/* =========================================================
-          FLOATING ENQUIRY BUTTON
-      ========================================================= */}
+      {/* Floating enquiry button */}
 
       <button
         type="button"
@@ -204,16 +200,13 @@ Website enquiry — Nilima Design Associates
       >
         <span className="relative flex h-2.5 w-2.5">
           <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-black opacity-30" />
-
           <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-black" />
         </span>
 
         Enquiry
       </button>
 
-      {/* =========================================================
-          MODAL OVERLAY
-      ========================================================= */}
+      {/* Modal */}
 
       {open && (
         <div
@@ -235,9 +228,7 @@ Website enquiry — Nilima Design Associates
             }
           }}
         >
-          {/* =====================================================
-              POPUP
-          ===================================================== */}
+          {/* Popup */}
 
           <div
             className="
@@ -256,9 +247,7 @@ Website enquiry — Nilima Design Associates
             "
             onMouseDown={(event) => event.stopPropagation()}
           >
-            {/* ===================================================
-                HEADER
-            =================================================== */}
+            {/* Header */}
 
             <header
               className="
@@ -327,8 +316,6 @@ Website enquiry — Nilima Design Associates
                     </h2>
                   </div>
 
-                  {/* Close */}
-
                   <button
                     type="button"
                     onClick={close}
@@ -374,9 +361,7 @@ Website enquiry — Nilima Design Associates
               </div>
             </header>
 
-            {/* ===================================================
-                SCROLLABLE CONTENT
-            =================================================== */}
+            {/* Scrollable content */}
 
             <div
               className="
@@ -390,9 +375,7 @@ Website enquiry — Nilima Design Associates
               }}
             >
               {submitted ? (
-                /* =================================================
-                   SUCCESS
-                ================================================= */
+                /* Success */
 
                 <div className="flex min-h-full items-center justify-center px-7">
                   <div className="w-full max-w-sm">
@@ -444,9 +427,8 @@ Website enquiry — Nilima Design Associates
                     </h3>
 
                     <p className="mt-4 text-sm font-medium leading-6 text-black/60">
-                      Your project details have been prepared.
-                      WhatsApp should now be open with the enquiry
-                      message ready to send.
+                      Your project details have been prepared. WhatsApp should
+                      now be open with the enquiry message ready to send.
                     </p>
                   </div>
                 </div>
@@ -454,22 +436,12 @@ Website enquiry — Nilima Design Associates
                 <form
                   id="survey-form"
                   onSubmit={handleSubmit}
-                  className="
-                    px-6
-                    py-6
-                    sm:px-8
-                    sm:py-7
-                  "
+                  className="px-6 py-6 sm:px-8 sm:py-7"
                 >
-                  {/* =================================================
-                      SECTION 01
-                  ================================================= */}
+                  {/* Section 01 */}
 
                   <section>
-                    <SectionLabel
-                      number="01"
-                      title="Your details"
-                    />
+                    <SectionLabel number="01" title="Your details" />
 
                     <div className="mt-5 space-y-4">
                       <Field
@@ -504,28 +476,20 @@ Website enquiry — Nilima Design Associates
                     </div>
                   </section>
 
-                  {/* =================================================
-                      SECTION 02
-                  ================================================= */}
+                  {/* Section 02 */}
 
                   <section className="mt-7">
-                    <SectionLabel
-                      number="02"
-                      title="What do you need?"
-                    />
+                    <SectionLabel number="02" title="What do you need?" />
 
                     <div className="mt-5 grid grid-cols-2 gap-2 sm:grid-cols-3">
                       {services.map((service) => {
-                        const selected =
-                          form.service === service;
+                        const selected = form.service === service;
 
                         return (
                           <button
                             key={service}
                             type="button"
-                            onClick={() =>
-                              selectService(service)
-                            }
+                            onClick={() => selectService(service)}
                             className={`
                               min-h-[52px]
                               border
@@ -546,8 +510,7 @@ Website enquiry — Nilima Design Associates
                             <span
                               className="block"
                               style={{
-                                fontFamily:
-                                  "var(--font-dm-mono)",
+                                fontFamily: "var(--font-dm-mono)",
                               }}
                             >
                               {serviceShortNames[service]}
@@ -582,15 +545,10 @@ Website enquiry — Nilima Design Associates
                     )}
                   </section>
 
-                  {/* =================================================
-                      SECTION 03
-                  ================================================= */}
+                  {/* Section 03 */}
 
                   <section className="mt-7">
-                    <SectionLabel
-                      number="03"
-                      title="Project details"
-                    />
+                    <SectionLabel number="03" title="Project details" />
 
                     <div className="mt-5 space-y-4">
                       <Field
@@ -650,16 +608,12 @@ Website enquiry — Nilima Design Associates
                     </div>
                   </section>
 
-                  {/* Space above sticky footer */}
-
                   <div className="h-5" />
                 </form>
               )}
             </div>
 
-            {/* ===================================================
-                STICKY SUBMIT BAR
-            =================================================== */}
+            {/* Sticky submit bar */}
 
             {!submitted && (
               <div
@@ -746,25 +700,13 @@ Website enquiry — Nilima Design Associates
           </div>
         </div>
       )}
-
-      {/* Reduced motion */}
-
-      <style jsx>{`
-        @media (prefers-reduced-motion: reduce) {
-          * {
-            animation: none !important;
-            transition: none !important;
-            scroll-behavior: auto !important;
-          }
-        }
-      `}</style>
     </>
   );
 }
 
-/* ===============================================================
-   SECTION LABEL
-=============================================================== */
+/*
+ * Section label
+ */
 
 function SectionLabel({
   number,
@@ -809,9 +751,9 @@ function SectionLabel({
   );
 }
 
-/* ===============================================================
-   FIELD
-=============================================================== */
+/*
+ * Text field
+ */
 
 function Field({
   label,
@@ -827,9 +769,7 @@ function Field({
   name: string;
   type?: string;
   value: string;
-  onChange: (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => void;
+  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   placeholder?: string;
 }) {
   return (
