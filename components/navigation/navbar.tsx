@@ -24,6 +24,7 @@ const menuItems = [
       },
     ],
   },
+
   {
     number: "02",
     title: "CAPABILITIES",
@@ -63,6 +64,7 @@ const menuItems = [
       },
     ],
   },
+
   {
     number: "03",
     title: "SERVICES",
@@ -102,6 +104,7 @@ const menuItems = [
       },
     ],
   },
+
   {
     number: "04",
     title: "PROJECTS",
@@ -125,13 +128,59 @@ const menuItems = [
       },
     ],
   },
+
   {
     number: "05",
+    title: "EQUIPMENT",
+    href: "/equipment",
+    children: [
+      {
+        title: "PDA",
+        href: "/equipment",
+      },
+      {
+        title: "CAPWAP",
+        href: "/equipment",
+      },
+      {
+        title: "PIT Equipment",
+        href: "/equipment",
+      },
+      {
+        title: "UPV",
+        href: "/equipment",
+      },
+      {
+        title: "Rebound Hammer",
+        href: "/equipment",
+      },
+      {
+        title: "Rebar Scanner",
+        href: "/equipment",
+      },
+      {
+        title: "Total Station",
+        href: "/equipment",
+      },
+      {
+        title: "DGPS",
+        href: "/equipment",
+      },
+      {
+        title: "Soil Investigation",
+        href: "/equipment",
+      },
+    ],
+  },
+
+  {
+    number: "06",
     title: "INSIGHTS",
     href: "/insights",
   },
+
   {
-    number: "06",
+    number: "07",
     title: "CONTACT",
     href: "/contact",
   },
@@ -154,17 +203,41 @@ export default function Navbar() {
 
   return (
     <>
-      {/* Floating Navbar — solid paper background so it stays visible
-          over both the dark hero photo and the light sections below */}
-      <header className="fixed left-0 top-0 z-50 w-full border-b border-[var(--line)] bg-[var(--paper)]/95 px-[clamp(1.25rem,3vw,4rem)] py-5 backdrop-blur-sm">
-        <div className="flex items-center justify-between">
+      {/* =====================================================
+          FLOATING NAVBAR
+      ===================================================== */}
 
-          {/* Logo — increased size */}
+      <header
+        className="
+          fixed
+          left-0
+          top-0
+          z-50
+          w-full
+          border-b
+          border-[var(--line)]
+          bg-[var(--paper)]/95
+          px-[clamp(1.25rem,3vw,4rem)]
+          py-5
+          backdrop-blur-sm
+        "
+      >
+        <div className="flex items-center justify-between">
+          {/* Logo */}
+
           <Link
             href="/"
             onClick={handleClose}
             aria-label="Nilima Design Associates home"
-            className="relative h-20 w-40 shrink-0"
+            className="
+              relative
+              h-20
+              w-40
+              shrink-0
+              transition-transform
+              duration-300
+              hover:scale-[1.02]
+            "
           >
             <Image
               src="/images/logo.png"
@@ -177,6 +250,7 @@ export default function Navbar() {
           </Link>
 
           {/* Menu Trigger */}
+
           <button
             type="button"
             onClick={() => setOpen(true)}
@@ -185,7 +259,13 @@ export default function Navbar() {
             className="group flex items-center gap-4"
           >
             <span
-              className="text-xs uppercase tracking-[0.25em] text-[var(--ink)]"
+              className="
+                text-sm
+                font-bold
+                uppercase
+                tracking-[0.22em]
+                text-[var(--ink)]
+              "
               style={{
                 fontFamily: "var(--font-dm-mono)",
               }}
@@ -194,35 +274,98 @@ export default function Navbar() {
             </span>
 
             <span className="flex flex-col gap-[5px]">
-              <span className="block h-[2px] w-8 bg-[var(--ink)] transition-all duration-300 group-hover:w-10" />
+              <span
+                className="
+                  block
+                  h-[2px]
+                  w-8
+                  bg-[var(--ink)]
+                  transition-all
+                  duration-300
+                  group-hover:w-10
+                "
+              />
 
-              <span className="ml-auto block h-[2px] w-5 bg-[var(--blueprint)] transition-all duration-300 group-hover:w-8" />
+              <span
+                className="
+                  ml-auto
+                  block
+                  h-[2px]
+                  w-5
+                  bg-[var(--blueprint)]
+                  transition-all
+                  duration-300
+                  group-hover:w-8
+                "
+              />
             </span>
           </button>
         </div>
       </header>
 
-      {/* Fullscreen Navigation */}
+      {/* =====================================================
+          FULLSCREEN NAVIGATION
+      ===================================================== */}
+
       <div
-        className={`fixed inset-0 z-[100] flex flex-col bg-[var(--navy)] transition-transform duration-700 ease-[cubic-bezier(0.76,0,0.24,1)] ${
-          open
-            ? "pointer-events-auto translate-x-0"
-            : "pointer-events-none translate-x-full"
-        }`}
+        className={`
+          fixed
+          inset-0
+          z-[100]
+          flex
+          flex-col
+          bg-[var(--navy)]
+          transition-transform
+          duration-700
+          ease-[cubic-bezier(0.76,0,0.24,1)]
+          ${
+            open
+              ? "pointer-events-auto translate-x-0"
+              : "pointer-events-none translate-x-full"
+          }
+        `}
         aria-hidden={!open}
       >
         {/* Aqua edge */}
-        <div className="pointer-events-none absolute right-0 top-0 h-full w-[3px] bg-[var(--blueprint)]" />
 
-        {/* Menu Header */}
-        <div className="flex w-full items-center justify-between px-[clamp(1.25rem,3vw,4rem)] py-7">
+        <div
+          className="
+            pointer-events-none
+            absolute
+            right-0
+            top-0
+            h-full
+            w-[3px]
+            bg-[var(--blueprint)]
+          "
+        />
 
-          {/* Logo — increased size */}
+        {/* =================================================
+            MENU HEADER
+        ================================================= */}
+
+        <div
+          className="
+            flex
+            w-full
+            items-center
+            justify-between
+            px-[clamp(1.25rem,3vw,4rem)]
+            py-7
+          "
+        >
+          {/* Logo */}
+
           <Link
             href="/"
             onClick={handleClose}
             aria-label="Nilima Design Associates home"
-            className="relative h-20 w-40 shrink-0"
+            className="
+              relative
+              h-20
+              w-40
+              shrink-0
+            "
           >
             <Image
               src="/images/logo.png"
@@ -234,6 +377,7 @@ export default function Navbar() {
           </Link>
 
           {/* Close */}
+
           <button
             type="button"
             onClick={handleClose}
@@ -241,7 +385,13 @@ export default function Navbar() {
             className="group flex items-center gap-4"
           >
             <span
-              className="text-xs uppercase tracking-[0.25em] text-white"
+              className="
+                text-sm
+                font-bold
+                uppercase
+                tracking-[0.22em]
+                text-white
+              "
               style={{
                 fontFamily: "var(--font-dm-mono)",
               }}
@@ -250,22 +400,76 @@ export default function Navbar() {
             </span>
 
             <span className="relative h-6 w-7">
-              <span className="absolute left-0 top-1/2 h-px w-7 rotate-45 bg-white transition-transform duration-300 group-hover:rotate-[35deg]" />
+              <span
+                className="
+                  absolute
+                  left-0
+                  top-1/2
+                  h-[2px]
+                  w-7
+                  rotate-45
+                  bg-white
+                  transition-transform
+                  duration-300
+                  group-hover:rotate-[35deg]
+                "
+              />
 
-              <span className="absolute left-0 top-1/2 h-px w-7 -rotate-45 bg-[var(--blueprint)] transition-transform duration-300 group-hover:-rotate-[35deg]" />
+              <span
+                className="
+                  absolute
+                  left-0
+                  top-1/2
+                  h-[2px]
+                  w-7
+                  -rotate-45
+                  bg-[var(--blueprint)]
+                  transition-transform
+                  duration-300
+                  group-hover:-rotate-[35deg]
+                "
+              />
             </span>
           </button>
         </div>
 
-        {/* Navigation Content */}
-        <div
-          className={`relative flex flex-1 flex-col justify-center px-[clamp(1.5rem,6vw,6rem)] transition-opacity duration-500 ${
-            open ? "delay-300 opacity-100" : "opacity-0"
-          }`}
-        >
-          <div className="grid w-full max-w-[1400px] grid-cols-12 gap-x-6">
+        {/* =================================================
+            NAVIGATION CONTENT
+        ================================================= */}
 
-            {/* Main Navigation */}
+        <div
+          className={`
+            relative
+            flex
+            min-h-0
+            flex-1
+            flex-col
+            justify-center
+            overflow-y-auto
+            px-[clamp(1.5rem,6vw,6rem)]
+            transition-opacity
+            duration-500
+            ${
+              open
+                ? "delay-300 opacity-100"
+                : "opacity-0"
+            }
+          `}
+        >
+          <div
+            className="
+              grid
+              w-full
+              max-w-[1400px]
+              grid-cols-12
+              gap-x-6
+              py-8
+            "
+          >
+            {/* =================================================
+                MAIN NAVIGATION
+            ================================================= */}
+
             <nav className="col-span-12 lg:col-span-7">
               {menuItems.map((item) => {
                 const hasChildren =
@@ -276,40 +480,81 @@ export default function Navbar() {
 
                 return (
                   <div key={item.title}>
-
                     {/* Main row */}
+
                     <div
-                      className="group flex w-full items-end justify-between border-b border-white/15"
+                      className="
+                        group
+                        flex
+                        w-full
+                        items-end
+                        justify-between
+                        border-b
+                        border-white/15
+                      "
                       onMouseEnter={() => {
                         if (hasChildren) {
                           setActiveItem(item.title);
                         }
                       }}
                     >
+                      {/* Main page link */}
 
-                      {/* Actual page navigation */}
                       <Link
                         href={item.href}
                         onClick={handleClose}
-                        className="flex flex-1 items-end gap-5 py-3 text-left md:gap-8 md:py-4"
+                        className="
+                          flex
+                          flex-1
+                          items-end
+                          gap-5
+                          py-3
+                          text-left
+                          md:gap-8
+                          md:py-4
+                        "
                       >
+                        {/* Number */}
+
                         <span
-                          className="mb-2 text-[10px] tracking-[0.2em]"
+                          className="
+                            mb-2
+                            text-[10px]
+                            tracking-[0.2em]
+                          "
                           style={{
                             fontFamily:
                               "var(--font-dm-mono)",
-                            color: "var(--blueprint)",
+                            color:
+                              "var(--blueprint)",
                           }}
                         >
                           {item.number}
                         </span>
 
-                        <span className="text-[clamp(1.8rem,3.8vw,4.25rem)] leading-[0.9] tracking-[-0.035em] text-white transition-transform duration-500 group-hover:translate-x-3">
+                        {/* Title */}
+
+                        <span
+                          className="
+                            text-[clamp(1.8rem,3.8vw,4.25rem)]
+                            leading-[0.9]
+                            tracking-[-0.035em]
+                            text-white
+                            transition-transform
+                            duration-500
+                            group-hover:translate-x-3
+                          "
+                          style={{
+                            fontFamily:
+                              "var(--font-bricolage)",
+                          }}
+                        >
                           {item.title}
                         </span>
                       </Link>
 
                       {/* Submenu control */}
+
                       {hasChildren && (
                         <button
                           type="button"
@@ -318,14 +563,28 @@ export default function Navbar() {
                           }
                           aria-label={`Toggle ${item.title} submenu`}
                           aria-expanded={isActive}
-                          className="flex h-full items-center px-4 py-5 md:px-6"
+                          className="
+                            flex
+                            h-full
+                            items-center
+                            px-4
+                            py-5
+                            md:px-6
+                          "
                         >
                           <span
-                            className={`text-xl font-light text-white transition-transform duration-300 ${
-                              isActive
-                                ? "rotate-45"
-                                : ""
-                            }`}
+                            className={`
+                              text-xl
+                              font-light
+                              text-white
+                              transition-transform
+                              duration-300
+                              ${
+                                isActive
+                                  ? "rotate-45"
+                                  : ""
+                              }
+                            `}
                           >
                             +
                           </span>
@@ -333,9 +592,19 @@ export default function Navbar() {
                       )}
                     </div>
 
-                    {/* Mobile submenu */}
+                    {/* =================================================
+                        MOBILE SUBMENU
+                    ================================================= */}
+
                     {hasChildren && isActive && (
-                      <div className="border-b border-white/15 py-4 lg:hidden">
+                      <div
+                        className="
+                          border-b
+                          border-white/15
+                          py-4
+                          lg:hidden
+                        "
+                      >
                         <div className="grid grid-cols-1 gap-2 pl-9">
                           {item.children?.map(
                             (child) => (
@@ -343,7 +612,17 @@ export default function Navbar() {
                                 href={child.href}
                                 key={child.title}
                                 onClick={handleClose}
-                                className="py-1 text-left text-sm uppercase tracking-[0.12em] text-white/60 transition-colors hover:text-[var(--blueprint)]"
+                                className="
+                                  py-1
+                                  text-left
+                                  text-sm
+                                  font-bold
+                                  uppercase
+                                  tracking-[0.12em]
+                                  text-white/60
+                                  transition-colors
+                                  hover:text-[var(--blueprint)]
+                                "
                                 style={{
                                   fontFamily:
                                     "var(--font-dm-mono)",
@@ -361,17 +640,34 @@ export default function Navbar() {
               })}
             </nav>
 
-            {/* Desktop Contextual Panel */}
-            <aside className="col-span-5 hidden lg:block lg:pl-16">
+            {/* =================================================
+                DESKTOP CONTEXTUAL PANEL
+            ================================================= */}
+
+            <aside
+              className="
+                col-span-5
+                hidden
+                lg:block
+                lg:pl-16
+              "
+            >
               <div className="sticky top-1/2 -translate-y-1/2">
                 {activeItem ? (
                   <div>
                     <p
-                      className="mb-5 text-[10px] uppercase tracking-[0.25em]"
+                      className="
+                        mb-5
+                        text-[10px]
+                        font-bold
+                        uppercase
+                        tracking-[0.25em]
+                      "
                       style={{
                         fontFamily:
                           "var(--font-dm-mono)",
-                        color: "var(--blueprint)",
+                        color:
+                          "var(--blueprint)",
                       }}
                     >
                       {activeItem}
@@ -381,7 +677,8 @@ export default function Navbar() {
                       {menuItems
                         .find(
                           (item) =>
-                            item.title === activeItem
+                            item.title ===
+                            activeItem
                         )
                         ?.children?.map(
                           (child, index) => (
@@ -389,10 +686,20 @@ export default function Navbar() {
                               href={child.href}
                               key={child.title}
                               onClick={handleClose}
-                              className="group flex w-full items-center gap-4 text-left"
+                              className="
+                                group
+                                flex
+                                w-full
+                                items-center
+                                gap-4
+                                text-left
+                              "
                             >
                               <span
-                                className="text-[10px] text-white/50"
+                                className="
+                                  text-[10px]
+                                  text-white/50
+                                "
                                 style={{
                                   fontFamily:
                                     "var(--font-dm-mono)",
@@ -403,11 +710,32 @@ export default function Navbar() {
                                 ).padStart(2, "0")}
                               </span>
 
-                              <span className="text-sm uppercase tracking-[0.12em] text-white/60 transition-colors group-hover:text-white">
+                              <span
+                                className="
+                                  text-sm
+                                  font-bold
+                                  uppercase
+                                  tracking-[0.12em]
+                                  text-white/60
+                                  transition-colors
+                                  group-hover:text-white
+                                "
+                              >
                                 {child.title}
                               </span>
 
-                              <span className="ml-auto translate-x-[-8px] text-[var(--blueprint)] opacity-0 transition-all duration-300 group-hover:translate-x-0 group-hover:opacity-100">
+                              <span
+                                className="
+                                  ml-auto
+                                  translate-x-[-8px]
+                                  text-[var(--blueprint)]
+                                  opacity-0
+                                  transition-all
+                                  duration-300
+                                  group-hover:translate-x-0
+                                  group-hover:opacity-100
+                                "
+                              >
                                 →
                               </span>
                             </Link>
@@ -416,12 +744,11 @@ export default function Navbar() {
                     </div>
 
                     {/* Parent page */}
-                    {menuItems
-                      .find(
-                        (item) =>
-                          item.title === activeItem
-                      )
-                      ?.href && (
+
+                    {menuItems.find(
+                      (item) =>
+                        item.title === activeItem
+                    )?.href && (
                       <Link
                         href={
                           menuItems.find(
@@ -431,13 +758,30 @@ export default function Navbar() {
                           )!.href
                         }
                         onClick={handleClose}
-                        className="mt-10 inline-flex items-center gap-3 border-b border-white/20 pb-2 text-[10px] uppercase tracking-[0.18em] text-white transition-colors hover:border-[var(--blueprint)] hover:text-[var(--blueprint)]"
+                        className="
+                          mt-10
+                          inline-flex
+                          items-center
+                          gap-3
+                          border-b
+                          border-white/20
+                          pb-2
+                          text-[10px]
+                          font-bold
+                          uppercase
+                          tracking-[0.18em]
+                          text-white
+                          transition-colors
+                          hover:border-[var(--blueprint)]
+                          hover:text-[var(--blueprint)]
+                        "
                         style={{
                           fontFamily:
                             "var(--font-dm-mono)",
                         }}
                       >
                         Explore {activeItem}
+
                         <span>↗</span>
                       </Link>
                     )}
@@ -447,23 +791,39 @@ export default function Navbar() {
                     <div className="mb-6 h-px w-full bg-white/15" />
 
                     <p
-                      className="max-w-sm text-4xl leading-tight text-white"
+                      className="
+                        max-w-sm
+                        text-4xl
+                        leading-tight
+                        text-white
+                      "
                       style={{
                         fontFamily:
                           "var(--font-instrument)",
                       }}
                     >
-                      Engineering with precision.
+                      Engineering with
+                      precision.
                     </p>
 
                     <p
-                      className="mt-6 max-w-xs text-[10px] uppercase leading-relaxed tracking-[0.15em] text-white/50"
+                      className="
+                        mt-6
+                        max-w-xs
+                        text-[10px]
+                        font-bold
+                        uppercase
+                        leading-relaxed
+                        tracking-[0.15em]
+                        text-white/50
+                      "
                       style={{
                         fontFamily:
                           "var(--font-dm-mono)",
                       }}
                     >
-                      Civil & Structural Engineering
+                      Civil & Structural
+                      Engineering
                       <br />
                       Kolkata, India
                     </p>
@@ -473,12 +833,34 @@ export default function Navbar() {
             </aside>
           </div>
 
-          {/* Footer Metadata */}
-          <div className="absolute bottom-7 left-[clamp(1.5rem,6vw,6rem)] right-[clamp(1.5rem,6vw,6rem)] flex items-end justify-between">
+          {/* =================================================
+              FOOTER METADATA
+          ================================================= */}
+
+          <div
+            className="
+              pointer-events-none
+              absolute
+              bottom-7
+              left-[clamp(1.5rem,6vw,6rem)]
+              right-[clamp(1.5rem,6vw,6rem)]
+              hidden
+              items-end
+              justify-between
+              sm:flex
+            "
+          >
             <p
-              className="text-[10px] uppercase tracking-[0.18em] text-white/50"
+              className="
+                text-[10px]
+                font-bold
+                uppercase
+                tracking-[0.18em]
+                text-white/50
+              "
               style={{
-                fontFamily: "var(--font-dm-mono)",
+                fontFamily:
+                  "var(--font-dm-mono)",
               }}
             >
               Civil & Structural Engineering
@@ -487,9 +869,15 @@ export default function Navbar() {
             </p>
 
             <p
-              className="text-[10px] tracking-[0.18em] text-white/50"
+              className="
+                text-[10px]
+                font-bold
+                tracking-[0.18em]
+                text-white/50
+              "
               style={{
-                fontFamily: "var(--font-dm-mono)",
+                fontFamily:
+                  "var(--font-dm-mono)",
               }}
             >
               NDA / 2026
