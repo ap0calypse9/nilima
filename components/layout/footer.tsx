@@ -1,8 +1,15 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 
-const navItems = ["About", "Capabilities", "Projects", "Insights", "Contact"];
+const navItems = [
+  { label: "About", href: "/about" },
+  { label: "Capabilities", href: "/capabilities" },
+  { label: "Projects", href: "/projects" },
+  { label: "Insights", href: "/insights" },
+  { label: "Contact", href: "/contact" },
+];
 
 export default function Footer() {
   return (
@@ -43,79 +50,82 @@ export default function Footer() {
             />
           </div>
 
-         {/* Office + contact */}
-<div className="col-span-12 md:col-span-4">
-  <p
-    className="mb-5 text-[10px] uppercase tracking-[0.18em]"
-    style={{
-      fontFamily: "var(--font-dm-mono)",
-      color: "var(--blueprint)",
-    }}
-  >
-    Office
-  </p>
+          {/* Office + contact */}
+          <div className="col-span-12 md:col-span-4">
+            <p
+              className="mb-5 text-[10px] uppercase tracking-[0.18em]"
+              style={{
+                fontFamily: "var(--font-dm-mono)",
+                color: "var(--blueprint)",
+              }}
+            >
+              Office
+            </p>
 
-  <address className="not-italic text-sm leading-7 text-white/60">
-    Flat No. 3A, Block 32, 3rd Floor
-    <br />
-    Nabadiganta, Sonai Road
-    <br />
-    Kolkata, West Bengal — 700094
-    <br />
-    India
-  </address>
+            <address className="not-italic text-sm leading-7 text-white/60">
+              Flat No. 3A, Block 32, 3rd Floor
+              <br />
+              Nabadiganta, Sonai Road
+              <br />
+              Kolkata, West Bengal — 700094
+              <br />
+              India
+            </address>
 
-  {/* Office Hours */}
-  <div className="mt-5">
-    <p
-      className="text-[9px] uppercase tracking-[0.16em] text-white/40"
-      style={{ fontFamily: "var(--font-dm-mono)" }}
-    >
-      Office Hours
-    </p>
+            {/* Office Hours */}
+            <div className="mt-5">
+              <p
+                className="text-[9px] uppercase tracking-[0.16em] text-white/40"
+                style={{ fontFamily: "var(--font-dm-mono)" }}
+              >
+                Office Hours
+              </p>
 
-    <p className="mt-1 text-sm text-white/60">
-      Monday — Saturday · 10:00 AM — 6:00 PM
-      <br />
-      Sunday · Holiday
-    </p>
-  </div>
+              <p className="mt-1 text-sm text-white/60">
+                Monday — Saturday · 10:00 AM — 6:00 PM
+                <br />
+                Sunday · Holiday
+              </p>
+            </div>
 
-  <div className="mt-5 space-y-2">
-    <a
-      href="tel:8972697919"
-      className="block text-sm text-white/60 transition-colors hover:text-[var(--blueprint)]"
-    >
-      8972697919
-    </a>
+            <div className="mt-5 space-y-2">
+              <a
+                href="tel:8972697919"
+                className="block text-sm text-white/60 transition-colors hover:text-[var(--blueprint)]"
+              >
+                8972697919
+              </a>
 
-    <a
-      href="mailto:ndaofficial2023@gmail.com"
-      className="block text-sm text-white/60 transition-colors hover:text-[var(--blueprint)]"
-    >
-      ndaofficial2023@gmail.com
-    </a>
-  </div>
-</div>
+              <a
+                href="mailto:ndaofficial2023@gmail.com"
+                className="block text-sm text-white/60 transition-colors hover:text-[var(--blueprint)]"
+              >
+                ndaofficial2023@gmail.com
+              </a>
+            </div>
+          </div>
 
           {/* Navigation */}
           <div className="col-span-12 md:col-span-3">
             <p
               className="mb-5 text-[10px] uppercase tracking-[0.18em]"
-              style={{ fontFamily: "var(--font-dm-mono)", color: "var(--blueprint)" }}
+              style={{
+                fontFamily: "var(--font-dm-mono)",
+                color: "var(--blueprint)",
+              }}
             >
               Navigate
             </p>
 
             <nav className="flex flex-col items-start gap-3">
               {navItems.map((item) => (
-                <button
-                  key={item}
-                  type="button"
+                <Link
+                  key={item.href}
+                  href={item.href}
                   className="text-sm text-white/80 transition-colors hover:text-[var(--blueprint)]"
                 >
-                  {item}
-                </button>
+                  {item.label}
+                </Link>
               ))}
             </nav>
           </div>

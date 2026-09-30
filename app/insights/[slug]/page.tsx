@@ -69,7 +69,128 @@ const insights = [
       },
     ],
   },
+  {
+    slug: "g7-structural-design-agartala-infrastructure-project",
+
+    title: "G+7 Structural Design – Infrastructure Project, Agartala",
+
+    subtitle: "G+7 Infrastructure Building — Agartala, Tripura",
+
+    category: "Case Study — Structural Design",
+
+    standard: "Seismic Zone V",
+
+    sections: [
+      {
+        heading: "Project Overview",
+
+        paragraphs: [
+          "Nilima Design Associates successfully provided structural engineering and design services for a G+7 infrastructure project in Agartala, Tripura.",
+
+          "The project was designed considering the Seismic Zone V requirements, with particular attention to structural stability, seismic response, load distribution and serviceability.",
+        ],
+      },
+
+      {
+        heading: "Project Details",
+
+        paragraphs: [
+          "The project involved the structural design and analysis of a G+7 infrastructure building with an RCC framed structural system.",
+        ],
+
+        list: [
+          "Project: G+7 Infrastructure Building",
+          "Location: Agartala, Tripura",
+          "Structural System: RCC Framed Structure",
+          "Seismic Zone: Zone V",
+          "Structural Design: Nilima Design Associates",
+          "Analysis Software: STAAD.Pro",
+          "Supporting Calculations: Excel-based engineering calculations",
+          "Foundation Analysis: STAAD Foundation and supporting design calculations",
+        ],
+      },
+
+      {
+        heading: "Structural Engineering Scope",
+
+        paragraphs: [
+          "Our scope included the structural analysis, design and documentation of the major structural components of the project.",
+        ],
+
+        list: [
+          "Structural framing and planning",
+          "Dead load and live load assessment",
+          "Seismic load analysis",
+          "Load combinations and structural modelling",
+          "Beam and column design",
+          "Slab design",
+          "Foundation analysis and design",
+          "Reinforcement requirements and detailing",
+          "Structural stability and serviceability checks",
+          "Preparation of structural design documentation",
+        ],
+      },
+
+      {
+        heading: "Design & Analysis Methodology",
+
+        paragraphs: [
+          "The building was modelled and analysed using STAAD.Pro to evaluate the structural response under gravity and seismic loading.",
+
+          "Additional Excel-based engineering calculations were used for design checks and verification of structural elements. Foundation analysis and design were also carried out using STAAD Foundation, supported by relevant engineering calculations.",
+
+          "The design approach focused on achieving an efficient load-transfer system from the superstructure to the foundation while considering the seismic demands applicable to the project location.",
+        ],
+      },
+
+      {
+        heading: "Engineering Challenge",
+
+        paragraphs: [
+          "The major engineering consideration was the project's location in Seismic Zone V. The structural system therefore required careful consideration of lateral loads, load paths, member forces, structural stability and foundation behaviour.",
+        ],
+      },
+
+      {
+        heading: "Project Outcome",
+
+        paragraphs: [
+          "Nilima Design Associates delivered a practical, structurally efficient and construction-oriented design solution for the G+7 infrastructure project, integrating structural analysis, detailed engineering calculations and foundation design.",
+        ],
+      },
+
+      {
+        heading: "Software Used",
+
+        paragraphs: [
+          "The project utilised STAAD.Pro, STAAD Foundation and Microsoft Excel as part of the structural analysis, design and engineering calculation workflow.",
+        ],
+
+        list: [
+          "STAAD.Pro",
+          "STAAD Foundation",
+          "Microsoft Excel",
+        ],
+      },
+
+      {
+        heading: "Engineering Focus",
+
+        paragraphs: [
+          "Engineering structures designed for safety, stability and long-term performance.",
+        ],
+
+        list: [
+          "Structural Design",
+          "Seismic Analysis",
+          "Foundation Design",
+          "Structural Engineering",
+        ],
+      },
+    ],
+  },
 ];
+
 
 export function generateStaticParams() {
   return insights.map((insight) => ({ slug: insight.slug }));
