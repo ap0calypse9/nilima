@@ -22,148 +22,139 @@ type Equipment = {
 const equipment: Equipment[] = [
   {
     number: "01",
-    category: "PILE TESTING",
-    name: "PDA",
-    subtitle: "Pile Dynamic Analysis",
-    description:
-      "Dynamic pile testing equipment used for evaluating pile performance and foundation behaviour under field conditions.",
-    specifications: [
-      "Dynamic pile testing",
-      "Foundation assessment",
-      "Field data acquisition",
-      "Pile performance analysis",
-    ],
-    image: "/images/equipment/pda.jpg",
-  },
-  {
-    number: "02",
-    category: "PILE TESTING",
-    name: "CAPWAP",
-    subtitle: "Pile Wave Analysis",
-    description:
-      "Advanced pile analysis equipment and software workflow used to interpret dynamic testing data and assess pile response.",
-    specifications: [
-      "Wave equation analysis",
-      "Pile capacity assessment",
-      "Signal interpretation",
-      "Foundation evaluation",
-    ],
-    image: "/images/equipment/capwap.jpg",
-  },
-  {
-    number: "03",
-    category: "PILE TESTING",
-    name: "PIT",
-    subtitle: "Pile Integrity Testing",
-    description:
-      "Non-destructive testing equipment used to investigate pile integrity and identify possible anomalies along the pile shaft.",
-    specifications: [
-      "Non-destructive testing",
-      "Pile integrity assessment",
-      "Wave reflection analysis",
-      "Foundation investigation",
-    ],
-    image: "/images/equipment/pit.jpg",
-  },
-  {
-    number: "04",
-    category: "CONCRETE TESTING",
-    name: "UPV",
-    subtitle: "Ultrasonic Pulse Velocity",
-    description:
-      "Ultrasonic testing equipment used for assessing concrete quality and detecting variations within structural elements.",
-    specifications: [
-      "Ultrasonic testing",
-      "Concrete assessment",
-      "Internal quality evaluation",
-      "Non-destructive testing",
-    ],
-    image: "/images/equipment/upv.jpg",
-  },
-  {
-    number: "05",
     category: "CONCRETE TESTING",
     name: "REBOUND HAMMER",
     subtitle: "Concrete Surface Assessment",
     description:
-      "Portable non-destructive testing equipment used to assess the surface hardness of concrete and support structural evaluation.",
+      "Portable non-destructive testing equipment used to assess the surface hardness of concrete and support structural condition assessment.",
     specifications: [
       "Concrete surface testing",
       "Non-destructive testing",
-      "Structural assessment",
+      "Surface hardness assessment",
       "Field inspection",
     ],
-    image: "/images/equipment/rebound-hammer.jpg",
+    image: "/images/equipment/rebound-hammer.jpeg",
   },
+
   {
-    number: "06",
+    number: "02",
+    category: "CONCRETE TESTING",
+    name: "UPV",
+    subtitle: "Ultrasonic Pulse Velocity",
+    description:
+      "Ultrasonic testing equipment used for evaluating concrete quality and identifying variations within structural elements through pulse velocity measurements.",
+    specifications: [
+      "Ultrasonic testing",
+      "Concrete quality assessment",
+      "Internal condition evaluation",
+      "Non-destructive testing",
+    ],
+    image: "/images/equipment/upv.jpeg",
+  },
+
+  {
+    number: "03",
+    category: "SURVEY",
+    name: "LEICA TOTAL STATION",
+    subtitle: "Precision Surveying Equipment",
+    description:
+      "Precision electronic surveying equipment used for accurate measurement of angles, distances and coordinates during engineering and construction surveys.",
+    specifications: [
+      "Precision surveying",
+      "Angle measurement",
+      "Distance measurement",
+      "Coordinate collection",
+    ],
+    image: "/images/equipment/leica-total-station.jpeg",
+  },
+
+  {
+    number: "04",
     category: "STRUCTURAL TESTING",
     name: "REBAR SCANNER",
     subtitle: "Reinforcement Detection",
     description:
-      "Scanning equipment used to locate reinforcement and investigate reinforcement arrangement within concrete elements.",
+      "Non-destructive scanning equipment used to locate reinforcement within concrete and support assessment of reinforcement arrangement and concrete cover.",
     specifications: [
       "Rebar detection",
       "Concrete scanning",
       "Cover assessment",
       "Structural investigation",
     ],
-    image: "/images/equipment/rebar-scanner.jpg",
+    image: "/images/equipment/rebar-scanner.jpeg",
   },
+
+  {
+    number: "05",
+    category: "MEASUREMENT",
+    name: "DISTANCE METER",
+    subtitle: "Digital Distance Measurement",
+    description:
+      "Digital distance measurement equipment used for accurate field measurements during structural, architectural and engineering surveys.",
+    specifications: [
+      "Distance measurement",
+      "Site measurement",
+      "Field surveying",
+      "Dimensional verification",
+    ],
+    image: "/images/equipment/distance-meter.jpeg",
+  },
+
+  {
+    number: "06",
+    category: "STRUCTURAL TESTING",
+    name: "HALF CELL POTENTIAL",
+    subtitle: "Corrosion Assessment",
+    description:
+      "Electrochemical testing equipment used to assess the likelihood of reinforcement corrosion in reinforced concrete structures.",
+    specifications: [
+      "Corrosion assessment",
+      "Electrochemical testing",
+      "RCC investigation",
+      "Reinforcement condition",
+    ],
+    image: "/images/equipment/half-cell-potential.jpeg",
+  },
+
   {
     number: "07",
     category: "SURVEY",
-    name: "TOTAL STATION",
+    name: "SOKKIA TOTAL STATION",
     subtitle: "Precision Land Survey",
     description:
-      "Electronic surveying equipment used for accurate measurement of angles, distances and site coordinates.",
+      "Electronic surveying equipment used for precise field measurements, construction layout, coordinate collection and engineering surveys.",
     specifications: [
-      "Topographical survey",
+      "Land surveying",
+      "Construction layout",
+      "Coordinate measurement",
       "Site measurement",
-      "Coordinate collection",
-      "Construction surveying",
     ],
-    image: "/images/equipment/total-station.jpg",
+    image: "/images/equipment/sokkia-total-station.jpeg",
   },
+
   {
     number: "08",
-    category: "SURVEY",
-    name: "DGPS",
-    subtitle: "Geospatial Positioning",
+    category: "STRUCTURAL TESTING",
+    name: "STEEL THICKNESS CHECKER",
+    subtitle: "Ultrasonic Thickness Measurement",
     description:
-      "High-precision positioning equipment used for surveying, mapping and geospatial data collection.",
+      "Thickness measurement equipment used for assessing the thickness of steel and other suitable materials during structural inspection and condition assessment.",
     specifications: [
-      "Precision positioning",
-      "Land surveying",
-      "Geospatial mapping",
-      "Coordinate measurement",
+      "Steel thickness measurement",
+      "Ultrasonic inspection",
+      "Structural assessment",
+      "Material condition testing",
     ],
-    image: "/images/equipment/dgps.jpg",
-  },
-  {
-    number: "09",
-    category: "SOIL INVESTIGATION",
-    name: "SOIL INVESTIGATION",
-    subtitle: "Ground & Foundation Investigation",
-    description:
-      "Field investigation equipment used for understanding subsurface conditions and supporting foundation engineering decisions.",
-    specifications: [
-      "Subsurface investigation",
-      "Ground condition assessment",
-      "Foundation studies",
-      "Field investigation",
-    ],
-    image: "/images/equipment/soil-investigation.jpg",
+    image: "/images/equipment/steel-thickness-checker.jpeg",
   },
 ];
 
 const categories = [
   "ALL",
-  "PILE TESTING",
   "CONCRETE TESTING",
   "STRUCTURAL TESTING",
   "SURVEY",
-  "SOIL INVESTIGATION",
+  "MEASUREMENT",
 ];
 
 export default function EquipmentPage() {
@@ -242,14 +233,13 @@ export default function EquipmentPage() {
       ref={pageRef}
       className="min-h-screen bg-white text-black"
     >
-      <Navbar/>
+      <Navbar />
+
       {/* =====================================================
           HERO
       ===================================================== */}
 
       <section className="relative overflow-hidden border-b border-black/10">
-        {/* Engineering grid */}
-
         <div
           className="pointer-events-none absolute inset-0 opacity-[0.045]"
           style={{
@@ -261,12 +251,10 @@ export default function EquipmentPage() {
           }}
         />
 
-        {/* Technical vertical line */}
-
         <div className="pointer-events-none absolute bottom-0 left-[8%] top-0 hidden w-px bg-black/10 lg:block" />
 
         <div className="relative mx-auto max-w-[1600px] px-6 pb-24 pt-32 sm:px-10 sm:pt-40 lg:px-16 lg:pb-32">
-          <div className="equipment-hero-item mb-10 flex items-center gap-4">
+          <div className="equipment-hero-item mb-10 flex flex-wrap items-center gap-4">
             <span
               className="text-[10px] font-bold uppercase tracking-[0.2em] text-black/40"
               style={{
@@ -276,7 +264,7 @@ export default function EquipmentPage() {
               EQUIPMENT / TECHNICAL INVENTORY
             </span>
 
-            <span className="h-px w-16 bg-black/20" />
+            <span className="hidden h-px w-16 bg-black/20 sm:block" />
 
             <span
               className="text-[10px] font-bold uppercase tracking-[0.2em]"
@@ -293,7 +281,7 @@ export default function EquipmentPage() {
             className="
               equipment-hero-item
               max-w-[1100px]
-              text-[clamp(4rem,11vw,11rem)]
+              text-[clamp(3.8rem,11vw,11rem)]
               font-bold
               leading-[0.78]
               tracking-[-0.065em]
@@ -326,8 +314,8 @@ export default function EquipmentPage() {
                   }}
                 >
                   Precision equipment for structural testing,
-                  foundation investigation, surveying and
-                  engineering assessment.
+                  concrete assessment, surveying, measurement
+                  and engineering investigation.
                 </p>
               </div>
             </div>
@@ -501,7 +489,8 @@ export default function EquipmentPage() {
           </div>
         </div>
       </section>
-    <Footer/>
+
+      <Footer />
     </main>
   );
 }
@@ -523,8 +512,6 @@ function EquipmentCard({
 
       <div className="lg:col-span-7">
         <div className="group relative aspect-[16/10] overflow-hidden bg-[#e9eeee]">
-          {/* Grid overlay */}
-
           <div
             className="pointer-events-none absolute inset-0 z-10 opacity-[0.12]"
             style={{
@@ -544,8 +531,6 @@ function EquipmentCard({
             sizes="(max-width: 1024px) 100vw, 60vw"
           />
 
-          {/* Number */}
-
           <div className="absolute left-5 top-5 z-20">
             <span
               className="bg-white px-3 py-2 text-[9px] font-bold tracking-[0.12em]"
@@ -556,8 +541,6 @@ function EquipmentCard({
               {item.number}
             </span>
           </div>
-
-          {/* Category */}
 
           <div className="absolute bottom-5 left-5 z-20">
             <span
@@ -591,7 +574,7 @@ function EquipmentCard({
 
           <h3
             className="
-              text-[clamp(3rem,6vw,6rem)]
+              text-[clamp(2.8rem,6vw,6rem)]
               font-bold
               leading-[0.8]
               tracking-[-0.06em]
@@ -629,7 +612,7 @@ function EquipmentCard({
             {item.specifications.map((spec, specIndex) => (
               <div
                 key={spec}
-                className="border-b border-r border-black/10 px-3 py-4 last:border-r-0"
+                className="border-b border-r border-black/10 px-3 py-4"
               >
                 <span
                   className="block text-[8px] font-bold uppercase tracking-[0.1em] text-black/35"
@@ -637,7 +620,7 @@ function EquipmentCard({
                     fontFamily: "var(--font-dm-mono)",
                   }}
                 >
-                  0{specIndex + 1}
+                  {String(specIndex + 1).padStart(2, "0")}
                 </span>
 
                 <span

@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const menuItems = [
   {
@@ -10,18 +10,9 @@ const menuItems = [
     title: "ABOUT",
     href: "/about",
     children: [
-      {
-        title: "Company",
-        href: "/about/company",
-      },
-      {
-        title: "Leadership",
-        href: "/about/leadership",
-      },
-      {
-        title: "Credentials",
-        href: "/about/credentials",
-      },
+      { title: "Company", href: "/about/company" },
+      { title: "Leadership", href: "/about/leadership" },
+      { title: "Credentials", href: "/about/credentials" },
     ],
   },
 
@@ -134,42 +125,15 @@ const menuItems = [
     title: "EQUIPMENT",
     href: "/equipment",
     children: [
-      {
-        title: "PDA",
-        href: "/equipment",
-      },
-      {
-        title: "CAPWAP",
-        href: "/equipment",
-      },
-      {
-        title: "PIT Equipment",
-        href: "/equipment",
-      },
-      {
-        title: "UPV",
-        href: "/equipment",
-      },
-      {
-        title: "Rebound Hammer",
-        href: "/equipment",
-      },
-      {
-        title: "Rebar Scanner",
-        href: "/equipment",
-      },
-      {
-        title: "Total Station",
-        href: "/equipment",
-      },
-      {
-        title: "DGPS",
-        href: "/equipment",
-      },
-      {
-        title: "Soil Investigation",
-        href: "/equipment",
-      },
+      { title: "PDA", href: "/equipment" },
+      { title: "CAPWAP", href: "/equipment" },
+      { title: "PIT Equipment", href: "/equipment" },
+      { title: "UPV", href: "/equipment" },
+      { title: "Rebound Hammer", href: "/equipment" },
+      { title: "Rebar Scanner", href: "/equipment" },
+      { title: "Total Station", href: "/equipment" },
+      { title: "DGPS", href: "/equipment" },
+      { title: "Soil Investigation", href: "/equipment" },
     ],
   },
 
@@ -201,6 +165,20 @@ export default function Navbar() {
     );
   };
 
+  // Prevent the website behind the menu from scrolling.
+  useEffect(() => {
+    if (!open) {
+      document.body.style.overflow = "";
+      return;
+    }
+
+    document.body.style.overflow = "hidden";
+
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [open]);
+
   return (
     <>
       {/* =====================================================
@@ -217,9 +195,14 @@ export default function Navbar() {
           border-b
           border-[var(--line)]
           bg-[var(--paper)]/95
-          px-[clamp(1.25rem,3vw,4rem)]
-          py-5
+          px-4
+          py-3
           backdrop-blur-sm
+          sm:px-6
+          sm:py-4
+          md:px-8
+          lg:px-[clamp(1.5rem,3vw,4rem)]
+          lg:py-5
         "
       >
         <div className="flex items-center justify-between">
@@ -231,12 +214,16 @@ export default function Navbar() {
             aria-label="Nilima Design Associates home"
             className="
               relative
-              h-20
-              w-40
+              h-14
+              w-32
               shrink-0
               transition-transform
               duration-300
               hover:scale-[1.02]
+              sm:h-16
+              sm:w-36
+              md:h-18
+              md:w-40
             "
           >
             <Image
@@ -259,8 +246,8 @@ export default function Navbar() {
             className="
               group
               flex
-              h-12
-              w-12
+              h-11
+              w-11
               shrink-0
               flex-col
               items-center
@@ -276,13 +263,15 @@ export default function Navbar() {
               hover:scale-105
               hover:ring-8
               active:scale-95
+              sm:h-12
+              sm:w-12
             "
           >
-            <span className="block h-[2px] w-5 bg-white transition-all duration-300" />
+            <span className="block h-[2px] w-5 bg-white" />
 
             <span className="block h-[2px] w-3.5 bg-white transition-all duration-300 group-hover:w-5" />
 
-            <span className="block h-[2px] w-5 bg-white transition-all duration-300" />
+            <span className="block h-[2px] w-5 bg-white" />
           </button>
         </div>
       </header>
@@ -297,7 +286,9 @@ export default function Navbar() {
           inset-0
           z-[100]
           flex
+          h-[100dvh]
           flex-col
+          overflow-hidden
           bg-[var(--navy)]
           transition-transform
           duration-700
@@ -319,8 +310,9 @@ export default function Navbar() {
             right-0
             top-0
             h-full
-            w-[3px]
+            w-[2px]
             bg-[var(--blueprint)]
+            sm:w-[3px]
           "
         />
 
@@ -332,10 +324,17 @@ export default function Navbar() {
           className="
             flex
             w-full
+            shrink-0
             items-center
             justify-between
-            px-[clamp(1.25rem,3vw,4rem)]
-            py-7
+            px-4
+            py-4
+            sm:px-6
+            sm:py-5
+            md:px-8
+            md:py-6
+            lg:px-[clamp(1.5rem,3vw,4rem)]
+            lg:py-7
           "
         >
           {/* Logo */}
@@ -346,9 +345,13 @@ export default function Navbar() {
             aria-label="Nilima Design Associates home"
             className="
               relative
-              h-20
-              w-40
+              h-14
+              w-32
               shrink-0
+              sm:h-16
+              sm:w-36
+              md:h-18
+              md:w-40
             "
           >
             <Image
@@ -366,15 +369,25 @@ export default function Navbar() {
             type="button"
             onClick={handleClose}
             aria-label="Close navigation"
-            className="group flex items-center gap-4"
+            className="
+              group
+              flex
+              min-h-11
+              items-center
+              gap-3
+              px-1
+              sm:gap-4
+            "
           >
             <span
               className="
-                text-sm
+                text-[11px]
                 font-bold
                 uppercase
-                tracking-[0.22em]
+                tracking-[0.18em]
                 text-white
+                sm:text-sm
+                sm:tracking-[0.22em]
               "
               style={{
                 fontFamily: "var(--font-dm-mono)",
@@ -383,19 +396,20 @@ export default function Navbar() {
               Close
             </span>
 
-            <span className="relative h-6 w-7">
+            <span className="relative h-6 w-6 sm:w-7">
               <span
                 className="
                   absolute
                   left-0
                   top-1/2
                   h-[2px]
-                  w-7
+                  w-6
                   rotate-45
                   bg-white
                   transition-transform
                   duration-300
                   group-hover:rotate-[35deg]
+                  sm:w-7
                 "
               />
 
@@ -405,12 +419,13 @@ export default function Navbar() {
                   left-0
                   top-1/2
                   h-[2px]
-                  w-7
+                  w-6
                   -rotate-45
                   bg-[var(--blueprint)]
                   transition-transform
                   duration-300
                   group-hover:-rotate-[35deg]
+                  sm:w-7
                 "
               />
             </span>
@@ -424,30 +439,39 @@ export default function Navbar() {
         <div
           className={`
             relative
-            flex
             min-h-0
             flex-1
-            flex-col
-            justify-center
             overflow-y-auto
-            px-[clamp(1.5rem,6vw,6rem)]
-            transition-opacity
-            duration-500
+            overscroll-contain
+            px-4
+            pb-8
+            pt-2
+            sm:px-6
+            sm:pb-10
+            sm:pt-4
+            md:px-8
+            lg:px-[clamp(1.5rem,6vw,6rem)]
             ${
               open
                 ? "delay-300 opacity-100"
                 : "opacity-0"
             }
+            transition-opacity
+            duration-500
           `}
         >
           <div
             className="
+              mx-auto
               grid
               w-full
               max-w-[1400px]
               grid-cols-12
               gap-x-6
-              py-8
+              py-2
+              sm:py-4
+              lg:min-h-full
+              lg:items-center
             "
           >
             {/* =================================================
@@ -471,8 +495,7 @@ export default function Navbar() {
                         group
                         flex
                         w-full
-                        items-end
-                        justify-between
+                        items-center
                         border-b
                         border-white/15
                       "
@@ -489,12 +512,14 @@ export default function Navbar() {
                         onClick={handleClose}
                         className="
                           flex
+                          min-w-0
                           flex-1
-                          items-end
-                          gap-5
+                          items-center
+                          gap-3
                           py-3
-                          text-left
-                          md:gap-8
+                          sm:gap-5
+                          sm:py-4
+                          md:gap-7
                           md:py-4
                         "
                       >
@@ -502,9 +527,13 @@ export default function Navbar() {
 
                         <span
                           className="
-                            mb-2
-                            text-[10px]
-                            tracking-[0.2em]
+                            w-5
+                            shrink-0
+                            text-[9px]
+                            tracking-[0.16em]
+                            sm:w-6
+                            sm:text-[10px]
+                            sm:tracking-[0.2em]
                           "
                           style={{
                             fontFamily:
@@ -520,13 +549,19 @@ export default function Navbar() {
 
                         <span
                           className="
-                            text-[clamp(1.8rem,3.8vw,4.25rem)]
+                            min-w-0
+                            truncate
+                            text-[clamp(1.65rem,8vw,3rem)]
                             leading-[0.9]
-                            tracking-[-0.035em]
+                            tracking-[-0.04em]
                             text-white
                             transition-transform
                             duration-500
-                            group-hover:translate-x-3
+                            group-hover:translate-x-1
+                            sm:text-[clamp(2rem,6vw,3.5rem)]
+                            sm:group-hover:translate-x-2
+                            lg:text-[clamp(1.8rem,3.8vw,4.25rem)]
+                            lg:group-hover:translate-x-3
                           "
                           style={{
                             fontFamily:
@@ -549,11 +584,14 @@ export default function Navbar() {
                           aria-expanded={isActive}
                           className="
                             flex
-                            h-full
+                            min-h-11
+                            min-w-11
+                            shrink-0
                             items-center
-                            px-4
-                            py-5
-                            md:px-6
+                            justify-center
+                            rounded-full
+                            sm:min-h-12
+                            sm:min-w-12
                           "
                         >
                           <span
@@ -563,6 +601,7 @@ export default function Navbar() {
                               text-white
                               transition-transform
                               duration-300
+                              sm:text-2xl
                               ${
                                 isActive
                                   ? "rotate-45"
@@ -585,34 +624,57 @@ export default function Navbar() {
                         className="
                           border-b
                           border-white/15
-                          py-4
+                          py-3
+                          sm:py-4
                           lg:hidden
                         "
                       >
-                        <div className="grid grid-cols-1 gap-2 pl-9">
+                        <div
+                          className="
+                            grid
+                            grid-cols-1
+                            gap-1
+                            pl-8
+                            sm:pl-11
+                          "
+                        >
                           {item.children?.map(
-                            (child) => (
+                            (child, index) => (
                               <Link
                                 href={child.href}
                                 key={child.title}
                                 onClick={handleClose}
                                 className="
-                                  py-1
+                                  flex
+                                  min-h-9
+                                  items-center
+                                  gap-3
+                                  py-1.5
                                   text-left
-                                  text-sm
+                                  text-[10px]
                                   font-bold
                                   uppercase
-                                  tracking-[0.12em]
-                                  text-white/60
+                                  tracking-[0.1em]
+                                  text-white/55
                                   transition-colors
                                   hover:text-[var(--blueprint)]
+                                  sm:text-xs
+                                  sm:tracking-[0.12em]
                                 "
                                 style={{
                                   fontFamily:
                                     "var(--font-dm-mono)",
                                 }}
                               >
-                                {child.title}
+                                <span className="text-[9px] text-white/25">
+                                  {String(
+                                    index + 1
+                                  ).padStart(2, "0")}
+                                </span>
+
+                                <span>
+                                  {child.title}
+                                </span>
                               </Link>
                             )
                           )}
@@ -727,8 +789,6 @@ export default function Navbar() {
                         )}
                     </div>
 
-                    {/* Parent page */}
-
                     {menuItems.find(
                       (item) =>
                         item.title === activeItem
@@ -765,7 +825,6 @@ export default function Navbar() {
                         }}
                       >
                         Explore {activeItem}
-
                         <span>↗</span>
                       </Link>
                     )}
@@ -824,23 +883,34 @@ export default function Navbar() {
           <div
             className="
               pointer-events-none
-              absolute
-              bottom-7
-              left-[clamp(1.5rem,6vw,6rem)]
-              right-[clamp(1.5rem,6vw,6rem)]
-              hidden
+              mt-10
+              flex
               items-end
               justify-between
-              sm:flex
+              border-t
+              border-white/10
+              pt-5
+              sm:mt-12
+              sm:pt-6
+              lg:absolute
+              lg:bottom-7
+              lg:left-[clamp(1.5rem,6vw,6rem)]
+              lg:right-[clamp(1.5rem,6vw,6rem)]
+              lg:mt-0
+              lg:border-t-0
+              lg:pt-0
             "
           >
             <p
               className="
-                text-[10px]
+                text-[8px]
                 font-bold
                 uppercase
-                tracking-[0.18em]
-                text-white/50
+                leading-relaxed
+                tracking-[0.14em]
+                text-white/40
+                sm:text-[10px]
+                sm:tracking-[0.18em]
               "
               style={{
                 fontFamily:
@@ -854,10 +924,12 @@ export default function Navbar() {
 
             <p
               className="
-                text-[10px]
+                text-[8px]
                 font-bold
-                tracking-[0.18em]
-                text-white/50
+                tracking-[0.14em]
+                text-white/40
+                sm:text-[10px]
+                sm:tracking-[0.18em]
               "
               style={{
                 fontFamily:
