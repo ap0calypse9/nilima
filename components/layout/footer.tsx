@@ -138,7 +138,7 @@ export default function Footer() {
               className="text-[9px] uppercase tracking-[0.16em] text-white/40"
               style={{ fontFamily: "var(--font-dm-mono)" }}
             >
-              © 2026 Nilima Design Associates
+             Copyright © 2026 Nilima Design Associates. All Rights Reserved.
             </p>
 
             <p

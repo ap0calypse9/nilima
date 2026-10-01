@@ -27,11 +27,11 @@ export default function Home() {
         <IsoStripe/>
         <TrustedBy/>
         <Identity />
-        <Stats/>
         <Capabilities />
         <Projects />
         <FeaturedVideo/>
         <Expertise />
+        <Stats/>
         <Trust />
         <Location/>
         <SurveyButton />
