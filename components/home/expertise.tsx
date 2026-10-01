@@ -43,6 +43,14 @@ const expertise = [
     image: "/images/expertise/vertical.jpeg",
     accent: "blueprint",
   },
+  {
+  number: "06",
+  title: "Rebound Hammer Test",
+  description:
+    "Non-destructive testing to assess the surface hardness and approximate compressive strength of concrete in existing structural elements.",
+  image: "/images/expertise/rebound-hammer.jpeg",
+  accent: "green",
+},
 ] as const;
 
 export default function Expertise() {

@@ -5,6 +5,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useRef } from "react";
 import Image from "next/image";
+import Link from "next/link";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -102,7 +103,10 @@ export default function Identity() {
       }}
     >
       <div className="page-grid">
-        {/* Section label */}
+        {/* =====================================================
+            SECTION LABEL
+        ===================================================== */}
+
         <div className="col-span-12 mb-20 md:mb-28">
           <div className="flex items-center gap-4">
             <span
@@ -127,7 +131,10 @@ export default function Identity() {
           </div>
         </div>
 
-        {/* Main statement */}
+        {/* =====================================================
+            MAIN STATEMENT
+        ===================================================== */}
+
         <div className="col-span-12 md:col-span-9">
           <h2
             ref={statement}
@@ -142,15 +149,20 @@ export default function Identity() {
           </h2>
         </div>
 
-        {/* Structural model image — larger, floating in the left gap below the headline */}
+        {/* =====================================================
+            STRUCTURAL MODEL IMAGE
+        ===================================================== */}
+
         <div
           ref={modelImage}
           className="relative col-span-12 mt-20 flex items-center justify-center md:col-span-6 md:mt-32 md:justify-start"
         >
-          {/* Blueprint grid backdrop, gives the transparent model something to sit on */}
+          {/* Blueprint grid backdrop */}
+
           <div className="grid-backdrop pointer-events-none absolute left-1/2 top-1/2 h-[520px] w-[520px] -translate-x-1/2 -translate-y-1/2 md:left-[48%]" />
 
-          {/* Soft ambient glow behind the model */}
+          {/* Ambient glow */}
+
           <div className="glow-pulse pointer-events-none absolute left-1/2 top-1/2 h-96 w-96 -translate-x-1/2 -translate-y-1/2 rounded-full" />
 
           <div className="model-float relative aspect-square w-full max-w-xl">
@@ -163,12 +175,16 @@ export default function Identity() {
               priority
             />
 
-            {/* Scanning line sweep, constrained to the model itself */}
+            {/* Scanning line */}
+
             <div className="scan-line pointer-events-none absolute inset-x-[8%] h-px" />
           </div>
         </div>
 
-        {/* Description */}
+        {/* =====================================================
+            DESCRIPTION
+        ===================================================== */}
+
         <div
           ref={description}
           className="col-span-12 mt-20 md:col-span-5 md:col-start-8 md:mt-32"
@@ -195,13 +211,20 @@ export default function Identity() {
           </p>
         </div>
 
-        {/* Capabilities */}
+        {/* =====================================================
+            CORE CAPABILITIES
+        ===================================================== */}
+
         <div
           ref={capabilities}
           className="col-span-12 mt-32 border-t pt-8 md:mt-48"
-          style={{ borderColor: "rgba(23,23,23,0.12)" }}
+          style={{
+            borderColor: "rgba(23,23,23,0.12)",
+          }}
         >
           <div className="grid grid-cols-12 gap-y-10">
+            {/* Label */}
+
             <div className="col-span-12 md:col-span-3">
               <p
                 className="text-[10px] uppercase tracking-[0.2em]"
@@ -214,27 +237,60 @@ export default function Identity() {
               </p>
             </div>
 
+            {/* Capability links */}
+
             <div className="col-span-12 md:col-span-9">
               <div
                 className="grid grid-cols-1 border-t md:grid-cols-2"
-                style={{ borderColor: "rgba(23,23,23,0.12)" }}
+                style={{
+                  borderColor: "rgba(23,23,23,0.12)",
+                }}
               >
                 {[
-                  "Structural Design",
-                  "Foundation Engineering",
-                  "Soil Investigation",
-                  "Pile Testing",
-                  "Land Survey",
-                  "Non-Destructive Testing",
-                  "Structural Audit",
-                  "Rehabilitation",
+                  {
+                    title: "Structural Design",
+                    href: "/capabilities#structural-engineering",
+                  },
+                  {
+                    title: "Foundation Engineering",
+                    href: "/capabilities#foundation-engineering",
+                  },
+                  {
+                    title: "Soil Investigation",
+                    href: "/capabilities#soil-investigation",
+                  },
+                  {
+                    title: "Pile Testing",
+                    href: "/capabilities#pile-testing",
+                  },
+                  {
+                    title: "Land Survey",
+                    href: "/capabilities#land-survey",
+                  },
+                  {
+                    title: "Non-Destructive Testing",
+                    href: "/capabilities#non-destructive-testing",
+                  },
+                  {
+                    title: "Structural Audit",
+                    href: "/capabilities#structural-audit",
+                  },
+                  {
+                    title: "Rehabilitation",
+                    href: "/capabilities#rehabilitation",
+                  },
                 ].map((item, index) => (
-                  <div
-                    key={item}
-                    className="group flex items-center justify-between border-b py-5"
-                    style={{ borderColor: "rgba(23,23,23,0.12)" }}
+                  <Link
+                    key={item.title}
+                    href={item.href}
+                    className="group flex items-center justify-between border-b py-5 transition-colors duration-300 hover:bg-black/[0.025]"
+                    style={{
+                      borderColor: "rgba(23,23,23,0.12)",
+                    }}
                   >
                     <div className="flex items-center gap-5">
+                      {/* Number */}
+
                       <span
                         className="text-[10px]"
                         style={{
@@ -245,30 +301,39 @@ export default function Identity() {
                         {String(index + 1).padStart(2, "0")}
                       </span>
 
+                      {/* Capability name */}
+
                       <span
                         className="text-lg tracking-[-0.02em] transition-transform duration-300 group-hover:translate-x-2 md:text-xl"
-                        style={{ color: "#171717" }}
+                        style={{
+                          color: "#171717",
+                        }}
                       >
-                        {item}
+                        {item.title}
                       </span>
                     </div>
 
+                    {/* Arrow */}
+
                     <span
-                      className="text-sm opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+                      className="translate-x-[-8px] text-sm opacity-0 transition-all duration-300 group-hover:translate-x-0 group-hover:opacity-100"
                       style={{
                         color: "#2f4a3c",
                       }}
                     >
                       ↗
                     </span>
-                  </div>
+                  </Link>
                 ))}
               </div>
             </div>
           </div>
         </div>
 
-        {/* Closing statement */}
+        {/* =====================================================
+            CLOSING STATEMENT
+        ===================================================== */}
+
         <div className="col-span-12 mt-32 md:mt-48">
           <p
             className="max-w-5xl text-[clamp(2.5rem,5vw,5.5rem)] leading-[0.95]"
@@ -279,46 +344,64 @@ export default function Identity() {
           >
             Precision is not an outcome.
             <br />
-            <span style={{ color: "#2f4a3c" }}>It is the foundation.</span>
+            <span style={{ color: "#2f4a3c" }}>
+              It is the foundation.
+            </span>
           </p>
         </div>
       </div>
+
+      {/* =====================================================
+          ANIMATIONS
+      ===================================================== */}
 
       <style jsx>{`
         @keyframes model-float {
           0% {
             transform: translate(0px, 0px) rotate(-0.8deg);
           }
+
           25% {
             transform: translate(4px, -10px) rotate(0.4deg);
           }
+
           50% {
             transform: translate(0px, -20px) rotate(0.8deg);
           }
+
           75% {
             transform: translate(-4px, -10px) rotate(-0.4deg);
           }
+
           100% {
             transform: translate(0px, 0px) rotate(-0.8deg);
           }
         }
+
         .model-float {
-          animation: model-float 9s cubic-bezier(0.45, 0.05, 0.55, 0.95)
-              infinite,
+          animation:
+            model-float 9s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite,
             model-shadow 9s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite;
         }
+
         @keyframes model-shadow {
           0%,
           100% {
-            filter: drop-shadow(0 14px 16px rgba(23, 23, 23, 0.16));
+            filter: drop-shadow(
+              0 14px 16px rgba(23, 23, 23, 0.16)
+            );
           }
+
           50% {
-            filter: drop-shadow(0 34px 30px rgba(23, 23, 23, 0.1));
+            filter: drop-shadow(
+              0 34px 30px rgba(23, 23, 23, 0.1)
+            );
           }
         }
 
         .grid-backdrop {
-          background-image: linear-gradient(
+          background-image:
+            linear-gradient(
               rgba(41, 171, 226, 0.14) 1px,
               transparent 1px
             ),
@@ -327,12 +410,15 @@ export default function Identity() {
               rgba(41, 171, 226, 0.14) 1px,
               transparent 1px
             );
+
           background-size: 28px 28px;
+
           mask-image: radial-gradient(
             circle at center,
             black 0%,
             transparent 72%
           );
+
           -webkit-mask-image: radial-gradient(
             circle at center,
             black 0%,
@@ -346,18 +432,22 @@ export default function Identity() {
             opacity: 0.35;
             transform: translate(-50%, -50%) scale(0.94);
           }
+
           50% {
             opacity: 0.6;
             transform: translate(-50%, -50%) scale(1.06);
           }
         }
+
         .glow-pulse {
           background: radial-gradient(
             circle,
             rgba(141, 198, 63, 0.35),
             transparent 70%
           );
-          animation: glow-pulse 9s cubic-bezier(0.45, 0.05, 0.55, 0.95)
+
+          animation: glow-pulse 9s
+            cubic-bezier(0.45, 0.05, 0.55, 0.95)
             infinite;
         }
 
@@ -366,17 +456,21 @@ export default function Identity() {
             top: 4%;
             opacity: 0;
           }
+
           12% {
             opacity: 1;
           }
+
           88% {
             opacity: 1;
           }
+
           100% {
             top: 96%;
             opacity: 0;
           }
         }
+
         .scan-line {
           background: linear-gradient(
             90deg,
@@ -384,7 +478,9 @@ export default function Identity() {
             rgba(41, 171, 226, 0.9),
             transparent
           );
+
           box-shadow: 0 0 10px rgba(41, 171, 226, 0.7);
+
           animation: scan 3.6s ease-in-out infinite;
         }
 

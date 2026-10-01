@@ -2,56 +2,82 @@
 
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 
 const capabilities = [
   {
     title: "Structural",
     subtitle: "Design & Engineering",
+    href: "/capabilities#structural-engineering",
     description:
       "Structural design, analysis and engineering solutions for residential, commercial, industrial and infrastructure projects.",
     tags: ["ETABS", "STAAD.PRO", "REVIT"],
-    scope: ["Concept to detailed design", "Seismic & wind analysis", "IS 456 / IS 1893 compliance"],
+    scope: [
+      "Concept to detailed design",
+      "Seismic & wind analysis",
+      "IS 456 / IS 1893 compliance",
+    ],
     image: "/images/capabilities/structural.jpeg",
     accent: "blueprint",
   },
   {
     title: "Foundation",
     subtitle: "Soil & Deep Foundations",
+    href: "/capabilities#foundation-engineering",
     description:
       "Soil investigation, foundation engineering and pile testing for safe and reliable structural systems.",
     tags: ["SOIL TESTING", "DLT", "PIT", "CAPWAP"],
-    scope: ["Geotechnical investigation", "Pile & raft design", "Load & integrity testing"],
+    scope: [
+      "Geotechnical investigation",
+      "Pile & raft design",
+      "Load & integrity testing",
+    ],
     image: "/images/capabilities/foundation.jpeg",
     accent: "green",
   },
   {
     title: "Survey",
     subtitle: "Land & Topography",
+    href: "/capabilities#land-survey",
     description:
       "Land and topographical surveying for accurate planning, engineering and project execution.",
     tags: ["LAND SURVEY", "TOPOGRAPHY", "MAPPING"],
-    scope: ["Total station survey", "Contour & topo mapping", "Boundary verification"],
+    scope: [
+      "Total station survey",
+      "Contour & topo mapping",
+      "Boundary verification",
+    ],
     image: "/images/capabilities/survey.jpeg",
     accent: "blueprint",
   },
   {
     title: "Testing",
     subtitle: "NDT & Structural Health",
+    href: "/capabilities#non-destructive-testing",
     description:
       "Non-destructive testing, structural audits and building health assessments for existing structures.",
     tags: ["NDT", "AUDIT", "CRACK ANALYSIS"],
-    scope: ["Rebound hammer & UPV testing", "Distress & crack mapping", "Condition assessment reports"],
+    scope: [
+      "Rebound hammer & UPV testing",
+      "Distress & crack mapping",
+      "Condition assessment reports",
+    ],
     image: "/images/capabilities/test.jpeg",
     accent: "green",
   },
   {
     title: "Rehabilitation",
     subtitle: "Repair & Retrofitting",
+    href: "/capabilities#rehabilitation",
     description:
       "Structural rehabilitation, retrofitting and repair strategies designed to extend the service life of structures.",
     tags: ["RETROFIT", "REPAIR", "STABILITY"],
-    scope: ["Jacketing & strengthening", "Crack injection & repair", "Seismic retrofit design"],
-    image: "/images/capabilities/rehab.jpeg",
+    scope: [
+      "Jacketing & strengthening",
+      "Crack injection & repair",
+      "Seismic retrofit design",
+    ],
+    image: "/images/capabilities/reha.jpeg",
     accent: "blueprint",
   },
 ];
@@ -181,9 +207,8 @@ export default function Capabilities() {
           {/* Technical spec panel with a hatch accent band behind it */}
           <div className="relative md:col-span-5">
             <div
-              className={`pointer-events-none absolute -inset-x-6 -inset-y-6 -z-10 hidden md:block ${
-                current.accent === "blueprint" ? "hatch-blueprint" : "hatch-green"
-              }`}
+              className={`pointer-events-none absolute -inset-x-6 -inset-y-6 -z-10 hidden md:block ${current.accent === "blueprint" ? "hatch-blueprint" : "hatch-green"
+                }`}
             />
 
             <p
@@ -219,6 +244,18 @@ export default function Capabilities() {
 
             {/* Tool tags */}
             <div className="mt-6 flex flex-wrap gap-2">
+              <Link
+                href={current.href}
+                className="mt-8 inline-flex items-center gap-3 border-b-2 pb-2 text-xs font-bold uppercase tracking-[0.14em] transition-all duration-300 hover:gap-5"
+                style={{
+                  fontFamily: "var(--font-dm-mono)",
+                  color: accentVar,
+                  borderColor: accentVar,
+                }}
+              >
+                Explore {current.title}
+                <span aria-hidden="true">→</span>
+              </Link>
               {current.tags.map((tag) => (
                 <span
                   key={tag}
