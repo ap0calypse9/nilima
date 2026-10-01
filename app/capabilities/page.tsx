@@ -128,7 +128,7 @@ const capabilities: Capability[] = [
       "Seismic retrofit design",
     ],
     accent: "green",
-    image: "/images/capabilities/rehab.jpeg",
+    image: "/images/capabilities/reha.jpeg",
   },
 ];
 
