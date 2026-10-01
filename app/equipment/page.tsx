@@ -97,7 +97,7 @@ const equipment: Equipment[] = [
       "Field surveying",
       "Dimensional verification",
     ],
-    image: "/images/equipment/distance-meter.jpeg",
+    image: "/images/equipment/distancee-meter.jpeg",
   },
 
   {
