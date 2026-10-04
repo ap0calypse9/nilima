@@ -116,7 +116,6 @@ export default function Identity() {
                 color: "#2f4a3c",
               }}
             >
-              01
             </span>
 
             <span
@@ -126,7 +125,6 @@ export default function Identity() {
                 color: "#6f6a5f",
               }}
             >
-              Who We Are
             </span>
           </div>
         </div>

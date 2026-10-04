@@ -15,7 +15,7 @@ export default function IsoStripe() {
             </span>
 
             <p className="text-sm text-[var(--ink)]">
-              <span className="font-semibold">ISO Certified</span>{" "}
+              <span className="font-semibold">ISO 9001: 2015 Certified</span>{" "}
               <span className="text-[var(--graphite)]">
                 — quality management systems verified for structural and
                 civil engineering practice.

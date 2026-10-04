@@ -121,10 +121,7 @@ export default function Capabilities() {
         </div>
 
         <div className="col-span-12 mt-6 md:col-span-4 md:col-start-9 md:mt-3">
-          <p className="text-base leading-relaxed text-[var(--graphite)]">
-            Five disciplines, one continuous practice — from first
-            calculation to final inspection.
-          </p>
+        
         </div>
 
         {/* Discipline index */}
