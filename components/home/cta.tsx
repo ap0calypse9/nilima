@@ -14,7 +14,6 @@ export default function CTA() {
                 fontFamily: "var(--font-dm-mono)",
               }}
             >
-              06
             </span>
 
             <span
