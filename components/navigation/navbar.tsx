@@ -227,7 +227,7 @@ export default function Navbar() {
             "
           >
             <Image
-              src="/images/logo.png"
+              src="/images/nda.png"
               alt="Nilima Design Associates"
               fill
               priority
