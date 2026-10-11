@@ -16,6 +16,7 @@ import IsoStripe from "@/components/home/iso";
 import Faq from "@/components/home/faq";
 import Stats from "@/components/home/stat";
 import SurveyButton from "@/components/contact/survey-button";
+import Comments from "@/components/home/comments";
 
 export default function Home() {
   return (
@@ -33,6 +34,7 @@ export default function Home() {
         <Expertise />
         <Stats/>
         <Trust />
+        <Comments/>
         <Location/>
         <SurveyButton />
         <FloatingContact />
