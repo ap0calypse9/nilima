@@ -778,6 +778,109 @@ const insights = [
       }
     ]
   },
+  {
+  slug: "vertical-electrical-sounding-ves-survey-subsurface-investigation",
+  title: "Vertical Electrical Sounding (VES) Survey for Subsurface Investigation",
+  subtitle:
+    "Geophysical Investigation for Preliminary Groundwater Exploration and Subsurface Assessment",
+  category: "Geophysical Investigation — VES Survey",
+  date: "2026",
+  excerpt:
+    "Explore how Vertical Electrical Sounding (VES) uses electrical resistivity measurements to investigate probable subsurface layers, support preliminary groundwater exploration, and guide further site investigations.",
+  standard: "Electrical Resistivity Method — Schlumberger Electrode Configuration",
+  sections: [
+    {
+      heading: "Project Overview",
+      paragraphs: [
+        "Vertical Electrical Sounding (VES) is a geophysical investigation technique used to evaluate variations in the electrical resistivity of subsurface materials with depth. It helps engineers and geoscientists understand probable subsurface layering and identify zones that may be suitable for further groundwater exploration or geological investigation.",
+        "Nilima Design Associates provides geophysical survey services to support preliminary subsurface assessment for infrastructure development, site investigation, and groundwater-related studies.",
+      ],
+    },
+    {
+      heading: "Project Objectives",
+      paragraphs: [
+        "The primary objectives of a VES survey are to evaluate subsurface electrical resistivity variations, interpret probable geological formations, identify potential water-bearing formations for further investigation, and support preliminary groundwater exploration and site characterization.",
+        "The interpreted findings can also provide technical inputs for planning subsequent borehole investigations.",
+      ],
+      list: [
+        "Evaluate variations in subsurface electrical resistivity.",
+        "Interpret probable geological formations and subsurface layers.",
+        "Identify potential water-bearing formations for further investigation.",
+        "Support preliminary groundwater exploration and site characterization.",
+        "Provide technical inputs for planning subsequent borehole investigations.",
+      ],
+    },
+    {
+      heading: "Survey Methodology",
+      paragraphs: [
+        "VES surveys are generally conducted using the electrical resistivity method, commonly employing a Schlumberger electrode configuration where site conditions permit.",
+      ],
+      list: [
+        "Site Reconnaissance: Inspect the survey location to identify suitable measurement positions, surface conditions, access constraints, and potential sources of electrical interference.",
+        "Electrode Arrangement: Install current and potential electrodes according to the selected survey configuration. In the Schlumberger arrangement, current-electrode spacing is progressively increased to investigate deeper subsurface conditions.",
+        "Field Data Acquisition: Introduce electrical current into the ground and measure the resulting potential difference. Use the observations and electrode geometry to calculate apparent resistivity.",
+        "Data Processing and Interpretation: Analyze the apparent-resistivity data using appropriate interpretation techniques or inversion software to estimate a subsurface resistivity model.",
+        "Technical Reporting: Present the interpreted results with relevant field observations, resistivity curves, interpreted subsurface layers, and recommendations appropriate to the survey objectives and available data.",
+      ],
+    },
+    {
+      heading: "Engineering Significance",
+      paragraphs: [
+        "VES investigation can provide useful preliminary information for groundwater exploration, geological and hydrogeological assessment, understanding variations in subsurface strata, and planning follow-up boreholes and other ground investigations.",
+        "It can also support site investigation for selected infrastructure and development projects.",
+        "Electrical resistivity is influenced by several factors, including soil and rock type, moisture content, groundwater salinity, porosity, and clay content. Resistivity interpretations should therefore be correlated with local geological information and borehole data wherever available.",
+      ],
+      list: [
+        "Preliminary groundwater exploration and identification of potential aquifer zones.",
+        "Preliminary geological and hydrogeological assessment.",
+        "Assessment of variations in subsurface strata.",
+        "Planning follow-up boreholes and additional ground investigations.",
+        "Supporting site investigation for selected infrastructure and development projects.",
+      ],
+    },
+    {
+      heading: "Interpretation and Technical Limitations",
+      paragraphs: [
+        "VES results represent an interpretation of subsurface electrical properties rather than a direct measurement of soil classification or groundwater yield.",
+        "A low-resistivity zone does not necessarily indicate a productive aquifer, as clay-rich layers or saline groundwater may also exhibit low resistivity. Similarly, a resistivity contrast alone cannot conclusively establish the bearing capacity or engineering properties of soil.",
+        "Where required, findings should be verified through exploratory drilling, borehole logging, groundwater-level observations, pumping tests, or appropriate geotechnical investigations.",
+      ],
+    },
+    {
+      heading: "Survey Deliverables",
+      paragraphs: [
+        "Depending on the agreed scope of work, a VES survey report may include the following information:",
+      ],
+      list: [
+        "Site location and survey details.",
+        "Field observations and electrode configuration.",
+        "Apparent-resistivity data and sounding curves.",
+        "Interpreted resistivity model and probable subsurface layers.",
+        "Preliminary identification of potential groundwater-bearing zones, where relevant.",
+        "Technical conclusions, limitations, and recommendations for further investigation.",
+      ],
+    },
+    {
+      heading: "Conclusion",
+      paragraphs: [
+        "Vertical Electrical Sounding is a valuable geophysical tool for preliminary subsurface assessment when planned, executed, and interpreted appropriately. It can help guide further investigation and reduce uncertainty during early-stage site characterization.",
+        "Nilima Design Associates offers survey and engineering investigation services with an emphasis on systematic fieldwork, technical interpretation, and practical reporting to support informed project decisions.",
+      ],
+    },
+    {
+      heading: "Looking for VES Survey Services?",
+      paragraphs: [
+        "Contact Nilima Design Associates for project-specific survey planning, field investigation, and technical reporting.",
+      ],
+    },
+    {
+      heading: "Technical Note",
+      paragraphs: [
+        "This is a general, methodology-based case study prepared for educational and service-information purposes. It does not represent a specific completed project or verified field result. Actual project findings should be published only when supported by genuine survey records.",
+      ],
+    },
+  ],
+},
 ];
 
 
