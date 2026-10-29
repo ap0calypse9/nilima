@@ -112,6 +112,17 @@ const projects: Project[] = [
       "/images/projects/shopping-mall/3.jpeg",
     ],
   },
+  {
+  slug: "ves-survey",
+  title: "Vertical Electrical Sounding (VES) Survey",
+  category: "Infrastructure",
+  location: "Dewa road Barabanki",
+  images: [
+    "/images/projects/ves-survey/3.jpeg",
+    "/images/projects/ves-survey/2.jpeg",
+    
+  ],
+},
 ];
 
 const filters: { label: string; value: Category | "All" }[] = [
