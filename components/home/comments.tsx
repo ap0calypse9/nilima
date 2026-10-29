@@ -11,9 +11,12 @@ const PAGE_SIZE = 5;
 
 type Comment = { time: string; ts: number | null; name: string; text: string; pending?: boolean };
 
-const colors = ['#6366f1', '#ec4899', '#f59e0b', '#10b981', '#3b82f6', '#8b5cf6', '#ef4444'];
+// Brand colours only: aqua, green and their darker shades
+const colors = ['var(--blueprint)', 'var(--green)', '#1c7ea6', '#4d8a1f'];
 const colorFor = (s: string) =>
   colors[[...s].reduce((a, c) => a + c.charCodeAt(0), 0) % colors.length];
+
+const mono = { fontFamily: 'var(--font-dm-mono)' } as const;
 
 // gviz returns dates as "Date(2026,9,12,14,3,22)" (month is 0-indexed)
 function parseSheetDate(v: unknown): number | null {
@@ -36,6 +39,9 @@ function timeAgo(ts: number | null, fallback: string) {
   if (day < 30) return `${day} day${day > 1 ? 's' : ''} ago`;
   return new Date(ts).toLocaleDateString(undefined, { day: 'numeric', month: 'short', year: 'numeric' });
 }
+
+const inputClass =
+  'w-full border border-[var(--line)] bg-white px-3 py-2.5 text-sm text-[var(--ink)] outline-none transition-colors focus:border-[var(--blueprint)]';
 
 export default function Comments() {
   const [list, setList] = useState<Comment[]>([]);
@@ -129,164 +135,214 @@ export default function Comments() {
   const previewName = name.trim() || 'Anonymous';
 
   return (
-    <section className="cm-wrap">
-      <header className="cm-head">
-        <h3 className="cm-title">Comments</h3>
-        {all.length > 0 && <span className="cm-count">{all.length}</span>}
-      </header>
+    <section className="relative bg-[var(--paper)] py-24 text-[var(--ink)] md:py-32">
+      <div className="page-grid">
+        {/* Header */}
+        <div className="col-span-12 flex items-end gap-5">
+          <h3 className="text-[clamp(2.25rem,5vw,4rem)] font-semibold leading-[0.95] tracking-[-0.03em]">
+            Comments.
+          </h3>
+          {all.length > 0 && (
+            <span
+              className="mb-2 px-2.5 py-1 text-xs font-bold text-white"
+              style={{ ...mono, backgroundColor: 'var(--blueprint)' }}
+            >
+              {String(all.length).padStart(2, '0')}
+            </span>
+          )}
+        </div>
 
-      <form onSubmit={submit} className="cm-form">
-        <div className="cm-form-top">
-          <div className="cm-avatar" style={{ background: colorFor(previewName) }}>
-            {previewName.charAt(0).toUpperCase()}
+        <div className="col-span-12 mt-10">
+          <div className="dimension-line" />
+        </div>
+
+        <div className="col-span-12 mt-14 grid grid-cols-1 gap-14 md:grid-cols-12">
+          {/* Form */}
+          <div className="relative md:col-span-5">
+            <div className="pointer-events-none absolute -inset-x-5 -inset-y-5 -z-10 hidden md:block hatch-blueprint" />
+
+            <form onSubmit={submit} className="relative space-y-5 border border-[var(--line)] bg-white p-6">
+              {[
+                'left-2 top-2 border-l border-t',
+                'right-2 top-2 border-r border-t',
+                'left-2 bottom-2 border-l border-b',
+                'right-2 bottom-2 border-r border-b',
+              ].map((position) => (
+                <span
+                  key={position}
+                  className={`pointer-events-none absolute h-3 w-3 ${position}`}
+                  style={{ borderColor: 'var(--blueprint)' }}
+                />
+              ))}
+
+              <span className="block h-[3px] w-10" style={{ backgroundColor: 'var(--green)' }} />
+
+              <div>
+                <label
+                  htmlFor="cm-name"
+                  className="block text-xs uppercase tracking-wide text-[var(--graphite)]"
+                  style={mono}
+                >
+                  Name
+                </label>
+                <div className="mt-2 flex items-center gap-3">
+                  <div
+                    className="flex h-10 w-10 shrink-0 items-center justify-center text-sm font-bold text-white"
+                    style={{ ...mono, backgroundColor: colorFor(previewName) }}
+                  >
+                    {previewName.charAt(0).toUpperCase()}
+                  </div>
+                  <input
+                    id="cm-name"
+                    className={inputClass}
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    placeholder="Your name"
+                    maxLength={40}
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label
+                  htmlFor="cm-text"
+                  className="block text-xs uppercase tracking-wide text-[var(--graphite)]"
+                  style={mono}
+                >
+                  Comment
+                </label>
+                <textarea
+                  id="cm-text"
+                  className={`${inputClass} mt-2 resize-none`}
+                  value={text}
+                  onChange={(e) => setText(e.target.value)}
+                  onKeyDown={(e) => {
+                    if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') submit();
+                  }}
+                  placeholder="Share your experience working with us"
+                  rows={4}
+                  maxLength={500}
+                />
+              </div>
+
+              <input
+                value={trap}
+                onChange={(e) => setTrap(e.target.value)}
+                tabIndex={-1}
+                autoComplete="off"
+                aria-hidden="true"
+                style={{ position: 'absolute', left: '-9999px' }}
+              />
+
+              <div className="flex items-center justify-between gap-4">
+                <small className="text-[11px] text-[var(--graphite)]" style={mono}>
+                  {text.length}/500 · Ctrl+Enter
+                </small>
+                <button
+                  className="inline-flex items-center px-6 py-3 text-sm font-semibold text-white transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-40"
+                  style={{ backgroundColor: 'var(--blueprint)' }}
+                  disabled={!text.trim() || posting}
+                >
+                  {posting ? 'Posting…' : 'Post comment'}
+                </button>
+              </div>
+            </form>
           </div>
-          <input
-            className="cm-input cm-name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            placeholder="Your name"
-            maxLength={40}
-          />
-        </div>
-        <textarea
-          className="cm-input"
-          value={text}
-          onChange={(e) => setText(e.target.value)}
-          onKeyDown={(e) => {
-            if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') submit();
-          }}
-          placeholder="Share your thoughts..."
-          rows={3}
-          maxLength={500}
-        />
-        <input
-          value={trap}
-          onChange={(e) => setTrap(e.target.value)}
-          tabIndex={-1}
-          autoComplete="off"
-          aria-hidden="true"
-          style={{ position: 'absolute', left: '-9999px' }}
-        />
-        <div className="cm-row">
-          <small className="cm-muted">
-            {text.length}/500 · Ctrl+Enter to post
-          </small>
-          <button className="cm-btn" disabled={!text.trim() || posting}>
-            {posting ? 'Posting...' : 'Post comment'}
-          </button>
-        </div>
-      </form>
 
-      {loading && (
-        <div className="cm-list">
-          {[0, 1, 2].map((i) => (
-            <div key={i} className="cm-card cm-skel">
-              <div className="cm-avatar cm-skel-block" />
-              <div className="cm-body">
-                <div className="cm-skel-block cm-skel-line" style={{ width: '30%' }} />
-                <div className="cm-skel-block cm-skel-line" style={{ width: '80%' }} />
+          {/* List */}
+          <div className="md:col-span-7">
+            {loading && (
+              <div>
+                {[0, 1, 2].map((i) => (
+                  <div key={i} className="flex gap-4 border-b border-[var(--line)] py-6">
+                    <div className="cm-skel h-10 w-10 shrink-0" />
+                    <div className="flex-1">
+                      <div className="cm-skel h-3" style={{ width: '30%' }} />
+                      <div className="cm-skel mt-3 h-3" style={{ width: '80%' }} />
+                    </div>
+                  </div>
+                ))}
               </div>
+            )}
+
+            {error && (
+              <p className="text-sm text-[var(--graphite)]" style={mono}>
+                {error}
+              </p>
+            )}
+
+            {!loading && !error && all.length === 0 && (
+              <p className="text-sm italic text-[var(--graphite)]">
+                No comments yet — be the first to share your experience.
+              </p>
+            )}
+
+            <div>
+              {keyed.map(({ c, key }) => (
+                <article
+                  key={key}
+                  className={`cm-in flex gap-4 border-b border-[var(--line)] py-6 first:pt-0 ${
+                    c.pending ? 'opacity-60' : ''
+                  }`}
+                >
+                  <div
+                    className="flex h-10 w-10 shrink-0 items-center justify-center text-sm font-bold text-white"
+                    style={{ ...mono, backgroundColor: colorFor(c.name) }}
+                  >
+                    {c.name.charAt(0).toUpperCase()}
+                  </div>
+                  <div className="min-w-0 flex-1">
+                    <div className="flex flex-wrap items-baseline justify-between gap-2">
+                      <p className="text-sm font-semibold text-[var(--ink)]">{c.name}</p>
+                      <p className="text-[11px] text-[var(--graphite)]" style={mono}>
+                        {c.pending ? 'Posting…' : timeAgo(c.ts, c.time)}
+                      </p>
+                    </div>
+                    <p className="mt-2 whitespace-pre-wrap text-sm leading-6 text-[var(--graphite)] [overflow-wrap:anywhere]">
+                      {c.text}
+                    </p>
+                  </div>
+                </article>
+              ))}
             </div>
-          ))}
-        </div>
-      )}
 
-      {error && <p className="cm-error">{error}</p>}
-
-      {!loading && !error && all.length === 0 && (
-        <div className="cm-empty">
-          <div className="cm-empty-icon">💬</div>
-          <p>No comments yet. Start the conversation!</p>
-        </div>
-      )}
-
-      <div className="cm-list">
-        {keyed.map(({ c, key }) => (
-          <article key={key} className={`cm-card ${c.pending ? 'cm-pending' : ''}`}>
-            <div className="cm-avatar" style={{ background: colorFor(c.name) }}>
-              {c.name.charAt(0).toUpperCase()}
-            </div>
-            <div className="cm-body">
-              <div className="cm-meta">
-                <b>{c.name}</b>
-                <span className="cm-muted">
-                  {c.pending ? 'Posting...' : timeAgo(c.ts, c.time)}
-                </span>
+            {(remaining > 0 || visible > PAGE_SIZE) && (
+              <div className="mt-8">
+                {remaining > 0 && (
+                  <button
+                    type="button"
+                    className="border-b border-[var(--ink)] pb-1 text-sm font-medium text-[var(--ink)] transition-colors hover:border-[var(--blueprint)] hover:text-[var(--blueprint)]"
+                    onClick={() => setVisible((v) => v + PAGE_SIZE)}
+                  >
+                    Show more ({remaining})
+                  </button>
+                )}
+                {visible > PAGE_SIZE && remaining <= 0 && (
+                  <button
+                    type="button"
+                    className="border-b border-[var(--ink)] pb-1 text-sm font-medium text-[var(--ink)] transition-colors hover:border-[var(--blueprint)] hover:text-[var(--blueprint)]"
+                    onClick={() => setVisible(PAGE_SIZE)}
+                  >
+                    Show less
+                  </button>
+                )}
               </div>
-              <p>{c.text}</p>
-            </div>
-          </article>
-        ))}
+            )}
+          </div>
+        </div>
       </div>
 
-      {(remaining > 0 || visible > PAGE_SIZE) && (
-        <div className="cm-more">
-          {remaining > 0 && (
-            <button type="button" className="cm-ghost" onClick={() => setVisible((v) => v + PAGE_SIZE)}>
-              Show more ({remaining})
-            </button>
-          )}
-          {visible > PAGE_SIZE && remaining <= 0 && (
-            <button type="button" className="cm-ghost" onClick={() => setVisible(PAGE_SIZE)}>
-              Show less
-            </button>
-          )}
-        </div>
-      )}
-
+      {/* Plain <style> (not styled-jsx) to avoid the Turbopack issue */}
       <style>{`
-        .cm-wrap { --cm-accent: #6366f1; --cm-line: rgba(128,128,128,.28); --cm-soft: rgba(128,128,128,.08);
-          max-width: 680px; margin: 48px auto; padding: 0 16px; font-family: inherit; }
-        .cm-head { display: flex; align-items: center; gap: 10px; margin-bottom: 18px; }
-        .cm-title { margin: 0; font-size: 1.4rem; }
-        .cm-count { background: var(--cm-accent); color: #fff; font-size: .78rem; font-weight: 700;
-          padding: 2px 10px; border-radius: 999px; }
-
-        .cm-form { position: relative; display: flex; flex-direction: column; gap: 10px; padding: 16px;
-          border: 1px solid var(--cm-line); border-radius: 16px; background: var(--cm-soft); margin-bottom: 28px; }
-        .cm-form-top { display: flex; align-items: center; gap: 10px; }
-        .cm-input { width: 100%; box-sizing: border-box; padding: 10px 14px; border-radius: 12px;
-          border: 1px solid var(--cm-line); background: transparent; color: inherit; font: inherit;
-          resize: vertical; transition: border-color .15s, box-shadow .15s; }
-        .cm-input:focus { outline: none; border-color: var(--cm-accent); box-shadow: 0 0 0 3px rgba(99,102,241,.25); }
-        .cm-row { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
-        .cm-btn { padding: 9px 20px; border: 0; border-radius: 999px; background: var(--cm-accent); color: #fff;
-          font-weight: 600; cursor: pointer; transition: transform .12s, opacity .2s, box-shadow .2s; }
-        .cm-btn:hover:not(:disabled) { transform: translateY(-1px); box-shadow: 0 6px 16px rgba(99,102,241,.35); }
-        .cm-btn:disabled { opacity: .4; cursor: not-allowed; }
-
-        .cm-list { display: flex; flex-direction: column; gap: 12px; }
-        .cm-card { display: flex; gap: 12px; padding: 14px 16px; border-radius: 14px;
-          border: 1px solid var(--cm-line); animation: cmIn .35s ease both;
-          transition: background .2s, transform .2s; }
-        .cm-card:hover { background: var(--cm-soft); }
-        .cm-pending { opacity: .65; border-style: dashed; }
-        .cm-avatar { flex: none; width: 40px; height: 40px; border-radius: 50%; color: #fff;
-          display: grid; place-items: center; font-weight: 700; font-size: 1rem; }
-        .cm-body { min-width: 0; flex: 1; }
-        .cm-meta { display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; }
-        .cm-meta span { font-size: .78rem; }
-        .cm-body p { margin: 4px 0 0; line-height: 1.5; white-space: pre-wrap; overflow-wrap: anywhere; }
-
-        .cm-more { display: flex; justify-content: center; margin-top: 16px; }
-        .cm-ghost { padding: 8px 20px; border-radius: 999px; border: 1px solid var(--cm-line);
-          background: transparent; color: inherit; font: inherit; cursor: pointer; transition: background .2s, border-color .2s; }
-        .cm-ghost:hover { background: var(--cm-soft); border-color: var(--cm-accent); }
-
-        .cm-empty { text-align: center; padding: 32px 0; opacity: .7; }
-        .cm-empty-icon { font-size: 2rem; margin-bottom: 6px; }
-        .cm-muted { opacity: .6; }
-        .cm-error { color: #ef4444; }
-
-        .cm-skel-block { background: linear-gradient(90deg, var(--cm-soft), rgba(128,128,128,.22), var(--cm-soft));
-          background-size: 200% 100%; animation: cmShimmer 1.4s infinite; border-radius: 8px; }
-        .cm-skel .cm-avatar { background: none; }
-        .cm-skel-line { height: 12px; margin: 8px 0; }
-
+        .cm-skel {
+          background: linear-gradient(90deg, rgba(10,10,10,.05), rgba(41,171,226,.16), rgba(10,10,10,.05));
+          background-size: 200% 100%;
+          animation: cmShimmer 1.4s infinite;
+        }
+        .cm-in { animation: cmIn .35s ease both; }
         @keyframes cmIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
         @keyframes cmShimmer { from { background-position: 200% 0; } to { background-position: -200% 0; } }
-        @media (prefers-reduced-motion: reduce) { .cm-card, .cm-skel-block { animation: none; } }
-        @media (max-width: 480px) { .cm-card { padding: 12px; } .cm-avatar { width: 34px; height: 34px; } }
+        @media (prefers-reduced-motion: reduce) { .cm-in, .cm-skel { animation: none; } }
       `}</style>
     </section>
   );
