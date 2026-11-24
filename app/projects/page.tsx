@@ -123,6 +123,17 @@ const projects: Project[] = [
     
   ],
 },
+{
+  slug: "static-vertical-load-test-hanu-bhunya",
+  title: "Static Vertical Load Test – Pile Settlement Measurement",
+  category: "Infrastructure",
+  location: "Hanu Bhunya, West Bengal",
+  images: [
+    "/images/projects/static-vertical-load-test/1.jpeg",
+    "/images/projects/static-vertical-load-test/2.jpeg",
+    "/images/projects/static-vertical-load-test/3.jpeg",
+  ],
+},
 ];
 
 const filters: { label: string; value: Category | "All" }[] = [
