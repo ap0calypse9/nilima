@@ -881,6 +881,149 @@ const insights = [
     },
   ],
 },
+{
+  slug: "static-vertical-load-test-on-piles-procedure-methodology",
+  title: "Static Vertical Load Test on Piles: Procedure, Importance & IS Code Requirements",
+  subtitle:
+    "Evaluating the Load-Bearing Capacity and Settlement Behaviour of Pile Foundations",
+  category: "Case Study — Pile Testing",
+  date: "2026",
+  excerpt:
+    "Understand the procedure, equipment, methodology and IS 2911 requirements for Static Vertical Load Testing of pile foundations, including load application, settlement measurement and performance assessment.",
+  standard: "IS 2911 (Part 4): 2013",
+  sections: [
+    {
+      heading: "Introduction",
+      paragraphs: [
+        "A Static Vertical Load Test (SVLT) is one of the most reliable methods for evaluating the load-bearing capacity and settlement characteristics of pile foundations. It is widely used in residential buildings, commercial complexes, industrial structures, bridges, infrastructure projects and high-rise buildings.",
+        "The test determines how a pile performs under gradually applied vertical compressive loads and helps structural and geotechnical engineers verify whether the pile foundation can safely transfer structural loads to the underlying soil strata.",
+        "At Nilima Design Associates, we provide professional Static Vertical Load Testing services with a focus on accurate measurements, proper testing procedures and technically sound reporting.",
+      ],
+    },
+    {
+      heading: "What Is a Static Vertical Load Test?",
+      paragraphs: [
+        "A Static Vertical Load Test is a field-based pile foundation testing method in which a predetermined vertical compressive load is applied to a test pile using a hydraulic jack and a suitable reaction system.",
+        "The settlement of the pile is measured at different load increments using calibrated dial gauges or displacement measuring instruments.",
+        "The test helps determine the ultimate load-carrying capacity of the pile, settlement behaviour under applied loads, load-settlement relationship, safe working load assessment, and overall performance and suitability of pile foundations.",
+      ],
+      list: [
+        "Ultimate load-carrying capacity of the pile.",
+        "Settlement behaviour under applied loads.",
+        "Load-settlement relationship.",
+        "Safe working load assessment.",
+        "Performance and suitability of pile foundations.",
+      ],
+    },
+    {
+      heading: "Purpose and Importance of Static Vertical Load Testing",
+      paragraphs: [
+        "Static Vertical Load Testing plays an important role in foundation quality assurance and geotechnical investigation. It provides field-based information to evaluate pile performance and verify foundation design assumptions.",
+      ],
+      list: [
+        "Verify the load-carrying capacity of pile foundations.",
+        "Evaluate settlement behaviour under vertical compression.",
+        "Assess pile performance under service loads.",
+        "Validate design assumptions used by geotechnical engineers.",
+        "Identify excessive settlement or inadequate pile performance.",
+        "Provide technical data for foundation design verification.",
+      ],
+    },
+    {
+      heading: "Static Vertical Load Test Procedure",
+      paragraphs: [
+        "The test is generally conducted following the applicable provisions of IS 2911 (Part 4), subject to project specifications and testing requirements.",
+      ],
+      list: [
+        "Preparation of Test Pile: Identify and prepare the test pile after achieving the specified concrete strength and required curing period. Trim and level the pile head to provide a suitable loading surface.",
+        "Installation of Hydraulic Jack: Position a calibrated hydraulic jack centrally over the pile head. Provide a suitable bearing plate and loading arrangement to ensure uniform transfer of load.",
+        "Reaction Arrangement: Install a suitable reaction system to resist the applied test load. Depending on site conditions, this may consist of reaction piles with a suitable loading frame, a kentledge arrangement, or an anchored reaction system.",
+        "Installation of Measuring Instruments: Install dial gauges or digital displacement sensors on independent reference beams to measure vertical pile settlement accurately.",
+        "Application of Load: Apply the load gradually in specified increments according to the applicable testing procedure. Record settlement readings at prescribed time intervals for each loading stage.",
+        "Unloading Procedure: After completing the required loading stages, release the load in specified increments. Record rebound readings to evaluate the elastic recovery of the pile.",
+        "Data Analysis and Reporting: Analyse the collected load and settlement readings to prepare load-settlement curves and evaluate pile performance against the applicable acceptance criteria.",
+      ],
+    },
+    {
+      heading: "Equipment Required for Static Vertical Load Test",
+      paragraphs: [
+        "The major equipment and accessories used during Static Vertical Load Testing include:",
+      ],
+      list: [
+        "Calibrated hydraulic jack.",
+        "Hydraulic pump and pressure gauge.",
+        "Reaction frame or kentledge arrangement.",
+        "Dial gauges or digital displacement sensors.",
+        "Independent reference beam.",
+        "Bearing plates and loading accessories.",
+        "Calibration certificates and measurement instruments.",
+      ],
+    },
+    {
+      heading: "Applicable Indian Standard",
+      paragraphs: [
+        "IS 2911 (Part 4): 2013 — Code of Practice for Design and Construction of Pile Foundations: Load Test on Piles — is the principal Indian Standard reference for pile load testing.",
+        "The testing procedure, loading sequence, duration, instrumentation and acceptance criteria should be selected according to the applicable standard, project specifications and instructions of the geotechnical or structural consultant.",
+      ],
+    },
+    {
+      heading: "Types of Pile Load Tests",
+      paragraphs: [
+        "Pile foundation testing generally includes different methods, each serving a specific purpose in evaluating the performance and integrity of pile foundations.",
+      ],
+      list: [
+        "Static Vertical Compression Load Test.",
+        "Static Lateral Load Test.",
+        "Static Pull-Out or Uplift Load Test.",
+        "Pile Integrity Test (PIT).",
+        "High Strain Dynamic Load Test (PDA).",
+      ],
+    },
+    {
+      heading: "Applications of Static Vertical Load Testing",
+      paragraphs: [
+        "Static Vertical Load Tests are commonly conducted across a wide range of building, industrial and infrastructure projects.",
+      ],
+      list: [
+        "Residential and commercial buildings.",
+        "High-rise building foundations.",
+        "Industrial structures and factories.",
+        "Bridges and flyovers.",
+        "Highway and infrastructure projects.",
+        "Power plants and industrial installations.",
+        "Government and private construction projects.",
+      ],
+    },
+    {
+      heading: "Why Choose Nilima Design Associates?",
+      paragraphs: [
+        "Nilima Design Associates provides professional pile foundation testing and structural engineering services in Kolkata, West Bengal and across India.",
+        "Our services include:",
+      ],
+      list: [
+        "Static Vertical Load Test.",
+        "Static Lateral Load Test.",
+        "Pile Uplift Load Test.",
+        "Pile Integrity Test.",
+        "Dynamic Load Test (PDA).",
+        "CAPWAP Analysis.",
+        "Soil Investigation and Geotechnical Testing.",
+        "Structural Consultancy and NDT Services.",
+        "Systematic field execution using calibrated testing equipment.",
+        "Comprehensive technical reporting to support reliable foundation assessment.",
+      ],
+    },
+    {
+      heading: "Conclusion",
+      paragraphs: [
+        "Static Vertical Load Testing is an essential quality-control procedure for evaluating the load-bearing capacity and settlement behaviour of pile foundations. Proper testing helps engineers verify foundation performance and make informed decisions regarding structural safety and serviceability.",
+        "For professional Static Vertical Load Testing services in Kolkata and anywhere in India, contact Nilima Design Associates.",
+        "Website: https://www.nilimadesignassociates.in/",
+        "Contact: Nilima Design Associates — Structural Consultancy and Pile Testing Services.",
+      ],
+    },
+  ],
+},
 ];
 
 
